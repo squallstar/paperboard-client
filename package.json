@@ -1,0 +1,33 @@
+{
+  "name": "paperboard-client",
+  "version": "0.1.0",
+  "description": "Collector V2 Engine",
+  "main": "index.php",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/squallstar/paperboard-client.git"
+  },
+  "keywords": [
+    "paperboard",
+    "engine"
+  ],
+  "author": "Nicholas Valbusa",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/squallstar/paperboard-client/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-coffee": "^0.11.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-sass": "^0.7.4",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jade-plugin": "~0.5.0"
+  }
+}

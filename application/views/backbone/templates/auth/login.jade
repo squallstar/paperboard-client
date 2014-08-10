@@ -1,0 +1,13 @@
+.box.login
+  h2 Login with your Paperboard Account
+  form(autocomplete='off')
+    input(type='text', class='email', placeholder='Email address')
+    input(type='password', class='password', placeholder='Password')
+  a(class='btn-login', href='#', title='Login with your account') Login
+  a(class='forgot-password', href='#', title='Request a new password') Forgot password?
+
+.box.signup
+  h2 No account?
+  p Future claim
+
+  a(class='btn-login', href='/login', data-navigate, title='Login with your account') Login

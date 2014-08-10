@@ -1,0 +1,6 @@
+node_modules/
+application/logs/log-*.php
+
+assets/js/backbone.js
+
+assets/css/core.css
