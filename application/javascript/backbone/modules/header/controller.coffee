@@ -1,11 +1,14 @@
-# @Collector.module "Header", (Header, App, Backbone, Marionette, $, _) ->
+@Paperboard.module "Header", (Header, App, Backbone, Marionette, $, _) ->
 
-#     Header.Show = ->
-#       @layout = new Header.View
-#       App.header.show @layout
+    Header.Show = ->
+      @layout = new Header.View
+      App.header.show @layout
 
-#     App.reqres.setHandler "user:login", ->
-#       Header.layout.render()
+    App.vent.on "user:login", ->
+      if Header.layout
+        Header.layout.render()
+      else
+        do Header.Show
 
-#     App.reqres.setHandler "user:logout", ->
-#       Header.layout.render()
+    # App.trigger.off "user:logout", ->
+    #   Header.layout.render()

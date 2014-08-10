@@ -43,8 +43,7 @@
             password: @password
         success: (data) ->
           App.setToken data.auth_token
-          App.user = new App.Entities.User data.user
-          App.vent.trigger "user:login"
+          App.request "set:user", data.user
         error: ->
           alert 'The e-mail address or password you entered is not valid.'
       false

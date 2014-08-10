@@ -1,14 +1,4 @@
+h1.logo Paperboard
+
 if user
-  a.account(href='#', title='View your twitter timeline')
-    img(src="#{user.profile_img}")
-
-.titlebar
-  strong
-    | fragments
-    sup beta
-    | &bull;
-  span #{user ? 'from twitter' : 'from the web'}
-
-.search
-  input(type='text', value='#{search_query}')
-  .handle
+  img(src="#{user.profile_img}")
