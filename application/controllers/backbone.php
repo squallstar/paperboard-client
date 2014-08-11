@@ -9,22 +9,16 @@ class Backbone extends CI_Controller
 
     if ($auth_token)
     {
-      $url = $entrypoint . 'v3/user?auth_token=' . $auth_token;
-
+      $url = $entrypoint . 'v4/collections/recap?auth_token=' . $auth_token;
       $data = file_get_contents($url);
-
-      if (isset(json_decode($data)->id))
-      {
-        $user = $data;
-      }
     }
     else
     {
-      $user = 'false';
+      $data = 'false';
     }
 
     $this->load->view('backbone/index', array(
-      'user' => $user,
+      'data' => $data,
       'entrypoint' => $entrypoint
     ));
   }

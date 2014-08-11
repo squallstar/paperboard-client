@@ -27,7 +27,7 @@
   <script type="text/javascript">
     Paperboard.start({
       entrypoint:'<?php echo $entrypoint; ?>',
-      user:<?php echo $user; ?>
+      data:<?php echo $data; ?>
     });
   </script>
 </html>

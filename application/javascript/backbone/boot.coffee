@@ -15,7 +15,7 @@
     overlay: "#overlay"
 
   App.addInitializer ->
-    do @module(module).Show for module in ["Header", "Sidebar"]
+    do @module(module).Show for module in ["Header"]
 
   App.$window.resize ->
     grid = Math.round App.$window.width()/300
@@ -37,6 +37,7 @@
   App.reqres.setHandler "set:user", (user) ->
     App.user = new App.Entities.User user
     App.vent.trigger "user:login"
+    do App.boards.fetch
 
   App.setToken = (token) ->
     $.cookie '_probe_tkn', token
@@ -54,10 +55,11 @@
 
     App.__token = $.cookie '_probe_tkn'
 
-    if options.user
-      App.request "set:user", options.user
-
-    App.boards = new App.Entities.Boards
+    if options.data
+      App.user = new App.Entities.User options.data.user
+      App.boards = new App.Entities.Boards options.data.collections
+    else
+      App.boards = new App.Entities.Boards
 
   App.on "start", ->
     App.$window.resize()

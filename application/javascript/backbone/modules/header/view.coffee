@@ -60,17 +60,17 @@
       searchinput: ".search input"
 
     initialize: ->
-      App.reqres.setHandler "search:domain", (domain) =>
-        @ui.searchinput.val domain
-        @ui.searchinput.blur()
-        App.request "search", domain
+      # App.reqres.setHandler "search:domain", (domain) =>
+      #   @ui.searchinput.val domain
+      #   @ui.searchinput.blur()
+      #   App.request "search", domain
 
-      App.reqres.setHandler "search:clear", =>
-        @ui.searchinput.val ''
-        @closeSearchBox()
+      # App.reqres.setHandler "search:clear", =>
+      #   @ui.searchinput.val ''
+      #   @closeSearchBox()
 
-      @suggestions = new Header.Suggestions
-        collection: new App.Entities.Suggestions
+      # @suggestions = new Header.Suggestions
+      #   collection: new App.Entities.Suggestions
 
     templateHelpers: ->
       "search_query": if App.searchQuery then App.searchQuery else ''
@@ -115,6 +115,4 @@
         App.request "search"
 
     onRender: ->
-      if App.searchQuery then @ui.search.addClass 'open'
-
-      @ui.search.append @suggestions.$el
+      #@ui.search.append @suggestions.$el

@@ -1,4 +1,6 @@
 h1.logo Paperboard
 
 if user
-  img(src="#{user.profile_img}")
+  .user
+    img.avatar(src="#{user.avatar.medium}")
+    | #{user.full_name}
