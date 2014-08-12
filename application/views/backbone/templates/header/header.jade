@@ -1,23 +1,24 @@
 .top
   h1.logo Paperboard
 
-  .search-bar
-    a(href='#', title='Search')
-
   if user
+    .search-bar
+      a(href='#', title='Search')
+
     .settings
       | #{user.full_name}
       img.avatar(src="#{user.avatar.medium}")
 
-.nav
-  a(href='#', class='toggle-sidebar') All boards
+if user
+  .nav
+    a(href='#', class='toggle-sidebar') All boards
 
-  ul.context
-    li.current
-      a(href='#') Everything
-    li
-      a(href='#') Yesterday
-    li
-      a(href='#') Pictures
-    li
-      a(href='#') Videos
+    ul.context
+      li.current
+        a(href='#') Everything
+      li
+        a(href='#') Yesterday
+      li
+        a(href='#') Pictures
+      li
+        a(href='#') Videos

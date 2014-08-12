@@ -4,6 +4,23 @@
     template: "sidebar-item"
     tagName: "li"
 
+    events:
+      "click a" : "didClickItem"
+
+    didClickItem: (event) ->
+      do event.preventDefault
+      @$el.closest('ul').find('a').removeClass 'current'
+      @$el.find('a').addClass 'current'
+      App.$html.removeClass 'with-sidebar'
+
+    onRender: ->
+      if @model.get('name').indexOf('@') is 0
+        @$el.find('a').addClass 'icon-twitter'
+      else
+        @$el.find('a').addClass 'icon-folder'
+
+  # --------------------------------------------------------------------------
+
   Sidebar.View = Marionette.CompositeView.extend
     template: "sidebar"
     tagName: "section"
@@ -16,11 +33,11 @@
 
     scheduleHideSidebar: (event) ->
       do event.preventDefault
-      return if @hideSidebarTimeout
+      return if @hideSidebarTimeout or not App.$html.hasClass('with-sidebar')
 
       @hideSidebarTimeout = window.setTimeout =>
         App.$html.removeClass 'with-sidebar'
-      , 650
+      , 250
 
     clearSidebarTimeout: ->
       if @hideSidebarTimeout

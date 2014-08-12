@@ -1,21 +1,64 @@
 #sidebar {
-  $width: 240px;
+  $width: 230px;
 
   @include transition(opacity, 0.25s);
   width: $width;
   position: fixed;
   top: $header-top-height;
   left: 0;
+  bottom: 0;
   opacity: 0;
   visibility: hidden;
-  bottom: 0;
   background-color: #FFF;
   z-index: 2;
   overflow-y: auto;
+  border-top: 1px solid #E5E5E5;
 
   html.with-sidebar & {
     opacity: 1;
     visibility: visible;
-    box-shadow: 0 6px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  ul.boards {
+
+    li {
+
+      a {
+        @extend %ellipsis;
+        @extend %antialias;
+        position: relative;
+        font-size: 0.95em;
+        display: block;
+        height: 47px;
+        line-height: 47px;
+        padding: 0 30px 0 60px;
+        text-decoration: none;
+        color: #737373;
+
+        &:hover, &.current {
+          background-color: #F5F5F5;
+        }
+
+        &.icon-infinite:before {
+          @include icon($sprite-infinite, $sprite-retina-infinite);
+          left: 29px;
+          margin-left: 0;
+        }
+
+        &.icon-twitter:before {
+          @include icon($sprite-twitter, $sprite-retina-twitter);
+          left: 30px;
+          margin-left: 0;
+        }
+
+        &.icon-folder:before {
+          @include icon($sprite-folder-web, $sprite-retina-folder-web);
+          left: 30px;
+          margin-left: 0;
+          opacity: 0.3;
+        }
+      }
+    }
   }
 }

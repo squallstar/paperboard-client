@@ -53,6 +53,7 @@
       "click .nav .toggle-sidebar"      : "revealSidebar"
 
     ui:
+      nav: ".nav"
       toggleSidebar: ".nav .toggle-sidebar"
 
     templateHelpers: ->
@@ -64,6 +65,14 @@
 
       App.request "create:sidebar"
       App.$html.addClass 'with-sidebar'
+
+    setNav: (object) ->
+      @ui.nav.removeClass 'type-twitter'
+
+      if object._class is 'Board'
+        @ui.toggleSidebar.text object.get('name')
+        if object.get('name').indexOf('@') is 0
+          @ui.nav.addClass 'type-twitter'
 
     onClose: ->
       App.$html.removeClass 'with-sidebar'

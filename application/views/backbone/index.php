@@ -27,6 +27,7 @@
   <script type="text/javascript">
     Paperboard.start({
       entrypoint:'<?php echo $entrypoint; ?>',
+      route:'<?php echo $_SERVER["REQUEST_URI"]; ?>',
       data:<?php echo $data; ?>
     });
   </script>

@@ -25,9 +25,9 @@
     App.vent.trigger "change:grid", grid
     @__gridSize = grid
 
-  App.$body.on "click", "a[data-navigate]", (event) ->
+  App.$html.on "click", "a[data-navigate]", (event) ->
     do event.preventDefault
-    App.navigate $(event.currentTarget).attr('html'), true
+    App.navigate $(event.currentTarget).attr('href'), {trigger: true}
 
   App.vent.on "auth:not_valid", ->
     $.removeCookie '_probe_tkn'
@@ -52,6 +52,7 @@
   App.on "before:start", (options) ->
     @options =
       url: options.entrypoint.replace(/^\/|\/$/g, '')
+      route: options.route.replace(/^\/|\/$/g, '')
 
     App.__token = $.cookie '_probe_tkn'
 
@@ -64,11 +65,10 @@
   App.on "start", ->
     App.$window.resize()
 
-    route = Backbone.history.fragment or App.rootRoute
+    route = @options.route or App.rootRoute
     route = 'login' unless App.user
 
-    if Backbone.history
-      Backbone.history.start pushState: true
-      @navigate route, {trigger: true, replace: true}
+    Backbone.history.start {pushState: true, silent: route isnt @options.route}
+    @navigate route, {trigger: true, replace: true}
 
   App
