@@ -11,10 +11,11 @@
   bottom: 0;
   background-color: #FFF;
   z-index: 2;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   html.with-sidebar & {
     opacity: 1;
     visibility: visible;
+    box-shadow: 0 6px 4px rgba(0,0,0,0.15);
   }
 }
