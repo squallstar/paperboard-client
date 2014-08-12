@@ -185,6 +185,10 @@
 
       &:not(.type-twitter) {
         background-color: #FFF;
+
+        > .toggle-sidebar {
+          background-color: #F5F5F5;
+        }
       }
 
       > .logo {
@@ -192,7 +196,6 @@
       }
 
       > .toggle-sidebar {
-        background-color: #F5F5F5;
         left: nth($sprite-logo, 5) + 40px;
       }
     }

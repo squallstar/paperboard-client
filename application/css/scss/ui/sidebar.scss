@@ -21,7 +21,7 @@
   }
 
   html.fixed-header & {
-    top: $header-height - $header-top-height;
+    top: 0;
   }
 
   ul.boards {
