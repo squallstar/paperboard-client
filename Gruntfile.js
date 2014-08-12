@@ -175,17 +175,7 @@ module.exports = function(grunt) {
           livereload: true,
           debounceDelay: 1000
         },
-      },
-      images: {
-        files: [
-          'application/images/**',
-        ],
-        tasks: ['sprite:common', 'sprite:retina'],
-        options: {
-          livereload: false,
-          debounceDelay: 1000
-        },
-      },
+      }
     }
 
   });

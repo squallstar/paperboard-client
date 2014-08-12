@@ -1,8 +1,11 @@
 #rg-header {
+  $side-padding: 27px;
+
   position: fixed;
   top: 0;
   left: 0;
   width:100%;
+  min-width: 768px;
   z-index:2;
   height:$header-height;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
@@ -12,7 +15,7 @@
     height: $header-top-height;
     overflow: hidden;
     background: #FFF;
-    padding: 0 27px;
+    padding: 0 $side-padding;
 
     > h1 {
       position: relative;
@@ -41,6 +44,7 @@
       height: $header-top-height;
 
       > a {
+        @include transition(opacity, 0.2s);
         display: inline-block;
         opacity: 0.2;
         width: 45px;
@@ -48,6 +52,10 @@
 
         &:before {
           @include icon($sprite-search, $sprite-retina-search);
+        }
+
+        &:hover {
+          opacity: 1;
         }
       }
     }
@@ -70,8 +78,33 @@
   }
 
   .nav {
+    padding: 0 $side-padding;
     background-color: #F5F5F5;
     height: $header-height - $header-top-height;
+
+    > .toggle-sidebar {
+      @extend %antialias;
+      position: relative;
+      display: inline-block;
+      float: left;
+      margin-top: 8px;
+      background-color: #FFF;
+      color: #737373;
+      height: $header-height - $header-top-height - 16px;
+      line-height: 30px;
+      font-size: 0.95em;
+      padding: 0 26px 0 10px;
+      text-decoration: none;
+      border-radius: 3px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+
+      &:after {
+        @include icon($sprite-chevron, $sprite-retina-chevron);
+        left: auto;
+        margin: -4px 0 0;
+        right: 8px;
+      }
+    }
 
     .context {
       margin: 0 auto;
@@ -86,24 +119,23 @@
         margin: 0 18px;
 
         a {
+          @include transition(border-color, 0.4s);
           display: block;
           height: 100%;
           padding-top: 15px;
           text-decoration: none;
           color: #7A7A7A;
+          border-bottom: 2px solid transparent;
 
           &:hover {
             color: #000;
-            border-bottom: 2px solid #5BCBF5;
+            border-bottom-color: #5BCBF5;
           }
         }
 
-        &.current {
-
-          a {
-            color: #000;
-            border-bottom: 2px solid #5BCBF5;
-          }
+        &.current a, a:hover {
+          color: #000;
+          border-bottom-color: #5BCBF5;
         }
       }
     }

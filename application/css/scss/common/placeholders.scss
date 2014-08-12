@@ -16,6 +16,10 @@
   text-indent: -999em;
 }
 
+%antialias {
+  -webkit-font-smoothing: antialiased;
+}
+
 %highlight-disabled {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
