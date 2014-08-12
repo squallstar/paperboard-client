@@ -4,3 +4,8 @@ application/logs/log-*.php
 assets/js/backbone.js
 
 assets/css/core.css
+
+assets/img/sprite.png
+assets/img/sprite-retina.png
+application/css/scss/generated/sprite-retina.scss
+application/css/scss/generated/sprite.scss
