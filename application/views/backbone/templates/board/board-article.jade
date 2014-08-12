@@ -2,7 +2,7 @@
   if image
     if image.ratio
       a(href='#', target='_blank', class='img', style='padding-bottom:#{image.ratio}%')
-        img(class='lazy', src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7', data-original='#{image.url_archived_small}', alt='#{image.title}', width='100%')
+        img(class='lazy', src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7', data-original='#{image.url_archived_small}', width='100%')
     else
       a(href='#', target='_blank', class='img', style='padding-bottom:50%')
         img(class='lazy', src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7', data-original='#{image.url_original}', width='100%')
@@ -11,3 +11,10 @@
     h3 #{title}
     if description
       p #{description}
+
+    if source.type == 'TwitterUser'
+      .posted-date #{published_ago} by #{source.full_name}
+      img.user-pic(src="#{source.profile_image_url}")
+    else
+      .posted-date Posted #{published_ago}
+      a.source-url(href=url) #{url_host}

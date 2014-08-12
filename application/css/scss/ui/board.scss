@@ -8,7 +8,14 @@ section.board {
     width: 100%;
 
     article {
-      width: 25%;
+
+      .grid-1 & {
+        width: 100%;
+      }
+
+      .grid-2 & {
+        width: 50%;
+      }
 
       .grid-3 & {
         width: 33.33%;
@@ -52,6 +59,7 @@ section.board {
         }
 
         .content {
+          overflow: hidden;
           padding: 15px;
 
           h3 {
@@ -62,12 +70,52 @@ section.board {
           }
 
           p {
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #898989;
             line-height: 1.5;
             letter-spacing: 0px;
             margin-top:10px;
           }
+
+          .user-pic {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 25px;
+            height: 25px;
+            opacity: 0;
+            visibility: hidden;
+            cursor: pointer;
+          }
+
+          .posted-date {
+            @extend %ellipsis;
+            margin-top: 11px;
+            font-size: 0.75em;
+            color: #BBB;
+          }
+
+          .source-url {
+            @extend %ellipsis;
+            display: inline-block;
+            margin-top: 5px;
+            font-size: 0.75em;
+            color: #5DA9DD;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      &:hover .w .content .user-pic {
+        opacity: 0.1;
+        visibility: visible;
+
+        &:hover {
+          opacity: 1;
         }
       }
     }

@@ -12,6 +12,8 @@
         return App.navigate(App.rootRoute, true) unless board
         App.request "change:nav", board
 
+        do board.articles.reset
+
         App.content.show new Boards.Board.View
           model: board
           collection: board.articles

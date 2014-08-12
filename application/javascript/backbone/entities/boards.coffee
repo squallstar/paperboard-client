@@ -34,8 +34,6 @@
     board = new App.Entities.Board private_id: private_id
     board.fetch
       success: ->
-        console.log 1
         callback(board)
       error: ->
-        console.log 2
         callback null

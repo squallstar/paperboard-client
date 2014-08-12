@@ -6,7 +6,6 @@
 
   App.$window = $(window)
   App.$html = $('html')
-  App.$body = $('body')
   App.fixedHeader = false
 
   App.addRegions
@@ -21,7 +20,7 @@
   App.$window.resize ->
     App.$window._height = App.$window.height()
     grid = Math.round App.$window.width()/300
-    if grid > 6 or grid < 3 then grid = 3
+    if grid > 6 or grid < 1 then grid = 1
     return if not grid or @__gridSize is grid
     App.$html.removeClass("grid-#{@__gridSize}").addClass "grid-#{grid}"
     App.vent.trigger "change:grid", grid
@@ -61,6 +60,8 @@
     App.options.url + endpoint
 
   App.on "before:start", (options) ->
+    App.$body = $('body')
+
     @options =
       url: options.entrypoint.replace(/^\/|\/$/g, '')
       route: options.route.replace(/^\/|\/$/g, '')

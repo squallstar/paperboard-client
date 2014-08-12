@@ -10,7 +10,14 @@
         title: model.name
         description: model.description
         image: false
+        source: model.sources[0]
+        published_ago: @model.publishedAgo()
+        url_host: model.url_host.replace 'www.', ''
+        url: model.url
       }
+
+      if data.title.length > 160
+        data.title = data.title.substring(0,159) + '&hellip;'
 
       if data.description.length > 160
         data.description = data.description.substring(0,159) + '&hellip;'
@@ -30,6 +37,7 @@
     tagName: "section"
     className: "board"
     childView: Board.Article
+    childViewContainer: ".articles"
 
     # Indicates whether the masonry instance has been initialized
     setup: false
@@ -45,11 +53,6 @@
 
     initialize: ->
       _.bindAll @, 'pageScroll'
-      $(window).scroll @pageScroll
-
-    onDomRefresh: ->
-      $(window).scrollTop 0
-      if @setup then @ui.wrapper.masonry()
 
     fetch: ->
       @fetching = true
@@ -74,18 +77,33 @@
       if $target.scrollTop() >= ($target.height() - App.$window._height - 650)
         do @fetchMore
 
-    onBeforeClose: ->
-      $(window).unbind 'scroll'
-      if @setup then @ui.articles.masonry 'destroy'
+    onBeforeDestroyCollection: ->
+      @ui.articles.masonry 'destroy'
 
-    onRender: ->
-      console.log 'render'
+    onBeforeDestroy: ->
+      App.$window.off "scroll", @pageScroll
+
+    onRenderTemplate: ->
+      App.$window.on "scroll", @pageScroll
+
       @ui.articles.masonry
         itemSelector: 'article'
         columnWidth: 'article'
         isAnimated: false
         gutter: 0
         transitionDuration: 0
+
+    onRenderCollection: ->
+      do @attachLazyLoad
+      @firstLayout = true
+
+      window.setTimeout =>
+        @ui.articles.masonry('layout')
+      , 0
+
+      window.setTimeout =>
+        if @ui.articles.height() < App.$window.height() then do @fetchMore
+      , 500
 
     attachLazyLoad: ->
       @$el.find('.lazy').removeClass('lazy').lazyload
@@ -94,32 +112,12 @@
         threshold : 400
 
     attachHtml: (collectionView, itemView, index) ->
-      return if itemView.model.get('description') is '' and not itemView.model.get('lead_image')
-
-      if collectionView.isBuffering
-        collectionView.elBuffer.appendChild itemView.el
-      else
+      if itemView.model.get('description') isnt '' and itemView.model.get('lead_image')
         @ui.articles.append itemView.el
-        @ui.articles.masonry 'appended', itemView.el
+        @ui.articles.masonry 'addItems', itemView.el
 
-        if @collection.length > 0 and index is (@collection.length-1)
+      if @collection.length > 0 and index is (@collection.length-1)
+        do @onRenderCollection
 
-          if not @loadMore
-            @firstLayout = true
-
-            window.setTimeout =>
-              @ui.articles.masonry()
-            , 1
-
-            window.setTimeout =>
-              if @ui.articles.height() < App.$window.height() then do @fetchMore
-            , 500
-
-          do @attachLazyLoad
-
-    onDomRefresh: ->
+    onRender: ->
       if @collection.length is 0 then do @fetch
-
-    appendHtml: (collectionView, buffer) ->
-      @ui.articles.append buffer
-      @ui.articles.masonry()

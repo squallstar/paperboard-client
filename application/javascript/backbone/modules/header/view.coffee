@@ -51,6 +51,7 @@
     events:
       "mouseenter .nav .toggle-sidebar" : "revealSidebar"
       "click .nav .toggle-sidebar"      : "revealSidebar"
+      "click .nav .logo"                : "backToTop"
 
     ui:
       nav: ".nav"
@@ -73,6 +74,11 @@
         @ui.toggleSidebar.text object.get('name')
         if object.get('name').indexOf('@') is 0
           @ui.nav.addClass 'type-twitter'
+
+    backToTop: (event) ->
+      do event.preventDefault
+      do event.stopPropagation
+      $("html, body").animate {scrollTop:0}, 380, 'swing'
 
     onClose: ->
       App.$html.removeClass 'with-sidebar'

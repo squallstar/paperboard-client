@@ -4,6 +4,14 @@
     _class: "Article"
     defaults:
       name: ""
+      published_at: 0
+
+    publishedAgo: ->
+      published = moment(@get("published_at")*1000)
+      if moment().diff(published, "days") > 7
+        return published.format "LLLL"
+      else
+        return published.fromNow()
 
   # --------------------------------------------------------------------------
 
