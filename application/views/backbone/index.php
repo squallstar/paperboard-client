@@ -20,8 +20,8 @@
     <div id="overlay"></div>
     <div id="wrapper">
       <div id="rg-header"></div>
-      <div id="sidebar"></div>
-      <div id="content"></div>
+      <div id="rg-sidebar"></div>
+      <div id="rg-content"></div>
     </div>
   </body>
   <script type="text/javascript">

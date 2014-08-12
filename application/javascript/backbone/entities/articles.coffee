@@ -11,8 +11,11 @@
     _class: "Articles"
     model: Entities.Article
 
+    initialize: (models, options) ->
+      @board = options.board
+
     url: ->
-      "v3/collections/#{@options.board.get('private_id')}/links"
+      "v3/collections/#{@board.get('private_id')}/links"
 
     fetchMore: (callback) ->
       url = @url()

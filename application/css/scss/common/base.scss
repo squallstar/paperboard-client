@@ -18,10 +18,17 @@ html, body {
 body {
   height:100%;
   min-height:100%;
-  margin-top:$header-height;
   font-family:"Proxima Nova", sans-serif;
   font-size: 1em;
   overflow-y:scroll;
+
+  html.fixed-header & {
+    padding-top: $header-height;
+  }
+}
+
+#content-rg {
+  min-width: $viewport-min-width;
 }
 
 input[type="text"], textarea {
@@ -38,7 +45,7 @@ input[type="text"], textarea {
   background: #C3C3C3;
   border-left: 1px solid #AAA;
   -webkit-border-radius: 0;
-  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: none;
 }
 ::-webkit-scrollbar-corner {
     background: transparent;

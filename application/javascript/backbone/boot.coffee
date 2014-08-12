@@ -7,11 +7,12 @@
   App.$window = $(window)
   App.$html = $('html')
   App.$body = $('body')
+  App.fixedHeader = false
 
   App.addRegions
     header:  "#rg-header"
-    sidebar: "#sidebar"
-    content: "#content"
+    sidebar: "#rg-sidebar"
+    content: "#rg-content"
     overlay: "#overlay"
 
   App.addInitializer ->
@@ -19,11 +20,20 @@
 
   App.$window.resize ->
     grid = Math.round App.$window.width()/300
-    if grid > 6 or grid < 1 then grid = 1
+    if grid > 6 or grid < 3 then grid = 3
     return if not grid or @__gridSize is grid
     App.$html.removeClass("grid-#{@__gridSize}").addClass "grid-#{grid}"
     App.vent.trigger "change:grid", grid
     @__gridSize = grid
+
+  App.$window.scroll ->
+    scrollTop = App.$window.scrollTop()
+    if scrollTop <= 60 and App.fixedHeader
+      App.$html.removeClass 'fixed-header'
+      App.fixedHeader = false
+    else if scrollTop > 60 and not App.fixedHeader
+      App.$html.addClass 'fixed-header'
+      App.fixedHeader = true
 
   App.$html.on "click", "a[data-navigate]", (event) ->
     do event.preventDefault

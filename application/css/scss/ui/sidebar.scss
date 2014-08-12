@@ -1,4 +1,4 @@
-#sidebar {
+#rg-sidebar {
   $width: 230px;
 
   @include transition(opacity, 0.25s);
@@ -18,6 +18,10 @@
     opacity: 1;
     visibility: visible;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  html.fixed-header & {
+    top: $header-height - $header-top-height;
   }
 
   ul.boards {

@@ -1,0 +1,60 @@
+section.board {
+  padding:40px 20px 30px;
+  position:relative;
+  width:100%;
+
+  .articles {
+    position: relative;
+    width: 100%;
+
+    article {
+      width: 25%;
+
+      .grid-3 & {
+        width: 33.33%;
+      }
+
+      .grid-4 & {
+        width: 25%;
+      }
+
+      .grid-5 & {
+        width: 20%;
+      }
+
+      .grid-6 & {
+        width: 16.66%;
+      }
+
+
+      margin-bottom:20px;
+      padding: 0 10px 10px;
+
+      .w {
+        position: relative;
+        background-color: #FFF;
+        border: 1px solid #D8D8D8;
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.05);
+
+        .content {
+          padding: 15px;
+
+          h3 {
+            font-family: "Proxima Nova Condensed";
+            font-size: 1.4em;
+            line-height: 1.2;
+            margin-bottom: 10px;
+          }
+
+          p {
+            font-size: 0.9em;
+            color: #898989;
+            line-height: 1.5;
+            letter-spacing: 0px;
+            margin-top:10px;
+          }
+        }
+      }
+    }
+  }
+}

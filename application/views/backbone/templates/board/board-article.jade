@@ -1,0 +1,12 @@
+.w
+  if image
+    if image.ratio
+      a(href='#', target='_blank', class='img', style='padding-bottom:#{image.ratio}%')
+        img(class='lazy', src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7', data-original='#{image.url_archived_small ? image.url_archived_small : image.url_archived}', alt='#{image.title}', width='100%')
+    else
+      img(class='lazy', src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7', data-original='#{image.url_original}', width='100%')
+
+  .content
+    h3 #{title}
+    if description
+      p #{description}
