@@ -12,11 +12,15 @@
         image: false
       }
 
+      if data.description.length > 160
+        data.description = data.description.substring(0,159) + '&hellip;'
+
       if model.lead_image
         data.image = model.lead_image
         if data.image and data.image.width and data.image.height
           data.image.ratio = (data.image.height * 100 / data.image.width).toFixed(2)
           if data.image.ratio > 150 then data.image.ratio = 149
+
       data
 
   # --------------------------------------------------------------------------
@@ -66,9 +70,8 @@
     pageScroll: (event) ->
       return if @fetching or not @firstLayout
       $target = $ event.target
-      height = $(window).height()
 
-      if $target.scrollTop() >= ($target.height() - height - 500)
+      if $target.scrollTop() >= ($target.height() - App.$window._height - 650)
         do @fetchMore
 
     onBeforeClose: ->
@@ -91,6 +94,8 @@
         threshold : 400
 
     attachHtml: (collectionView, itemView, index) ->
+      return if itemView.model.get('description') is '' and not itemView.model.get('lead_image')
+
       if collectionView.isBuffering
         collectionView.elBuffer.appendChild itemView.el
       else

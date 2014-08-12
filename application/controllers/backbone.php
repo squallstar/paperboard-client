@@ -12,7 +12,13 @@ class Backbone extends CI_Controller
     if ($auth_token)
     {
       $url = $entrypoint . 'v4/collections/recap?auth_token=' . $auth_token;
-      $data = file_get_contents($url);
+
+      try {
+        $data = @file_get_contents($url);
+      } catch (Exception $e) {
+        $data = false;
+      }
+
     }
     else
     {

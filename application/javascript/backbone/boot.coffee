@@ -19,6 +19,7 @@
     do @module(module).Show for module in ["Header"]
 
   App.$window.resize ->
+    App.$window._height = App.$window.height()
     grid = Math.round App.$window.width()/300
     if grid > 6 or grid < 3 then grid = 3
     return if not grid or @__gridSize is grid
