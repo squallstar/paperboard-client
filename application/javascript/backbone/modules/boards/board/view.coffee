@@ -43,8 +43,6 @@
       _.bindAll @, 'pageScroll'
       $(window).scroll @pageScroll
 
-      if @collection.length is 0 then do @fetch
-
     onDomRefresh: ->
       $(window).scrollTop 0
       if @setup then @ui.wrapper.masonry()
@@ -81,9 +79,10 @@
       console.log 'render'
       @ui.articles.masonry
         itemSelector: 'article'
-        columnWidth: "article"
+        columnWidth: 'article'
         isAnimated: false
         gutter: 0
+        transitionDuration: 0
 
     attachLazyLoad: ->
       @$el.find('.lazy').removeClass('lazy').lazyload
@@ -102,8 +101,10 @@
 
           if not @loadMore
             @firstLayout = true
-            console.log 'masonry updated'
-            @ui.articles.masonry()
+
+            window.setTimeout =>
+              @ui.articles.masonry()
+            , 1
 
             window.setTimeout =>
               if @ui.articles.height() < App.$window.height() then do @fetchMore
@@ -111,11 +112,9 @@
 
           do @attachLazyLoad
 
+    onDomRefresh: ->
+      if @collection.length is 0 then do @fetch
+
     appendHtml: (collectionView, buffer) ->
       @ui.articles.append buffer
       @ui.articles.masonry()
-
-      # if @collection.length > 0 and index is (@collection.length-1) and not @loadMore
-      #   @firstLayout = true
-      #   @ui.articles.masonry()
-      #   console.log 'cool'
