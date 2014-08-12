@@ -1,6 +1,21 @@
-h1.logo Paperboard
+.top
+  h1.logo Paperboard
 
-if user
-  .user
-    img.avatar(src="#{user.avatar.medium}")
-    | #{user.full_name}
+  .search-bar
+    a(href='#', title='Search')
+
+  if user
+    .settings
+      | #{user.full_name}
+      img.avatar(src="#{user.avatar.medium}")
+
+.nav
+  ul.context
+    li.current
+      a(href='#') Everything
+    li
+      a(href='#') Yesterday
+    li
+      a(href='#') Pictures
+    li
+      a(href='#') Videos

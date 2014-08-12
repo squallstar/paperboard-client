@@ -4,6 +4,8 @@ class Backbone extends CI_Controller
 {
   public function index()
   {
+    header("Cache-Control: no-cache");
+
     $entrypoint = $this->config->item('api_domain');
     $auth_token = $this->input->cookie('_probe_tkn');
 

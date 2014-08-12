@@ -17,54 +17,5 @@ $break-large: 1024px;
 }
 
 @include responsive("phone") {
-  #sidebar {
-    display: none;
-  }
-  #content {
-    margin-left:0;
-  }
-  #header section.header {
-    padding-left:20px;
 
-    .titlebar {
-      display: none;
-    }
-
-    .search.open {
-
-      input {
-        width:160px;
-      }
-    }
-
-    .account {
-
-      span {
-        display:none;
-      }
-
-      i {
-        font-size:32px;
-      }
-    }
-  }
-
-  section.articles {
-    padding:20px;
-
-    article {
-      width:100%;
-
-      > .spacer {
-        padding:0;
-      }
-      
-      .actions {
-        padding-right:0;
-      }
-    }
-  }
-  .pace .pace-activity {
-    opacity: 1;
-  }
 }

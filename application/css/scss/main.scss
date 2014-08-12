@@ -1,17 +1,11 @@
-//Config vars
-$header-height:61px;
-$sidebar-width:100px;
-
+@import "common/config";
 @import "common/fonts";
+
+@import "generated/sprite";
+@import "generated/sprite-retina";
+
+@import "common/placeholders";
 @import "common/mixins";
-
 @import "common/base";
-@import "ui/header";
-@import "ui/sidebar";
-@import "ui/articles";
-@import "ui/collections";
-@import "ui/loader";
-@import "ui/login";
-@import "ui/overlay";
 
-@import "common/responsive";
+@import "ui/header";

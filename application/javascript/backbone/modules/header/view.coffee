@@ -46,8 +46,7 @@
 
   class Header.View extends Marionette.ItemView
     template: "header"
-    tagName: "section"
-    className: "header"
+    tagName: "header"
 
     events:
       "click .search": "clickSearch"

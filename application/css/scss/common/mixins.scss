@@ -7,3 +7,28 @@
 @mixin responsive($min, $max) {
   @media only screen and (min-width: $min + 1) and (max-width: $max) { @content; }
 }
+
+@mixin icon($normal, $retina: false, $centered: true) {
+  @include sprite($normal);
+
+  @if $retina {
+    @media
+    only screen and (-webkit-min-device-pixel-ratio: 1.25),
+    only screen and ( min-device-pixel-ratio: 1.25),
+    only screen and ( min-resolution: 144dppx),
+    only screen and ( min-resolution: 1.25dppx)
+    {
+      @include sprite-image($retina);
+      background-size: nth($normal, 7) nth($normal, 8);
+    }
+  }
+
+  @if $centered {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: - nth($normal, 5)/2;
+    margin-top: - nth($normal, 6)/2;
+  }
+}

@@ -19,7 +19,7 @@
   <body>
     <div id="overlay"></div>
     <div id="wrapper">
-      <div id="header"></div>
+      <div id="rg-header"></div>
       <div id="sidebar"></div>
       <div id="content"></div>
     </div>

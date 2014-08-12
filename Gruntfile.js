@@ -19,7 +19,7 @@ module.exports = function(grunt) {
   //grunt.loadNpmTasks('grunt-notify');
   //grunt.loadNpmTasks('grunt-shell');
   //grunt.loadNpmTasks('grunt-smushit');
-  //grunt.loadNpmTasks('grunt-spritesmith');
+  grunt.loadNpmTasks('grunt-spritesmith');
   //grunt.loadNpmTasks('grunt-replace');
 
   grunt.initConfig({
@@ -100,6 +100,51 @@ module.exports = function(grunt) {
       }
     },
 
+    sprite: {
+      normal: {
+        src: ['application/images/sprites/normal/*.png'],
+        destImg: 'assets/img/sprite.png',
+        destCSS: 'application/css/scss/generated/sprite.scss',
+        imgPath: '../img/sprite.png',
+        algorithm: 'binary-tree',
+        engine: 'gm',
+        'engineOpts': {
+          'imagemagick': true
+        },
+        cssFormat: 'scss',
+        cssOpts: {
+          cssClass: function (item) {
+            return '.sprite-' + item.name;
+          }
+        },
+        cssVarMap: function (sprite) {
+          sprite.name = 'sprite-' + sprite.name;
+        },
+        padding: 1
+      },
+      retina: {
+        src: ['application/images/sprites/retina/*.png'],
+        destImg: 'assets/img/sprite-retina.png',
+        destCSS: 'application/css/scss/generated/sprite-retina.scss',
+        imgPath: '../img/sprite-retina.png',
+        algorithm: 'binary-tree',
+        engine: 'gm',
+        'engineOpts': {
+          'imagemagick': true
+        },
+        cssFormat: 'scss',
+        cssOpts: {
+          cssClass: function (item) {
+            return '.sprite-retina-' + item.name;
+          }
+        },
+        cssVarMap: function (sprite) {
+          sprite.name = 'sprite-retina-' + sprite.name;
+        },
+        padding: 2
+      }
+    },
+
     uglify: {
       release: {
         preserveComments : false,
@@ -117,7 +162,7 @@ module.exports = function(grunt) {
         tasks: ['clean:all', 'sass:development', 'concat:css', 'clean:post_build'],
         options: {
           livereload: true,
-          debounceDelay: 1000,
+          debounceDelay: 1000
         },
       },
       js: {
@@ -128,15 +173,27 @@ module.exports = function(grunt) {
         tasks: ['clean:all', 'coffee', 'jade2js', 'concat:js', 'clean:post_build'],
         options: {
           livereload: true,
-          debounceDelay: 1000,
+          debounceDelay: 1000
         },
-      }
+      },
+      images: {
+        files: [
+          'application/images/**',
+        ],
+        tasks: ['sprite:common', 'sprite:retina'],
+        options: {
+          livereload: false,
+          debounceDelay: 1000
+        },
+      },
     }
 
   });
 
   grunt.registerTask('build', [
     'clean:all',
+    'sprite:normal',
+    'sprite:retina',
     'sass:development',
     'concat:css',
     'coffee',
@@ -147,6 +204,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build:production', [
     'clean:all',
+    'sprite:normal',
+    'sprite:retina',
     'sass:release',
     'concat:css',
     'coffee',

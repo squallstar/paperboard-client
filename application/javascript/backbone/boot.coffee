@@ -9,7 +9,7 @@
   App.$body = $('body')
 
   App.addRegions
-    header:  "#header"
+    header:  "#rg-header"
     sidebar: "#sidebar"
     content: "#content"
     overlay: "#overlay"
@@ -69,6 +69,6 @@
 
     if Backbone.history
       Backbone.history.start pushState: true
-      @navigate(route, trigger: true) if Backbone.history.fragment is ""
+      @navigate route, {trigger: true, replace: true}
 
   App
