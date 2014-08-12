@@ -1,25 +1,31 @@
-# @Collector.module "Sidebar", (Sidebar, App, Backbone, Marionette, $, _) ->
+@Paperboard.module "Sidebar", (Sidebar, App, Backbone, Marionette, $, _) ->
 
-#   class Sidebar.View extends Marionette.ItemView
-#     template: "sidebar"
-#     tagName: "section"
-#     className: "sidebar"
+  Sidebar.Item = Marionette.ItemView.extend
+    template: "sidebar-item"
+    tagName: "li"
 
-#     events:
-#       "click .menu a": "clickMenu"
+  Sidebar.View = Marionette.CompositeView.extend
+    template: "sidebar"
+    tagName: "section"
+    childView: Sidebar.Item
+    childViewContainer: "ul.boards"
 
-#     templateHelpers:
-#       "logged": false
+    events:
+      "mouseenter" : "clearSidebarTimeout"
+      "mouseleave" : "scheduleHideSidebar"
 
-#     clickMenu: (event) ->
-#       do event.preventDefault
+    scheduleHideSidebar: (event) ->
+      do event.preventDefault
+      return if @hideSidebarTimeout
 
-#       $el = $(event.currentTarget)
-#       return if $el.hasClass 'disabled'
+      @hideSidebarTimeout = window.setTimeout =>
+        App.$html.removeClass 'with-sidebar'
+      , 650
 
-#       @$el.find('.menu a').removeClass 'active'
+    clearSidebarTimeout: ->
+      if @hideSidebarTimeout
+        clearTimeout @hideSidebarTimeout
+        delete @hideSidebarTimeout
 
-#       if $el.hasClass 'articles'
-#       	App.request "search"
-#       else if $el.hasClass 'collections'
-#         App.request "collections"
+    onBeforeClose: ->
+      do @clearSidebarTimeout

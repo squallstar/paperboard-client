@@ -9,6 +9,3 @@
         Header.layout.render()
       else
         do Header.Show
-
-    # App.trigger.off "user:logout", ->
-    #   Header.layout.render()

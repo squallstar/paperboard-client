@@ -42,76 +42,50 @@
 #           else
 #             @$el.removeClass 'open'
 
-#   # --------------------------------------------------------------------------
+  # --------------------------------------------------------------------------
 
-  class Header.View extends Marionette.ItemView
+  Header.View = Marionette.ItemView.extend
     template: "header"
     tagName: "header"
 
     events:
-      "click .search": "clickSearch"
-      "keyup .search input": "doSearch"
-      "blur .search input" : "closeSearchBox"
-      "click .account" : "navigateRoot"
+      "mouseenter .nav .toggle-sidebar" : "revealSidebar"
+      "click .nav .toggle-sidebar"      : "revealSidebar"
 
     ui:
-      search: ".search"
-      searchinput: ".search input"
-
-    initialize: ->
-      # App.reqres.setHandler "search:domain", (domain) =>
-      #   @ui.searchinput.val domain
-      #   @ui.searchinput.blur()
-      #   App.request "search", domain
-
-      # App.reqres.setHandler "search:clear", =>
-      #   @ui.searchinput.val ''
-      #   @closeSearchBox()
-
-      # @suggestions = new Header.Suggestions
-      #   collection: new App.Entities.Suggestions
+      toggleSidebar: ".nav .toggle-sidebar"
 
     templateHelpers: ->
-      "search_query": if App.searchQuery then App.searchQuery else ''
       "user": if App.user then App.user.toJSON() else false
 
-    navigateRoot: (event) ->
+    revealSidebar: (event) ->
       do event.preventDefault
-      App.request "search"
+      return if App.$html.hasClass 'with-sidebar'
 
-    clickSearch: (event) ->
-      do event.preventDefault
+      App.request "create:sidebar"
+      App.$html.addClass 'with-sidebar'
 
-      if @ui.search.hasClass 'open'
-        return @ui.search.find('input').focus()
+    onClose: ->
+      App.$html.removeClass 'with-sidebar'
+      do App.sidebar.empty
 
-      @ui.search.addClass 'open'
-      @ui.search.find('input').focus()
 
-    doSearch: (e) ->
-      return unless @ui.search.hasClass 'open'
-      if @suggestionsInterval then clearInterval @suggestionsInterval
+    # doSearch: (e) ->
+    #   return unless @ui.search.hasClass 'open'
+    #   if @suggestionsInterval then clearInterval @suggestionsInterval
 
-      if e.which is 13
-        query = @ui.searchinput.val()
-        if query
-          @ui.searchinput.blur()
-          @suggestions.collection.reset()
-          App.request "search", query
-        else
-          @closeSearchBox()
-      else if e.which is 27
-        @ui.searchinput.val ''
-        @closeSearchBox()
-      else
-        @suggestionsInterval = setTimeout (=>
-          @suggestions.fetch @ui.searchinput.val()
-        ), 300
-
-    closeSearchBox: ->
-      @ui.search.removeClass('open')
-      if App.searchQuery
-        App.request "search"
-
-    onRender: ->
-      #@ui.search.append @suggestions.$el
+    #   if e.which is 13
+    #     query = @ui.searchinput.val()
+    #     if query
+    #       @ui.searchinput.blur()
+    #       @suggestions.collection.reset()
+    #       App.request "search", query
+    #     else
+    #       @closeSearchBox()
+    #   else if e.which is 27
+    #     @ui.searchinput.val ''
+    #     @closeSearchBox()
+    #   else
+    #     @suggestionsInterval = setTimeout (=>
+    #       @suggestions.fetch @ui.searchinput.val()
+    #     ), 300

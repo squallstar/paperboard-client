@@ -1,4 +1,8 @@
-# @Collector.module "Sidebar", (Sidebar, App, Backbone, Marionette, $, _) ->
+@Paperboard.module "Sidebar", (Sidebar, App, Backbone, Marionette, $, _) ->
 
-#     Sidebar.Show = ->
-#       App.sidebar.show new Sidebar.View
+  Sidebar.Create = ->
+    App.sidebar.show new Sidebar.View
+      collection: App.boards
+
+  App.reqres.setHandler "create:sidebar", ->
+    unless App.sidebar.hasView() then do Sidebar.Create
