@@ -14,7 +14,6 @@
       do event.preventDefault
       @$el.closest('ul').find('li').removeClass 'current'
       @$el.addClass 'current'
-      App.$html.removeClass 'with-sidebar'
 
     onRender: ->
       if @model.get('name').indexOf('@') is 0
@@ -39,8 +38,12 @@
       return if @hideSidebarTimeout or not App.$html.hasClass('with-sidebar')
 
       @hideSidebarTimeout = window.setTimeout =>
-        App.$html.removeClass 'with-sidebar'
+        do @hideSidebar
       , 250
+
+    hideSidebar: ->
+      App.$html.removeClass 'with-sidebar'
+      do @clearSidebarTimeout
 
     clearSidebarTimeout: ->
       if @hideSidebarTimeout

@@ -4,7 +4,7 @@
       @layout = new Header.View
       App.header.show @layout
 
-    App.reqres.setHandler "change:nav", (object) ->
+    App.reqres.setHandler "change:nav", (object = {}) ->
       unless Header.layout then do Header.Show
       Header.layout.setNav object
 

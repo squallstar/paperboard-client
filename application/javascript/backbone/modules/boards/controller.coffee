@@ -6,6 +6,8 @@
       "board/:id" : "showBoard"
 
     showEverything: ->
+      App.content.reset()
+      App.request "change:nav"
 
     showBoard: (id) ->
       App.request "find:board", id, (board) ->

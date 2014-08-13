@@ -56,6 +56,7 @@
     ui:
       nav: ".nav"
       toggleSidebar: ".nav .toggle-sidebar"
+      toggleSettings: ".nav .toggle-settings"
 
     templateHelpers: ->
       "user": if App.user then App.user.toJSON() else false
@@ -67,10 +68,16 @@
       App.request "create:sidebar"
       App.$html.addClass 'with-sidebar'
 
-    setNav: (object) ->
-      @ui.nav.removeClass 'type-twitter'
+    onRenderTemplate: ->
+      @ui.toggleSettings.addClass 'hide'
 
-      if object._class is 'Board'
+    setNav: (object) ->
+      is_board = object._class is 'Board'
+
+      @ui.nav.removeClass 'type-twitter'
+      @ui.toggleSettings.toggleClass 'hide', not is_board
+
+      if is_board
         @ui.toggleSidebar.text object.get('name')
         if object.get('name').indexOf('@') is 0
           @ui.nav.addClass 'type-twitter'

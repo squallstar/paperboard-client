@@ -38,6 +38,7 @@
   App.$html.on "click", "a[data-navigate]", (event) ->
     do event.preventDefault
     App.navigate $(event.currentTarget).attr('href'), {trigger: true}
+    App.execute "hide:sidebar"
 
   App.vent.on "auth:not_valid", ->
     $.removeCookie '_probe_tkn'

@@ -164,6 +164,40 @@
       }
     }
 
+    .toggle-settings {
+      @include transition(opacity, 0.2s);
+      position: absolute;
+      right: $side-padding + 2px;
+      top: 7px;
+      height: 30px;
+      line-height: 31px;
+      padding-right: 23px;
+      font-size: 0.8em;
+      color: #000;
+      text-decoration: none;
+      opacity: 0.2;
+
+      &:before {
+        @include icon($sprite-cog, $sprite-retina-cog);
+        left: auto;
+        right: 0;
+        margin-left: 0;
+      }
+
+      html.fixed-header & {
+        text-indent: -999em;
+      }
+
+      &:hover {
+        opacity: 0.7;
+        text-indent: 0;
+
+        html.fixed-header & {
+          text-indent: 0;
+        }
+      }
+    }
+
     &.type-twitter {
       background-color: #5DA9DD;
 
@@ -176,6 +210,22 @@
         &.current a, a:hover {
           color: #FFF;
           border-bottom-color: rgba(0,0,0,0.2);
+        }
+      }
+
+      .toggle-settings {
+        color: #FFF;
+        opacity: 0.4;
+
+        &:before {
+          @include icon($sprite-cog-white, $sprite-retina-cog-white);
+          left: auto;
+          right: 0;
+          margin-left: 0;
+        }
+
+        &:hover {
+          opacity: 1;
         }
       }
     }
