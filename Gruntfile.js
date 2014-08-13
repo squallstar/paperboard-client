@@ -12,20 +12,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-jade-plugin');
-  //grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  //grunt.loadNpmTasks('grunt-notify');
-  //grunt.loadNpmTasks('grunt-shell');
-  //grunt.loadNpmTasks('grunt-smushit');
   grunt.loadNpmTasks('grunt-spritesmith');
-  //grunt.loadNpmTasks('grunt-replace');
 
   grunt.initConfig({
 
     clean: {
-      all: ['application/assets/js', 'application/assets/css'],
+      all: ['application/assets/js', 'application/assets/css', 'public/assest/img/generated'],
       post_build: ['.sass-cache', 'npm-debug.log', '__templates.js']
     },
 
@@ -35,7 +30,7 @@ module.exports = function(grunt) {
           join: true
         },
         files: {
-          'assets/js/backbone.js': [
+          'public/assets/js/paperboard.js': [
             'application/javascript/backbone/prototypes/*.coffee',
             'application/javascript/backbone/boot.coffee',
             'application/javascript/backbone/entities/*.coffee',
@@ -54,17 +49,17 @@ module.exports = function(grunt) {
           'application/javascript/vendor/marionette.js',
           'application/javascript/vendor/plugins/*',
           '__templates.js',
-          'assets/js/backbone.js'
+          'public/assets/js/paperboard.js'
         ],
-        dest: 'assets/js/backbone.js'
+        dest: 'public/assets/js/paperboard.js'
       },
       css: {
         src: [
           'application/css/vendor/reset.css',
           'application/css/vendor/grid.css',
-          'assets/css/core.css'
+          'public/assets/css/paperboard.css'
         ],
-        dest: 'assets/css/core.css'
+        dest: 'public/assets/css/paperboard.css'
       }
     },
 
@@ -79,7 +74,7 @@ module.exports = function(grunt) {
     sass: {
       development: {
         files: {
-          'assets/css/core.css' : [
+          'public/assets/css/paperboard.css' : [
             'application/css/scss/main.scss'
           ]
         },
@@ -90,7 +85,7 @@ module.exports = function(grunt) {
       },
       release: {
         files: {
-          'assets/css/core.css' : [
+          'public/assets/css/paperboard.css' : [
             'application/css/scss/main.scss'
           ]
         },
@@ -103,9 +98,9 @@ module.exports = function(grunt) {
     sprite: {
       normal: {
         src: ['application/images/sprites/normal/*.png'],
-        destImg: 'assets/img/sprite.png',
+        destImg: 'public/assets/img/generated/sprite.png',
         destCSS: 'application/css/scss/generated/sprite.scss',
-        imgPath: '../img/sprite.png',
+        imgPath: '../img/generated/sprite.png',
         algorithm: 'binary-tree',
         engine: 'gm',
         'engineOpts': {
@@ -124,9 +119,9 @@ module.exports = function(grunt) {
       },
       retina: {
         src: ['application/images/sprites/retina/*.png'],
-        destImg: 'assets/img/sprite-retina.png',
+        destImg: 'public/assets/img/generated/sprite-retina.png',
         destCSS: 'application/css/scss/generated/sprite-retina.scss',
-        imgPath: '../img/sprite-retina.png',
+        imgPath: '../img/generated/sprite-retina.png',
         algorithm: 'binary-tree',
         engine: 'gm',
         'engineOpts': {
@@ -149,7 +144,7 @@ module.exports = function(grunt) {
       release: {
         preserveComments : false,
         files: {
-          'assets/js/backbone.js': ['assets/js/backbone.js']
+          'public/assets/js/paperboard.js': ['public/assets/js/paperboard.js']
         }
       }
     },

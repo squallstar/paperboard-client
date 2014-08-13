@@ -1,11 +1,8 @@
 node_modules/
 application/logs/log-*.php
 
-assets/js/backbone.js
+application/css/scss/generated/*
 
-assets/css/core.css
-
-assets/img/sprite.png
-assets/img/sprite-retina.png
-application/css/scss/generated/sprite-retina.scss
-application/css/scss/generated/sprite.scss
+public/assets/js/
+public/assets/css/
+public/assets/img/generated/
