@@ -7,10 +7,13 @@
     events:
       "click a" : "didClickItem"
 
+    attributes: ->
+      'data-pid': @model.get('private_id')
+
     didClickItem: (event) ->
       do event.preventDefault
-      @$el.closest('ul').find('a').removeClass 'current'
-      @$el.find('a').addClass 'current'
+      @$el.closest('ul').find('li').removeClass 'current'
+      @$el.addClass 'current'
       App.$html.removeClass 'with-sidebar'
 
     onRender: ->
@@ -44,5 +47,28 @@
         clearTimeout @hideSidebarTimeout
         delete @hideSidebarTimeout
 
+    setSortable: ->
+      @sortableElement = @$el.sortable
+        items: "#{@childViewContainer} li"
+        containment: "parent"
+        handle: ".move-handle"
+
+        update: =>
+          i = 0
+          for item in @$el.find("#{@childViewContainer} li")
+            pid = $(item).data 'pid'
+            for board in @collection.models
+              if board.get('private_id') is pid
+                board.set {'position': i}, {silent: true}
+                i++
+
+          @collection.reorder()
+
     onBeforeClose: ->
       do @clearSidebarTimeout
+
+      if @sortableElement? and @$el.is ".ui-sortable"
+        @$el.sortable "disable"
+
+    onRender: ->
+      do @setSortable

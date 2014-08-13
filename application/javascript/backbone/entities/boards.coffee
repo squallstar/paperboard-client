@@ -20,6 +20,23 @@
     model: Entities.Board
     url: "v3/collections"
 
+    comparator: (model) ->
+      parseInt model.get('position'), 10
+
+    reorder: ->
+      do @sort
+      collection_ids = []
+      for collection in @models
+        #if not isNaN(id) or id is "favourite_collection" then collection_ids.push id
+        collection_ids.push collection.get('private_id')
+
+      Backbone.OAuth.post
+        url : "v3/collections/reorder"
+        data :
+          collection_ids : collection_ids
+
+      @
+
   # --------------------------------------------------------------------------
 
   App.reqres.setHandler "find:board", (private_id, callback) ->

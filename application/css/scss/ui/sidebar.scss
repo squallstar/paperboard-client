@@ -24,43 +24,88 @@
     top: 0;
   }
 
-  ul.boards {
+  > section {
+    height: 100%;
 
-    li {
+    > ul {
 
-      a {
-        @extend %ellipsis;
-        @extend %antialias;
+      li {
         position: relative;
-        font-size: 0.95em;
-        display: block;
         height: 47px;
-        line-height: 47px;
-        padding: 0 30px 0 60px;
-        text-decoration: none;
-        color: #737373;
 
         &:hover, &.current {
           background-color: #F5F5F5;
         }
 
-        &.icon-infinite:before {
-          @include icon($sprite-infinite, $sprite-retina-infinite);
-          left: 29px;
-          margin-left: 0;
+        .item {
+          @extend %ellipsis;
+          @extend %antialias;
+          position: relative;
+          font-size: 0.95em;
+          display: block;
+          height: 100%;
+          line-height: 47px;
+          padding: 0 0 0 60px;
+          margin-right: 50px;
+          text-decoration: none;
+          color: #737373;
+
+          &.icon-infinite:before {
+            @include icon($sprite-infinite, $sprite-retina-infinite);
+            left: 29px;
+            margin-left: 0;
+          }
+
+          &.icon-twitter:before {
+            @include icon($sprite-twitter, $sprite-retina-twitter);
+            left: 30px;
+            margin-left: 0;
+          }
+
+          &.icon-folder:before {
+            @include icon($sprite-folder-web, $sprite-retina-folder-web);
+            left: 30px;
+            margin-left: 0;
+            opacity: 0.3;
+          }
         }
 
-        &.icon-twitter:before {
-          @include icon($sprite-twitter, $sprite-retina-twitter);
-          left: 30px;
-          margin-left: 0;
+        .move-handle {
+          width: 26px;
+          height: 26px;
+          position: absolute;
+          z-index: 1;
+          right: 10px;
+          top: 10px;
+          opacity: 0;
+          cursor: -webkit-grab;
+          cursor: -moz-grab;
+
+          &:before {
+            @include icon($sprite-move, $sprite-retina-move);
+          }
+
+          &:active {
+            cursor: -webkit-grabbing;
+            cursor: -moz-grabbing;
+          }
         }
 
-        &.icon-folder:before {
-          @include icon($sprite-folder-web, $sprite-retina-folder-web);
-          left: 30px;
-          margin-left: 0;
-          opacity: 0.3;
+        &:hover .move-handle {
+          opacity: 0.1;
+
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+
+        &.ui-sortable-helper {
+          box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+          background-color: #EEE;
+
+          .item {
+            color: #222;
+          }
         }
       }
     }
