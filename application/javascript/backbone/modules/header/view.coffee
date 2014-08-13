@@ -73,9 +73,10 @@
 
     setNav: (object) ->
       is_board = object._class is 'Board'
+      can_edit = is_board and App.user and object.get('owned_collection')
 
       @ui.nav.removeClass 'type-twitter'
-      @ui.toggleSettings.toggleClass 'hide', not is_board
+      @ui.toggleSettings.toggleClass 'hide', not can_edit
 
       if is_board
         @ui.toggleSidebar.text object.get('name')

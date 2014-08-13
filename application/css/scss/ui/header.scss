@@ -166,6 +166,7 @@
 
     .toggle-settings {
       @include transition(opacity, 0.2s);
+      @extend %antialias;
       position: absolute;
       right: $side-padding + 2px;
       top: 7px;
@@ -215,7 +216,7 @@
 
       .toggle-settings {
         color: #FFF;
-        opacity: 0.4;
+        opacity: 0.5;
 
         &:before {
           @include icon($sprite-cog-white, $sprite-retina-cog-white);

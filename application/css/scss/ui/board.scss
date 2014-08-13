@@ -63,6 +63,7 @@ section.board {
           padding: 15px;
 
           h3 {
+            @extend %break-words;
             font-family: "Proxima Nova Condensed";
             font-size: 1.4em;
             line-height: 1.2;
