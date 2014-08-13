@@ -8,7 +8,7 @@
       model = @model.toJSON()
       data = {
         title: model.name
-        description: model.description
+        description: model.description.replace /(<([^>]+)>)/ig,""
         image: false
         source: model.sources[0]
         published_ago: @model.publishedAgo()
