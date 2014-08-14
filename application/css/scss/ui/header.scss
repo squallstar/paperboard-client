@@ -77,7 +77,7 @@
     }
   }
 
-  .nav {
+  #nav {
     @include transition(background-color, 0.2s);
     padding: 0 $side-padding;
     background-color: #F5F5F5;
@@ -164,10 +164,11 @@
       }
     }
 
-    .toggle-settings {
+    > .toggle-settings {
       @include transition(opacity, 0.2s);
       @extend %antialias;
       position: absolute;
+      display: none;
       right: $side-padding + 2px;
       top: 7px;
       height: 30px;
@@ -199,8 +200,78 @@
       }
     }
 
+    > .toggle-follow {
+      @include transition(opacity, 0.2s);
+      @extend %antialias;
+      position: absolute;
+      display: none;
+      right: $side-padding + 2px;
+      top: 7px;
+      height: 30px;
+      line-height: 30px;
+      padding: 0 10px 0 29px;
+      font-size: 0.8em;
+      color: #FFF;
+      text-decoration: none;
+      border: 1px solid #FFF;
+      border-radius: 3px;
+      opacity: 0.9;
+
+      &:before {
+        @include icon($sprite-tick-white, $sprite-retina-tick-white);
+        left: 9px;
+        margin-left: 0;
+        margin-top: -6px;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:active {
+        background-color: rgba(0,0,0,0.15);
+      }
+
+      &.pressed {
+        background-color: rgba(0,0,0,0.15);
+        border: 0;
+        color: #FFF;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.2) inset;
+        line-height: 31px;
+
+        &:active {
+          background-color: rgba(0,0,0,0.25);
+        }
+      }
+    }
+
+    &.type-owned {
+
+      > .toggle-settings {
+        display: block;
+      }
+    }
+
+    &:not(.type-owned) {
+
+      > .toggle-follow {
+        display: block;
+      }
+    }
+
     &.type-twitter {
       background-color: #5DA9DD;
+    }
+
+    &.type-can-be-followed {
+      background-color: #F8B65D;
+    }
+
+    &.type-followed {
+      background-color: #A3CD39;
+    }
+
+    &.type-twitter, &.type-followed, &.type-can-be-followed {
 
       .context li {
 
@@ -241,9 +312,9 @@
       display: none;
     }
 
-    .nav {
+    #nav {
 
-      &:not(.type-twitter) {
+      &:not(.type-twitter):not(.type-followed):not(.type-can-be-followed) {
         background-color: #FFF;
 
         > .toggle-sidebar {
@@ -251,11 +322,14 @@
         }
       }
 
-      &.type-twitter > .logo {
-        @include icon($sprite-logo-white, $sprite-retina-logo-white);
-        left: $side-padding + 3px;
-        margin-left: 0;
-        opacity: 0.55;
+      &.type-twitter, &.type-followed, &.type-can-be-followed {
+
+        > .logo {
+          @include icon($sprite-logo-white, $sprite-retina-logo-white);
+          left: $side-padding + 3px;
+          margin-left: 0;
+          opacity: 0.55;
+        }
       }
 
       > .logo {

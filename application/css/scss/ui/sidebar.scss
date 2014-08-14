@@ -50,6 +50,18 @@
           text-decoration: none;
           color: #737373;
 
+          > img {
+            $size: 20px;
+
+            position: absolute;
+            width: $size;
+            height: $size;
+            border-radius: $size;
+            top: 50%;
+            margin-top: - $size / 2;
+            left: 29px;
+          }
+
           &.icon-infinite:before {
             @include icon($sprite-infinite, $sprite-retina-infinite);
             left: 29px;
@@ -62,11 +74,17 @@
             margin-left: 0;
           }
 
-          &.icon-folder:before {
+          &.icon-owned:before {
             @include icon($sprite-folder-web, $sprite-retina-folder-web);
             left: 30px;
             margin-left: 0;
             opacity: 0.3;
+          }
+
+          &.icon-followed:before {
+            @include icon($sprite-folder-person, $sprite-retina-folder-person);
+            left: 30px;
+            margin-left: 0;
           }
         }
 

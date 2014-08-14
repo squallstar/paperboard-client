@@ -9,19 +9,21 @@
       | #{user.full_name}
       img.avatar(src="#{user.avatar.medium}")
 
-if user
-  .nav
-    a(class='logo', href='#', title='Back to top')
+#nav
+  a(class='logo', href='#', title='Back to top')
+
+  if user
     a(href='#', class='toggle-sidebar') All boards
 
-    ul.context
-      li.current
-        a(href='#') Everything
-      li
-        a(href='#') Yesterday
-      li
-        a(href='#') Pictures
-      li
-        a(href='#') Videos
+  ul.context
+    li.current
+      a(href='#') Everything
+    li
+      a(href='#') Yesterday
+    li
+      a(href='#') Pictures
+    li
+      a(href='#') Videos
 
-    a(class='toggle-settings', href='#') Board settings
+  a(class='toggle-settings', href='#') Board settings
+  a(class='toggle-follow', href='#')

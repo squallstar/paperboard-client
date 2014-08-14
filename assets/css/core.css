@@ -1,0 +1,738 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+input[type="text"], input[type="password"], textarea {
+	outline:0;
+}
+
+@charset "UTF-8";
+@font-face {
+  font-family: "Entypo";
+  src: url("../fonts/entypo.eot");
+  src: local("☺"), url("../fonts/entypo.woff") format("woff"), url("../fonts/entypo.ttf") format("truetype"), url("../fonts/entypo.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("../fonts/ProximaNova-Light.eot");
+  src: local("☺"), url("../fonts/ProximaNova-Light.woff") format("woff"), url("../fonts/ProximaNova-Light.ttf") format("truetype"), url("../fonts/ProximaNova-Light.svg") format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("../fonts/ProximaNova-Regular.eot");
+  src: local("☺"), url("../fonts/ProximaNova-Regular.woff") format("woff"), url("../fonts/ProximaNova-Regular.ttf") format("truetype"), url("../fonts/ProximaNova-Regular.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("../fonts/ProximaNova-Bold.eot");
+  src: local("☺"), url("../fonts/ProximaNova-Bold.woff") format("woff"), url("../fonts/ProximaNova-Bold.ttf") format("truetype"), url("../fonts/ProximaNova-Bold.svg") format("svg");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Proxima Nova Condensed';
+  src: url("../fonts/ProximaNovaCond-Light.eot");
+  src: local("☺"), url("../fonts/ProximaNovaCond-Light.woff") format("woff"), url("../fonts/ProximaNovaCond-Light.ttf") format("truetype"), url("../fonts/ProximaNovaCond-Light.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+/* line 2, ../../application/css/scss/common/placeholders.scss */
+#rg-header .top:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* line 9, ../../application/css/scss/common/placeholders.scss */
+#rg-header .nav > .toggle-sidebar, #rg-sidebar ul.boards li a, section.board .articles article .w .content .posted-date, section.board .articles article .w .content .source-url {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* line 19, ../../application/css/scss/common/placeholders.scss */
+#rg-header .nav > .toggle-sidebar, #rg-sidebar ul.boards li a {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 1, ../../application/css/scss/common/base.scss */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 6, ../../application/css/scss/common/base.scss */
+html, body {
+  background: #E5E5E5;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* line 18, ../../application/css/scss/common/base.scss */
+body {
+  height: 100%;
+  min-height: 100%;
+  font-family: "Proxima Nova", sans-serif;
+  font-size: 1em;
+  overflow-y: scroll;
+}
+/* line 25, ../../application/css/scss/common/base.scss */
+html.fixed-header body {
+  padding-top: 105px;
+}
+
+/* line 30, ../../application/css/scss/common/base.scss */
+#content-rg {
+  min-width: 768px;
+}
+
+/* line 34, ../../application/css/scss/common/base.scss */
+input[type="text"], textarea {
+  font-family: "Proxima Nova", sans-serif;
+}
+
+/* line 38, ../../application/css/scss/common/base.scss */
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  background: #F5F5F5;
+  border-left: 1px solid #D2D2D2;
+}
+
+/* line 44, ../../application/css/scss/common/base.scss */
+::-webkit-scrollbar-thumb {
+  background: #C3C3C3;
+  border-left: 1px solid #AAA;
+  -webkit-border-radius: 0;
+  -webkit-box-shadow: none;
+}
+
+/* line 50, ../../application/css/scss/common/base.scss */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* line 1, ../../application/css/scss/ui/header.scss */
+#rg-header {
+  position: relative;
+  width: 100%;
+  min-width: 768px;
+  z-index: 2;
+  height: 105px;
+}
+/* line 10, ../../application/css/scss/ui/header.scss */
+#rg-header .top {
+  height: 60px;
+  overflow: hidden;
+  background: #FFF;
+  padding: 0 27px;
+  z-index: 1;
+  position: relative;
+}
+/* line 19, ../../application/css/scss/ui/header.scss */
+#rg-header .top > h1 {
+  position: relative;
+  width: 250px;
+  height: 35px;
+  float: left;
+  padding-left: 35px;
+  margin-top: 12px;
+  line-height: 35px;
+  font-weight: normal;
+  font-size: 1.2em;
+  cursor: default;
+}
+/* line 31, ../../application/css/scss/ui/header.scss */
+#rg-header .top > h1:before {
+  background-image: url(../img/sprite.png);
+  background-position: -26px 0px;
+  width: 25px;
+  height: 22px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12.5px;
+  margin-top: -11px;
+  left: 0;
+  margin-left: 0;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 144dppx), only screen and (min-resolution: 1.25dppx) {
+  /* line 31, ../../application/css/scss/ui/header.scss */
+  #rg-header .top > h1:before {
+    background-image: url(../img/sprite-retina.png);
+    background-size: 69px 43px;
+  }
+}
+/* line 38, ../../application/css/scss/ui/header.scss */
+#rg-header .top > .search-bar {
+  position: absolute;
+  left: 50%;
+  text-align: center;
+  width: 480px;
+  margin-left: -240px;
+  height: 60px;
+}
+/* line 46, ../../application/css/scss/ui/header.scss */
+#rg-header .top > .search-bar > a {
+  -moz-transition: opacity 0.2s;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  display: inline-block;
+  opacity: 0.2;
+  width: 45px;
+  height: 45px;
+}
+/* line 53, ../../application/css/scss/ui/header.scss */
+#rg-header .top > .search-bar > a:before {
+  background-image: url(../img/sprite.png);
+  background-position: -21px -23px;
+  width: 20px;
+  height: 20px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 144dppx), only screen and (min-resolution: 1.25dppx) {
+  /* line 53, ../../application/css/scss/ui/header.scss */
+  #rg-header .top > .search-bar > a:before {
+    background-image: url(../img/sprite-retina.png);
+    background-size: 69px 43px;
+  }
+}
+/* line 57, ../../application/css/scss/ui/header.scss */
+#rg-header .top > .search-bar > a:hover {
+  opacity: 1;
+}
+/* line 63, ../../application/css/scss/ui/header.scss */
+#rg-header .top > .settings {
+  float: right;
+  height: 32px;
+  margin-top: 14px;
+  line-height: 35px;
+  font-size: 0.9em;
+}
+/* line 70, ../../application/css/scss/ui/header.scss */
+#rg-header .top > .settings > img {
+  float: right;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  margin-left: 10px;
+}
+/* line 80, ../../application/css/scss/ui/header.scss */
+#rg-header .nav {
+  -moz-transition: background-color 0.2s;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  padding: 0 27px;
+  background-color: #F5F5F5;
+  height: 45px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+/* line 88, ../../application/css/scss/ui/header.scss */
+#rg-header .nav .logo {
+  -moz-transition: width 0.3s;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+  background-image: url(../img/sprite.png);
+  background-position: -26px 0px;
+  width: 25px;
+  height: 22px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12.5px;
+  margin-top: -11px;
+  left: 30px;
+  margin-left: 0;
+  overflow: hidden;
+  width: 0;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 144dppx), only screen and (min-resolution: 1.25dppx) {
+  /* line 88, ../../application/css/scss/ui/header.scss */
+  #rg-header .nav .logo {
+    background-image: url(../img/sprite-retina.png);
+    background-size: 69px 43px;
+  }
+}
+/* line 97, ../../application/css/scss/ui/header.scss */
+#rg-header .nav > .toggle-sidebar {
+  -moz-transition: left 0.3s;
+  -webkit-transition: left 0.3s;
+  transition: left 0.3s;
+  position: absolute;
+  display: inline-block;
+  top: 8px;
+  left: 27px;
+  background-color: #FFF;
+  color: #737373;
+  height: 29px;
+  line-height: 30px;
+  font-size: 0.95em;
+  padding: 0 26px 0 10px;
+  text-decoration: none;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  max-width: 200px;
+}
+/* line 116, ../../application/css/scss/ui/header.scss */
+#rg-header .nav > .toggle-sidebar:after {
+  background-image: url(../img/sprite.png);
+  background-position: -52px -32px;
+  width: 10px;
+  height: 7px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -3.5px;
+  left: auto;
+  margin: -4px 0 0;
+  right: 8px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 144dppx), only screen and (min-resolution: 1.25dppx) {
+  /* line 116, ../../application/css/scss/ui/header.scss */
+  #rg-header .nav > .toggle-sidebar:after {
+    background-image: url(../img/sprite-retina.png);
+    background-size: 69px 43px;
+  }
+}
+/* line 124, ../../application/css/scss/ui/header.scss */
+#rg-header .nav .context {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 700px;
+  overflow: hidden;
+  height: 100%;
+  font-size: 0.95em;
+}
+/* line 132, ../../application/css/scss/ui/header.scss */
+#rg-header .nav .context li {
+  display: inline-block;
+  height: 100%;
+  margin: 0 18px;
+}
+/* line 137, ../../application/css/scss/ui/header.scss */
+#rg-header .nav .context li:first-child {
+  margin-left: 0;
+}
+/* line 141, ../../application/css/scss/ui/header.scss */
+#rg-header .nav .context li:last-child {
+  margin-right: 0;
+}
+/* line 145, ../../application/css/scss/ui/header.scss */
+#rg-header .nav .context li a {
+  -moz-transition: border-color 0.4s;
+  -webkit-transition: border-color 0.4s;
+  transition: border-color 0.4s;
+  display: block;
+  height: 100%;
+  padding-top: 15px;
+  text-decoration: none;
+  color: #7A7A7A;
+  border-bottom: 2px solid transparent;
+}
+/* line 154, ../../application/css/scss/ui/header.scss */
+#rg-header .nav .context li a:hover {
+  color: #000;
+  border-bottom-color: #5BCBF5;
+}
+/* line 160, ../../application/css/scss/ui/header.scss */
+#rg-header .nav .context li.current a, #rg-header .nav .context li a:hover {
+  color: #000;
+  border-bottom-color: #5BCBF5;
+}
+/* line 167, ../../application/css/scss/ui/header.scss */
+#rg-header .nav.type-twitter {
+  background-color: #5DA9DD;
+}
+/* line 172, ../../application/css/scss/ui/header.scss */
+#rg-header .nav.type-twitter .context li a {
+  color: #FFF;
+}
+/* line 176, ../../application/css/scss/ui/header.scss */
+#rg-header .nav.type-twitter .context li.current a, #rg-header .nav.type-twitter .context li a:hover {
+  color: #FFF;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+}
+/* line 184, ../../application/css/scss/ui/header.scss */
+html.fixed-header #rg-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+/* line 189, ../../application/css/scss/ui/header.scss */
+html.fixed-header #rg-header .top {
+  display: none;
+}
+/* line 195, ../../application/css/scss/ui/header.scss */
+html.fixed-header #rg-header .nav:not(.type-twitter) {
+  background-color: #FFF;
+}
+/* line 198, ../../application/css/scss/ui/header.scss */
+html.fixed-header #rg-header .nav:not(.type-twitter) > .toggle-sidebar {
+  background-color: #F5F5F5;
+}
+/* line 203, ../../application/css/scss/ui/header.scss */
+html.fixed-header #rg-header .nav.type-twitter > .logo {
+  background-image: url(../img/sprite.png);
+  background-position: 0px 0px;
+  width: 25px;
+  height: 22px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12.5px;
+  margin-top: -11px;
+  left: 30px;
+  margin-left: 0;
+  opacity: 0.55;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 144dppx), only screen and (min-resolution: 1.25dppx) {
+  /* line 203, ../../application/css/scss/ui/header.scss */
+  html.fixed-header #rg-header .nav.type-twitter > .logo {
+    background-image: url(../img/sprite-retina.png);
+    background-size: 69px 43px;
+  }
+}
+/* line 210, ../../application/css/scss/ui/header.scss */
+html.fixed-header #rg-header .nav > .logo {
+  width: 25px;
+}
+/* line 214, ../../application/css/scss/ui/header.scss */
+html.fixed-header #rg-header .nav > .toggle-sidebar {
+  left: 65px;
+}
+
+/* line 1, ../../application/css/scss/ui/sidebar.scss */
+#rg-sidebar {
+  -moz-transition: opacity 0.25s;
+  -webkit-transition: opacity 0.25s;
+  transition: opacity 0.25s;
+  width: 230px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  background-color: #FFF;
+  z-index: 2;
+  overflow-y: auto;
+  border-top: 1px solid #E5E5E5;
+}
+/* line 17, ../../application/css/scss/ui/sidebar.scss */
+html.with-sidebar #rg-sidebar {
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* line 23, ../../application/css/scss/ui/sidebar.scss */
+html.fixed-header #rg-sidebar {
+  top: 0;
+}
+/* line 31, ../../application/css/scss/ui/sidebar.scss */
+#rg-sidebar ul.boards li a {
+  position: relative;
+  font-size: 0.95em;
+  display: block;
+  height: 47px;
+  line-height: 47px;
+  padding: 0 30px 0 60px;
+  text-decoration: none;
+  color: #737373;
+}
+/* line 43, ../../application/css/scss/ui/sidebar.scss */
+#rg-sidebar ul.boards li a:hover, #rg-sidebar ul.boards li a.current {
+  background-color: #F5F5F5;
+}
+/* line 47, ../../application/css/scss/ui/sidebar.scss */
+#rg-sidebar ul.boards li a.icon-infinite:before {
+  background-image: url(../img/sprite.png);
+  background-position: 0px -23px;
+  width: 20px;
+  height: 20px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  left: 29px;
+  margin-left: 0;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 144dppx), only screen and (min-resolution: 1.25dppx) {
+  /* line 47, ../../application/css/scss/ui/sidebar.scss */
+  #rg-sidebar ul.boards li a.icon-infinite:before {
+    background-image: url(../img/sprite-retina.png);
+    background-size: 69px 43px;
+  }
+}
+/* line 53, ../../application/css/scss/ui/sidebar.scss */
+#rg-sidebar ul.boards li a.icon-twitter:before {
+  background-image: url(../img/sprite.png);
+  background-position: -52px 0px;
+  width: 17px;
+  height: 16px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -8.5px;
+  margin-top: -8px;
+  left: 30px;
+  margin-left: 0;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 144dppx), only screen and (min-resolution: 1.25dppx) {
+  /* line 53, ../../application/css/scss/ui/sidebar.scss */
+  #rg-sidebar ul.boards li a.icon-twitter:before {
+    background-image: url(../img/sprite-retina.png);
+    background-size: 69px 43px;
+  }
+}
+/* line 59, ../../application/css/scss/ui/sidebar.scss */
+#rg-sidebar ul.boards li a.icon-folder:before {
+  background-image: url(../img/sprite.png);
+  background-position: -52px -17px;
+  width: 17px;
+  height: 14px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -8.5px;
+  margin-top: -7px;
+  left: 30px;
+  margin-left: 0;
+  opacity: 0.3;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 144dppx), only screen and (min-resolution: 1.25dppx) {
+  /* line 59, ../../application/css/scss/ui/sidebar.scss */
+  #rg-sidebar ul.boards li a.icon-folder:before {
+    background-image: url(../img/sprite-retina.png);
+    background-size: 69px 43px;
+  }
+}
+
+/* line 1, ../../application/css/scss/ui/board.scss */
+section.board {
+  position: relative;
+  width: 100%;
+  padding: 20px 18px 30px;
+}
+/* line 6, ../../application/css/scss/ui/board.scss */
+section.board .articles {
+  position: relative;
+  width: 100%;
+}
+/* line 10, ../../application/css/scss/ui/board.scss */
+section.board .articles article {
+  padding: 10px;
+}
+/* line 12, ../../application/css/scss/ui/board.scss */
+.grid-1 section.board .articles article {
+  width: 100%;
+}
+/* line 16, ../../application/css/scss/ui/board.scss */
+.grid-2 section.board .articles article {
+  width: 50%;
+}
+/* line 20, ../../application/css/scss/ui/board.scss */
+.grid-3 section.board .articles article {
+  width: 33.33%;
+}
+/* line 24, ../../application/css/scss/ui/board.scss */
+.grid-4 section.board .articles article {
+  width: 25%;
+}
+/* line 28, ../../application/css/scss/ui/board.scss */
+.grid-5 section.board .articles article {
+  width: 20%;
+}
+/* line 32, ../../application/css/scss/ui/board.scss */
+.grid-6 section.board .articles article {
+  width: 16.66%;
+}
+/* line 38, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w {
+  position: relative;
+  background-color: #FFF;
+  border: 1px solid #D8D8D8;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.05);
+}
+/* line 44, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  background: url(../img/logo.png) no-repeat center;
+}
+/* line 52, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .img img {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  top: 0px;
+  left: 0px;
+}
+/* line 61, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .content {
+  overflow: hidden;
+  padding: 15px;
+}
+/* line 65, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .content h3 {
+  font-family: "Proxima Nova Condensed";
+  font-size: 1.4em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+/* line 72, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .content p {
+  font-size: 0.85em;
+  color: #898989;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  margin-top: 10px;
+}
+/* line 80, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .content .user-pic {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 25px;
+  height: 25px;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+}
+/* line 91, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .content .posted-date {
+  margin-top: 11px;
+  font-size: 0.75em;
+  color: #BBB;
+}
+/* line 98, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .content .source-url {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 0.75em;
+  color: #5DA9DD;
+  text-decoration: none;
+}
+/* line 106, ../../application/css/scss/ui/board.scss */
+section.board .articles article .w .content .source-url:hover {
+  text-decoration: underline;
+}
+/* line 113, ../../application/css/scss/ui/board.scss */
+section.board .articles article:hover .w .content .user-pic {
+  opacity: 0.1;
+  visibility: visible;
+}
+/* line 117, ../../application/css/scss/ui/board.scss */
+section.board .articles article:hover .w .content .user-pic:hover {
+  opacity: 1;
+}

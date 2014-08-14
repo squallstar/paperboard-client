@@ -99,7 +99,7 @@
 
       window.setTimeout =>
         @ui.articles.masonry('layout')
-      , 0
+      , 1
 
       window.setTimeout =>
         if @ui.articles.height() < App.$window.height() then do @fetchMore

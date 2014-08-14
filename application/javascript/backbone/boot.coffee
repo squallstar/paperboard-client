@@ -67,6 +67,8 @@
       url: options.entrypoint.replace(/^\/|\/$/g, '')
       route: options.route.replace(/^\/|\/$/g, '')
 
+      open_routes: [/board\/([A-z0-9]+)/]
+
     App.__token = $.cookie '_probe_tkn'
 
     if options.data
@@ -79,7 +81,14 @@
     App.$window.resize()
 
     route = @options.route or App.rootRoute
-    route = 'login' unless App.user
+
+    unless App.user
+      valid = false
+      for r in App.options.open_routes
+        if r.test(route)
+          valid = true
+          break
+      route = 'login' unless valid
 
     Backbone.history.start {pushState: true, silent: route isnt @options.route}
     @navigate route, {trigger: true, replace: true}

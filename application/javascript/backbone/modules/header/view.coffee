@@ -49,14 +49,16 @@
     tagName: "header"
 
     events:
-      "mouseenter .nav .toggle-sidebar" : "revealSidebar"
-      "click .nav .toggle-sidebar"      : "revealSidebar"
-      "click .nav .logo"                : "backToTop"
+      "mouseenter #nav .toggle-sidebar" : "revealSidebar"
+      "click #nav .toggle-sidebar"      : "revealSidebar"
+      "click #nav .toggle-settings"     : "toggleSettings"
+      "click #nav .toggle-follow"       : "toggleFollow"
+      "click #nav .logo"                : "backToTop"
 
     ui:
-      nav: ".nav"
-      toggleSidebar: ".nav .toggle-sidebar"
-      toggleSettings: ".nav .toggle-settings"
+      nav: "#nav"
+      toggleSidebar: "#nav .toggle-sidebar"
+      toggleFollow: "#nav .toggle-follow"
 
     templateHelpers: ->
       "user": if App.user then App.user.toJSON() else false
@@ -68,20 +70,44 @@
       App.request "create:sidebar"
       App.$html.addClass 'with-sidebar'
 
-    onRenderTemplate: ->
-      @ui.toggleSettings.addClass 'hide'
+    toggleSettings: (event) ->
+      do event.preventDefault
+      do event.stopPropagation
+
+    toggleFollow: (event) ->
+      do event.preventDefault
+      do event.stopPropagation
+
+      # TODO: if not logged in, sign up
+
+      if @subject.isFollowed()
+        App.boards.remove @subject
+        @updateFollowToggle false
+      else
+        App.boards.add @subject
+        @updateFollowToggle true
+
+    updateFollowToggle: (followed) ->
+      if followed
+        @ui.toggleFollow.addClass('pressed').text 'Following'
+        @subject.follow =>
+          @ui.nav.addClass('type-followed')
+      else
+        @ui.toggleFollow.removeClass('pressed').text 'Follow board'
+        @ui.nav.removeClass('type-followed')
+        @subject.destroy()
 
     setNav: (object) ->
-      is_board = object._class is 'Board'
-      can_edit = is_board and App.user and object.get('owned_collection')
-
-      @ui.nav.removeClass 'type-twitter'
-      @ui.toggleSettings.toggleClass 'hide', not can_edit
-
-      if is_board
+      @subject = object
+      if object._class is 'Board'
         @ui.toggleSidebar.text object.get('name')
-        if object.get('name').indexOf('@') is 0
-          @ui.nav.addClass 'type-twitter'
+        @ui.nav.toggleClass 'type-twitter', object.isTwitterType()
+        @ui.nav.toggleClass 'type-owned', object.isOwned()
+        @ui.nav.toggleClass 'type-can-be-followed', not object.isOwned()
+
+        @updateFollowToggle object.isFollowed()
+      else
+        @ui.nav.removeClass()
 
     backToTop: (event) ->
       do event.preventDefault

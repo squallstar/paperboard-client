@@ -7,6 +7,9 @@
     events:
       "click a" : "didClickItem"
 
+    ui:
+      item: ".item"
+
     attributes: ->
       'data-pid': @model.get('private_id')
 
@@ -16,10 +19,13 @@
       @$el.addClass 'current'
 
     onRender: ->
-      if @model.get('name').indexOf('@') is 0
-        @$el.find('a').addClass 'icon-twitter'
+      if @model.isFollowed()
+        @ui.item.addClass 'icon-person'
+        @ui.item.append "<img src='#{@model.get('user').image_url}' />"
+      else if @model.isTwitterType()
+        @ui.item.addClass 'icon-twitter'
       else
-        @$el.find('a').addClass 'icon-folder'
+        @ui.item.addClass 'icon-owned'
 
   # --------------------------------------------------------------------------
 

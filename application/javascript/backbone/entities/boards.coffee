@@ -13,6 +13,27 @@
     initialize: ->
       @articles = new Entities.Articles [], board: @
 
+    isTwitterType: ->
+      @get('type') is 'twitter' or @get('name').indexOf('@') is 0
+
+    isFollowed: ->
+      @get('owned_collection') is false and @collection and @collection is App.boards
+
+    isOwned: ->
+      @get 'owned_collection'
+
+    follow: (callback) ->
+      Backbone.OAuth.post
+        url: "/v3/collections/#{@get('private_id')}/follow"
+
+        success: =>
+          board = @clone()
+          board.set 'position', 99
+          App.boards.add board
+          if callback then callback true
+        error: ->
+          if callback then callback false
+
   # --------------------------------------------------------------------------
 
   Entities.Boards = Backbone.AuthCollection.extend
