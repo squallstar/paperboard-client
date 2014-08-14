@@ -44,6 +44,11 @@
 
   # --------------------------------------------------------------------------
 
+  Header.UserInfo = Marionette.ItemView.extend
+    template: "header-user-info"
+
+  # --------------------------------------------------------------------------
+
   Header.View = Marionette.ItemView.extend
     template: "header"
     tagName: "header"
@@ -59,6 +64,9 @@
       nav: "#nav"
       toggleSidebar: "#nav .toggle-sidebar"
       toggleFollow: "#nav .toggle-follow"
+
+    initialize: ->
+      @userInfo = new Header.UserInfo
 
     templateHelpers: ->
       "user": if App.user then App.user.toJSON() else false
@@ -103,7 +111,15 @@
         @ui.toggleSidebar.text object.get('name')
         @ui.nav.toggleClass 'type-twitter', object.isTwitterType()
         @ui.nav.toggleClass 'type-owned', object.isOwned()
-        @ui.nav.toggleClass 'type-can-be-followed', not object.isOwned()
+        @ui.nav.toggleClass 'type-can-be-followed', object.canBeFollowed()
+
+        if object.hasContexts()
+          @ui.nav.removeClass 'type-with-user'
+        else
+          console.log @userInfo
+          @userInfo.model = object
+          @userInfo.render()
+          @ui.nav.addClass 'type-with-user'
 
         @updateFollowToggle object.isFollowed()
       else
@@ -114,9 +130,15 @@
       do event.stopPropagation
       $("html, body").animate {scrollTop:0}, 380, 'swing'
 
+    onBeforeClose: ->
+      @userInfo.close()
+
     onClose: ->
       App.$html.removeClass 'with-sidebar'
       do App.sidebar.empty
+
+    onRender: ->
+      @$el.find('.user-info').append @userInfo.$el
 
 
     # doSearch: (e) ->

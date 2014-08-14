@@ -164,6 +164,24 @@
       }
     }
 
+    .user-info {
+      display: none;
+      margin: 0 auto;
+      text-align: center;
+      max-width: 400px;
+      height: 100%;
+      overflow: hidden;
+      color: #FFF;
+
+      img {
+        $size: 25px;
+
+        width: $size;
+        height: $size;
+        border-radius: $size;
+      }
+    }
+
     > .toggle-settings {
       @include transition(opacity, 0.2s);
       @extend %antialias;
@@ -254,8 +272,8 @@
 
     &:not(.type-owned) {
 
-      > .toggle-follow {
-        display: block;
+      .context {
+        display: none;
       }
     }
 
@@ -265,10 +283,21 @@
 
     &.type-can-be-followed {
       background-color: #F8B65D;
+
+      > .toggle-follow {
+        display: block;
+      }
     }
 
     &.type-followed {
       background-color: #A3CD39;
+    }
+
+    &.type-with-user {
+
+      .user-info {
+        display: block;
+      }
     }
 
     &.type-twitter, &.type-followed, &.type-can-be-followed {
@@ -313,6 +342,7 @@
     }
 
     #nav {
+      box-shadow: 0 0 15px rgba(0,0,0,0.35);
 
       &:not(.type-twitter):not(.type-followed):not(.type-can-be-followed) {
         background-color: #FFF;

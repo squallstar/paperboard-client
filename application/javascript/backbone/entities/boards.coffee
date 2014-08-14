@@ -19,8 +19,17 @@
     isFollowed: ->
       @get('owned_collection') is false and @collection and @collection is App.boards
 
+    isReadOnly: ->
+      @get('private_id') is 'everything'
+
     isOwned: ->
-      @get 'owned_collection'
+      @get('owned_collection') is true and not @isReadOnly()
+
+    canBeFollowed: ->
+      @get('owned_collection') is false and not @isReadOnly()
+
+    hasContexts: ->
+      @get('owned_collection') or @isReadOnly()
 
     follow: (callback) ->
       Backbone.OAuth.post
