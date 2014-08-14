@@ -81,21 +81,21 @@
       # TODO: if not logged in, sign up
 
       if @subject.isFollowed()
-        App.boards.remove @subject
+        @subject.destroy()
+        #App.boards.remove @subject
         @updateFollowToggle false
       else
-        App.boards.add @subject
         @updateFollowToggle true
+        @subject.follow =>
+          App.boards.add @subject
 
     updateFollowToggle: (followed) ->
       if followed
+        @ui.nav.addClass 'type-followed'
         @ui.toggleFollow.addClass('pressed').text 'Following'
-        @subject.follow =>
-          @ui.nav.addClass('type-followed')
       else
         @ui.toggleFollow.removeClass('pressed').text 'Follow board'
-        @ui.nav.removeClass('type-followed')
-        @subject.destroy()
+        @ui.nav.removeClass 'type-followed'
 
     setNav: (object) ->
       @subject = object
