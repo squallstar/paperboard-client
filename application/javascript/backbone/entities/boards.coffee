@@ -36,9 +36,7 @@
         url: "/v3/collections/#{@get('private_id')}/follow"
 
         success: =>
-          board = @clone()
-          board.set 'position', 99
-          App.boards.add board
+          App.boards.add @
           if callback then callback true
         error: ->
           if callback then callback false

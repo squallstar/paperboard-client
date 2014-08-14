@@ -43,3 +43,6 @@ table {
 input[type="text"], input[type="password"], textarea {
 	outline:0;
 }
+a {
+   outline: 0;
+}

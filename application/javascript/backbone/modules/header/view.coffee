@@ -59,6 +59,7 @@
       "click #nav .toggle-settings"     : "toggleSettings"
       "click #nav .toggle-follow"       : "toggleFollow"
       "click #nav .logo"                : "backToTop"
+      "click h1"                        : "clickLogo"
 
     ui:
       nav: "#nav"
@@ -78,6 +79,11 @@
       App.request "create:sidebar"
       App.$html.addClass 'with-sidebar'
 
+    clickLogo: (event) ->
+      do event.preventDefault
+      if document.documentElement.webkitRequestFullscreen
+        document.documentElement.webkitRequestFullscreen Element.ALLOW_KEYBOARD_INPUT
+
     toggleSettings: (event) ->
       do event.preventDefault
       do event.stopPropagation
@@ -93,16 +99,23 @@
         #App.boards.remove @subject
         @updateFollowToggle false
       else
-        @updateFollowToggle true
-        @subject.follow =>
-          App.boards.add @subject
+        @ui.toggleFollow.addClass('pressed')
+        @subject.follow (success) =>
+          if success
+            @updateFollowToggle true
+            window.setTimeout =>
+              @ui.toggleSidebar.animate {opacity: 0.5, marginLeft: 15}, 250, 'swing', =>
+                @ui.toggleSidebar.animate {opacity: 1, marginLeft: 0}, 250
+            , 200
+          else
+            @updateFollowToggle false
 
     updateFollowToggle: (followed) ->
       if followed
         @ui.nav.addClass 'type-followed'
         @ui.toggleFollow.addClass('pressed').text 'Following'
       else
-        @ui.toggleFollow.removeClass('pressed').text 'Follow board'
+        @ui.toggleFollow.removeClass('pressed').text 'Follow this board'
         @ui.nav.removeClass 'type-followed'
 
     setNav: (object) ->
@@ -116,7 +129,6 @@
         if object.hasContexts()
           @ui.nav.removeClass 'type-with-user'
         else
-          console.log @userInfo
           @userInfo.model = object
           @userInfo.render()
           @ui.nav.addClass 'type-with-user'

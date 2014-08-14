@@ -1,6 +1,7 @@
 #rg-header {
   $side-padding: 27px;
 
+  @extend %hardwareacceleration;
   position: relative;
   width: 100%;
   min-width: $viewport-min-width;
@@ -78,7 +79,7 @@
   }
 
   #nav {
-    @include transition(background-color, 0.2s);
+    @include transition(background-color, 0.3s);
     padding: 0 $side-padding;
     background-color: #F5F5F5;
     height: $header-height - $header-top-height;
@@ -165,6 +166,7 @@
     }
 
     .user-info {
+      position: relative;
       display: none;
       margin: 0 auto;
       text-align: center;
@@ -173,12 +175,54 @@
       overflow: hidden;
       color: #FFF;
 
-      img {
-        $size: 25px;
+      h3 {
+        @include transition(opacity, 0.3s);
+        @extend %ellipsis;
+        font-weight: normal;
+        margin-top: 8px;
+        cursor: default;
+      }
 
+      span {
+        @include transition(opacity, 0.3s);
+        @extend %ellipsis;
+        display: block;
+        font-size: 0.6em;
+        opacity: 0.75;
+        margin-top: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: default;
+      }
+
+      img {
+        $size: 30px;
+
+        @include transition(opacity, 0.3s);
+        position: absolute;
+        opacity: 0;
         width: $size;
         height: $size;
         border-radius: $size;
+        left: 50%;
+        top: 7px;
+        margin-left: - $size /2;
+        border: 2px solid rgba(255,255,255,0.4);
+
+        &:hover {
+          border-color: #FFF;
+        }
+      }
+
+      &:hover {
+
+        h3, span {
+          opacity: 0;
+        }
+
+        img {
+          opacity: 1;
+        }
       }
     }
 
@@ -227,20 +271,13 @@
       top: 7px;
       height: 30px;
       line-height: 30px;
-      padding: 0 10px 0 29px;
+      padding: 0 10px 0;
       font-size: 0.8em;
       color: #FFF;
       text-decoration: none;
       border: 1px solid #FFF;
       border-radius: 3px;
-      opacity: 0.9;
-
-      &:before {
-        @include icon($sprite-tick-white, $sprite-retina-tick-white);
-        left: 9px;
-        margin-left: 0;
-        margin-top: -6px;
-      }
+      opacity: 0.7;
 
       &:hover {
         opacity: 1;
@@ -256,6 +293,14 @@
         color: #FFF;
         box-shadow: 1px 1px 2px rgba(0,0,0,0.2) inset;
         line-height: 31px;
+        padding-left: 29px;
+
+        &:before {
+          @include icon($sprite-tick-white, $sprite-retina-tick-white);
+          left: 9px;
+          margin-left: 0;
+          margin-top: -6px;
+        }
 
         &:active {
           background-color: rgba(0,0,0,0.25);
@@ -282,7 +327,7 @@
     }
 
     &.type-can-be-followed {
-      background-color: #F8B65D;
+      background-color: #E23C47;
 
       > .toggle-follow {
         display: block;

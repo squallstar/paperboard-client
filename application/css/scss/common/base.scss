@@ -32,6 +32,7 @@ body {
 }
 
 #content-rg {
+  @extend %hardwareacceleration;
   min-width: $viewport-min-width;
 }
 

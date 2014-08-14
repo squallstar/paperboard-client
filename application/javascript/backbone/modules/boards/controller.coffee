@@ -14,6 +14,8 @@
         collection: board.articles
 
     showEverything: ->
+      App.navigate(App.rootRoute, true) unless App.user
+
       API._loadBoard new App.Entities.Board
         name: "All boards"
         private_id: "everything"
