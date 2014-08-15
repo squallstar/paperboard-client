@@ -1,6 +1,6 @@
 node_modules/
 application/logs/log-*.php
-
+error.log
 application/css/scss/generated/*
 
 public/assets/js/
