@@ -74,6 +74,7 @@
 
     revealSidebar: (event) ->
       do event.preventDefault
+      do event.stopPropagation
       return if App.$html.hasClass 'with-sidebar'
 
       App.request "create:sidebar"

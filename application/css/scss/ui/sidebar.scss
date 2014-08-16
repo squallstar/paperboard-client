@@ -49,6 +49,14 @@
     height: 100%;
     overflow-y: auto;
 
+    hr {
+      width: 100%;
+      margin: 10px 0;
+      height: 1px;
+      background-color: #E5E5E5;
+      border: 0;
+    }
+
     > ul {
 
       li {
@@ -97,10 +105,9 @@
           }
 
           &.icon-owned:before {
-            @include icon($sprite-folder-web, $sprite-retina-folder-web);
+            @include icon($sprite-user, $sprite-retina-user);
             left: 30px;
             margin-left: 0;
-            opacity: 0.3;
           }
 
           &.icon-followed:before {

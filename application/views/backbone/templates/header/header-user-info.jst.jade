@@ -1,4 +1,4 @@
 h3 #{name} by #{user.full_name}
 span #{total_links_count} articles from #{total_source_count} sources
-a(href='#', title="View #{user.full_name}'s profile")
+a(href="/user/#{user.id}", data-navigate, title="View #{user.full_name}'s profile")
   img(src=user.image_url, alt=user.full_name)

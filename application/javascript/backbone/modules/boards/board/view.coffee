@@ -12,7 +12,7 @@
         image: false
         source: model.sources[0]
         published_ago: @model.publishedAgo()
-        url_host: model.url_host.replace 'www.', ''
+        url_host: if model.url_host then model.url_host.replace('www.', '') else false
         url: model.url
       }
 
@@ -97,9 +97,7 @@
       do @attachLazyLoad
       @firstLayout = true
 
-      window.setTimeout =>
-        @ui.articles.masonry('layout')
-      , 1
+      @ui.articles.masonry('layout')
 
       window.setTimeout =>
         if @ui.articles.height() < App.$window.height() then do @fetchMore
@@ -109,7 +107,7 @@
       @$el.find('.lazy').removeClass('lazy').lazyload
         effect: "fadeIn"
         container: @ui.articles
-        threshold : 400
+        threshold : 100
 
     attachHtml: (collectionView, itemView, index) ->
       if itemView.model.get('description') isnt '' and itemView.model.get('lead_image')

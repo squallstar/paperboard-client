@@ -1,13 +1,11 @@
 section.board {
-  position:relative;
   width:100%;
   padding:20px 18px 30px 17px;
 
   .articles {
-    position: relative;
-    width: 100%;
 
     article {
+      position: absolute;
 
       .grid-1 & {
         width: 100%;
@@ -78,22 +76,21 @@ section.board {
             margin-top:10px;
           }
 
-          .user-pic {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 25px;
-            height: 25px;
-            opacity: 0;
-            visibility: hidden;
-            cursor: pointer;
-          }
-
           .posted-date {
             @extend %ellipsis;
             margin-top: 11px;
             font-size: 0.75em;
             color: #BBB;
+
+            a {
+              color: #BBB;
+              text-decoration: none;
+
+              &:hover {
+                color: #5DA9DD;
+                text-decoration: underline;
+              }
+            }
           }
 
           .source-url {
@@ -108,15 +105,6 @@ section.board {
               text-decoration: underline;
             }
           }
-        }
-      }
-
-      &:hover .w .content .user-pic {
-        opacity: 0.1;
-        visibility: visible;
-
-        &:hover {
-          opacity: 1;
         }
       }
     }

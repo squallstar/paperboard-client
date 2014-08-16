@@ -9,6 +9,8 @@ class Backbone extends CI_Controller
     $entrypoint = $this->config->item('api_domain');
     $auth_token = $this->input->cookie('_probe_tkn');
 
+    $data = 'false';
+
     if ($auth_token)
     {
       $url = $entrypoint . 'v4/collections/recap?auth_token=' . $auth_token;
@@ -16,13 +18,9 @@ class Backbone extends CI_Controller
       try {
         $data = @file_get_contents($url);
       } catch (Exception $e) {
-        $data = false;
+
       }
 
-    }
-    else
-    {
-      $data = 'false';
     }
 
     $this->load->view('backbone/index', array(

@@ -17,18 +17,26 @@
     <?php if (ENVIRONMENT == 'development') { ?><script src="http://localhost:35729/livereload.js"></script><?php } ?>
   </head>
   <body>
+    <div id="font-loader">
+      <span class="font-proxima-nova">x</span>
+      <span class="font-proxima-nova-condensed">x</span>
+    </div>
+
     <div id="overlay"></div>
     <div id="wrapper">
       <div id="rg-header"></div>
       <div id="rg-sidebar"></div>
       <div id="rg-content"></div>
     </div>
-  </body>
-  <script type="text/javascript">
-    Paperboard.start({
-      entrypoint:'<?php echo $entrypoint; ?>',
-      route:'<?php echo $_SERVER["REQUEST_URI"]; ?>',
-      data:<?php echo $data; ?>
+
+    <script type="text/javascript">
+    $(window).load(function() {
+      Paperboard.start({
+        entrypoint:'<?php echo $entrypoint; ?>',
+        route:'<?php echo $_SERVER["REQUEST_URI"]; ?>',
+        data:<?php echo $data; ?>
+      });
     });
-  </script>
+    </script>
+  </body>
 </html>

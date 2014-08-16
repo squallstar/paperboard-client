@@ -13,8 +13,9 @@
       p #{description}
 
     if source.type == 'TwitterUser'
-      .posted-date #{published_ago} by #{source.full_name}
-      img.user-pic(src="#{source.profile_image_url}")
+      .posted-date #{published_ago} by&nbsp;
+        a(href="/search/from/@#{source.screen_name}", data-navigate) #{source.full_name}
     else
       .posted-date Posted #{published_ago}
-      a.source-url(href=url, target="_blank") #{url_host}
+      if url_host
+        a.source-url(href=url, target="_blank") #{url_host}
