@@ -39,6 +39,13 @@
       "mouseenter" : "clearSidebarTimeout"
       "mouseleave" : "scheduleHideSidebar"
 
+    initialize: ->
+      @$el.bind "mousewheel DOMMouseScroll", (e) ->
+        e0 = e.originalEvent
+        delta = e0.wheelDelta or -e0.detail
+        @scrollTop += ((if delta < 0 then 1 else -1)) * 15
+        e.preventDefault()
+
     scheduleHideSidebar: (event) ->
       do event.preventDefault
       return if @hideSidebarTimeout or not App.$html.hasClass('with-sidebar')

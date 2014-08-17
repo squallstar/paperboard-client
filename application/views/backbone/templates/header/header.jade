@@ -8,12 +8,18 @@
     .settings
       | #{user.full_name}
       img.avatar(src="#{user.avatar.medium}")
+  else
+    .settings
+      a(href='login', data-navigate, class='button') Login
+      a(href='signup', data-navigate, class='link') Sign up
 
 #nav
   a(class='logo', href='#', title='Back to top')
 
   if user
-    a(href='#', class='toggle-sidebar') All boards
+    a(href='#', class='toggle-sidebar', title='View all your boards articles together') All boards
+  else
+    a(href='/features', class='what-is-this', data-navigate, title='Check out Paperboard features') What is this?
 
   ul.context
     li.current
@@ -27,5 +33,6 @@
 
   .user-info
 
-  a(class='toggle-settings', href='#') Board settings
-  a(class='toggle-follow', href='#')
+  if user
+    a(class='toggle-settings', href='#') Board settings
+    a(class='toggle-follow', href='#')

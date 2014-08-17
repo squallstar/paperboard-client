@@ -75,6 +75,40 @@
         border-radius: 32px;
         margin-left: 10px;
       }
+
+      .link, .button {
+        @extend %antialias;
+        color: #444;
+        height: 30px;
+        line-height: 30px;
+        float: right;
+        text-transform: uppercase;
+        font-size: 0.8em;
+        letter-spacing: 0.5px;
+        padding: 0 10px;
+        text-decoration: none;
+        border: 1px solid transparent;
+        border-radius: 5px;
+      }
+
+      .link {
+        margin-right: 8px;
+
+        &:hover {
+          color: #000;
+        }
+      }
+
+      .button {
+        margin-right: 2px;
+        border-color: #444;
+        font-weight: 600;
+
+        &:hover {
+          border-color: #000;
+          color: #000;
+        }
+      }
     }
   }
 
@@ -95,12 +129,26 @@
       width: 0;
     }
 
+    > .what-is-this {
+      @include transition(left, 0.3s);
+      position: absolute;
+      color: #FFF;
+      text-decoration: none;
+      font-size: 0.8em;
+      left: $side-padding + 1px;
+      top: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+
+      &:hover {
+        border-bottom-color: #FFF;
+      }
+    }
+
     > .toggle-sidebar {
       @include transition(left, 0.3s);
       @extend %antialias;
       @extend %ellipsis;
       position: absolute;
-      display: inline-block;
       top: 8px;
       left: $side-padding;
       background-color: #FFF;
@@ -379,11 +427,13 @@
 
   html.fixed-header & {
     position: fixed;
-    top: 0;
     left: 0;
 
+    top: - $header-top-height;
+
     .top {
-      display: none;
+      visibility: hidden;
+      pointer-events: none;
     }
 
     #nav {
@@ -411,7 +461,7 @@
         width: nth($sprite-logo, 5);
       }
 
-      > .toggle-sidebar {
+      > .toggle-sidebar, > .what-is-this {
         left: nth($sprite-logo, 5) + 40px;
       }
     }
