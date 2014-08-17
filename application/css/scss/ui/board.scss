@@ -1,8 +1,49 @@
 section.board {
+  position: relative;
   width:100%;
   padding:20px 18px 30px 17px;
 
-  .articles {
+  > .settings {
+    @include transition(right, 0.25s);
+    width: $board-settings-width;
+    top: 0;
+    right: -$board-settings-width - 20px;
+    bottom: 0;
+    background-color: #FFF;
+    position: absolute;
+    z-index: 2;
+    border-top: 1px solid #E5E5E5;
+
+    &:before {
+      box-shadow: -8px 0 8px -8px rgba(0,0,0,0.2) inset;
+      content: " ";
+      top: 0;
+      height: 100%;
+      position: absolute;
+      left: -8px;
+      width: 8px;
+    }
+
+    .content {
+      padding: 0 20px;
+      margin: 20px 0;
+    }
+
+    html.fixed-header & {
+      position: fixed;
+      top: $header-height - $header-top-height;
+    }
+  }
+
+  &.with-settings {
+    padding-right: $board-settings-width + 10px;
+
+    > .settings {
+      right: 0;
+    }
+  }
+
+  > .articles {
 
     article {
       position: absolute;

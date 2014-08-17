@@ -65,8 +65,10 @@
       nav: "#nav"
       toggleSidebar: "#nav .toggle-sidebar"
       toggleFollow: "#nav .toggle-follow"
+      toggleBoardSettings: "#nav .toggle-settings"
 
     initialize: ->
+      App.$html.addClass 'with-header'
       @userInfo = new Header.UserInfo
 
     templateHelpers: ->
@@ -87,23 +89,28 @@
 
     toggleSettings: (event) ->
       do event.preventDefault
-      do event.stopPropagation
+      if @ui.toggleBoardSettings.hasClass 'pressed'
+        @subject.trigger "hide:settings"
+      else
+        @subject.trigger "show:settings"
+      @ui.toggleBoardSettings.toggleClass 'pressed'
 
     toggleFollow: (event) ->
       do event.preventDefault
       do event.stopPropagation
 
-      # TODO: if not logged in, sign up
-
       if @subject.isFollowed()
-        @subject.destroy()
-        #App.boards.remove @subject
         @updateFollowToggle false
+        @subject.destroy
+          success: =>
+            window.setTimeout =>
+              @ui.toggleSidebar.animate {opacity: 0.5, marginLeft: -15}, 250, 'swing', =>
+                @ui.toggleSidebar.animate {opacity: 1, marginLeft: 0}, 250
+            , 200
       else
-        @ui.toggleFollow.addClass('pressed')
+        @updateFollowToggle true
         @subject.follow (success) =>
           if success
-            @updateFollowToggle true
             window.setTimeout =>
               @ui.toggleSidebar.animate {opacity: 0.5, marginLeft: 15}, 250, 'swing', =>
                 @ui.toggleSidebar.animate {opacity: 1, marginLeft: 0}, 250
@@ -129,10 +136,13 @@
 
         if object.hasContexts()
           @ui.nav.removeClass 'type-with-user'
+          if object.isOwned()
+            @ui.nav.addClass 'type-with-context'
         else
           @userInfo.model = object
           @userInfo.render()
           @ui.nav.addClass 'type-with-user'
+          @ui.nav.removeClass 'type-with-context'
 
         @updateFollowToggle object.isFollowed()
       else
@@ -147,7 +157,7 @@
       @userInfo.close()
 
     onClose: ->
-      App.$html.removeClass 'with-sidebar'
+      App.$html.removeClass 'with-sidebar with-header'
       do App.sidebar.empty
 
     onRender: ->

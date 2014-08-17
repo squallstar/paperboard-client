@@ -1,4 +1,4 @@
-#rg-header {
+#rg-header > header {
   $side-padding: 27px;
 
   @extend %hardwareacceleration;
@@ -120,7 +120,7 @@
     box-shadow: 0 0 8px rgba(0,0,0,0.2);
     position: relative;
 
-    .logo {
+    > .logo {
       @include transition(width, 0.3s);
       @include icon($sprite-logo, $sprite-retina-logo);
       left: $side-padding + 3px;
@@ -129,8 +129,24 @@
       width: 0;
     }
 
+    &.type-twitter, &.type-followed, &.type-can-be-followed {
+
+      > .logo {
+        @include transition(opacity, 0.2s);
+        @include icon($sprite-logo-white, $sprite-retina-logo-white);
+        left: $side-padding + 3px;
+        margin-left: 0;
+        opacity: 0.55;
+        width: 0;
+
+        &:hover {
+          opacity: 0.95;
+        }
+      }
+    }
+
     > .what-is-this {
-      @include transition(left, 0.3s);
+      @include transition(left, 0.25s);
       position: absolute;
       color: #FFF;
       text-decoration: none;
@@ -171,6 +187,7 @@
     }
 
     .context {
+      display: none;
       margin: 0 auto;
       text-align: center;
       max-width: 700px;
@@ -308,6 +325,10 @@
           text-indent: 0;
         }
       }
+
+      &.pressed {
+        opacity: 1;
+      }
     }
 
     > .toggle-follow {
@@ -363,10 +384,10 @@
       }
     }
 
-    &:not(.type-owned) {
+    &.type-with-context {
 
       .context {
-        display: none;
+        display: block;
       }
     }
 
@@ -444,16 +465,6 @@
 
         > .toggle-sidebar {
           background-color: #F5F5F5;
-        }
-      }
-
-      &.type-twitter, &.type-followed, &.type-can-be-followed {
-
-        > .logo {
-          @include icon($sprite-logo-white, $sprite-retina-logo-white);
-          left: $side-padding + 3px;
-          margin-left: 0;
-          opacity: 0.55;
         }
       }
 

@@ -14,12 +14,9 @@
     content: "#rg-content"
     overlay: "#overlay"
 
-  App.addInitializer ->
-    do @module(module).Show for module in ["Header"]
-
   App.$window.resize ->
     App.$window._height = App.$window.height()
-    grid = Math.round App.$window.width()/300
+    grid = Math.round App.$window.width()/290
     if grid > 6 or grid < 1 then grid = 1
     return if not grid or @__gridSize is grid
     App.$html.removeClass("grid-#{@__gridSize}").addClass "grid-#{grid}"

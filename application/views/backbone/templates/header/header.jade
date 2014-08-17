@@ -10,8 +10,8 @@
       img.avatar(src="#{user.avatar.medium}")
   else
     .settings
-      a(href='login', data-navigate, class='button') Login
-      a(href='signup', data-navigate, class='link') Sign up
+      a(href='/login', data-navigate, class='button') Login
+      a(href='/signup', data-navigate, class='link') Sign up
 
 #nav
   a(class='logo', href='#', title='Back to top')
@@ -34,5 +34,5 @@
   .user-info
 
   if user
-    a(class='toggle-settings', href='#') Board settings
+    a(class='toggle-settings', href='#', title='Show board settings') Board settings
     a(class='toggle-follow', href='#')

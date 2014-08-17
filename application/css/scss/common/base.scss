@@ -22,7 +22,7 @@ body {
   font-size: 1em;
   overflow-y:scroll;
 
-  html.fixed-header & {
+  html.with-header.fixed-header & {
     padding-top: $header-height;
   }
 }

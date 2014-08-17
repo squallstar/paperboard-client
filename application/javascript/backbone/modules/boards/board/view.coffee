@@ -1,5 +1,11 @@
 @Paperboard.module "Boards.Board", (Board, App, Backbone, Marionette, $, _) ->
 
+  Board.Settings = Marionette.ItemView.extend
+    className: "settings"
+    template: "board-settings"
+
+  # --------------------------------------------------------------------------
+
   Board.Article = Marionette.ItemView.extend
     tagName: "article"
     template: "board-article"
@@ -45,14 +51,15 @@
     # Indicates whether the first masonry layout has been called after appending all the elements
     firstLayout: false
 
-    # Indicates whether the view has already fetched for extra articles
-    loadMore: false
-
     ui:
       articles: ".articles"
 
     initialize: ->
       _.bindAll @, 'pageScroll'
+
+    modelEvents: ->
+      "hide:settings": "hideBoardSettings"
+      "show:settings": "showBoardSettings"
 
     fetch: ->
       @fetching = true
@@ -66,9 +73,24 @@
     fetchMore: ->
       return if @fetching
       @fetching = true
-      if @firstLayout then @loadMore = true
       @collection.fetchMore =>
         @fetching = false
+
+    showBoardSettings: ->
+      unless @settings
+        @settings = new Board.Settings
+          model: @model
+        @settings.render()
+        @$el.append @settings.$el
+
+      window.setTimeout =>
+        @$el.addClass 'with-settings'
+        @ui.articles.masonry 'layout'
+      , 20
+
+    hideBoardSettings: ->
+      @$el.removeClass 'with-settings'
+      @ui.articles.masonry 'layout'
 
     pageScroll: (event) ->
       return if @fetching or not @firstLayout
@@ -81,6 +103,8 @@
       @ui.articles.masonry 'destroy'
 
     onBeforeDestroy: ->
+      if @timeout then clearTimeout @timeout
+      if @settings then @settings.destroy()
       App.$window.off "scroll", @pageScroll
 
     onRenderTemplate: ->
@@ -97,9 +121,10 @@
       do @attachLazyLoad
       @firstLayout = true
 
-      @ui.articles.masonry('layout')
+      @ui.articles.masonry 'layout'
 
-      window.setTimeout =>
+      if @timeout then clearTimeout @timeout
+      @timeout = window.setTimeout =>
         if @ui.articles.height() < App.$window.height() then do @fetchMore
       , 500
 

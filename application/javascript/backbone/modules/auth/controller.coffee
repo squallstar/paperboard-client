@@ -5,7 +5,8 @@
       "login" : "showLogin"
 
     showLogin: ->
-      App.navigate(App.rootRoute, true) if App.user
+      return App.navigate(App.rootRoute, true) if App.user
+      App.execute "hide:header"
       App.content.show new Auth.Login.View
 
   App.addInitializer ->
