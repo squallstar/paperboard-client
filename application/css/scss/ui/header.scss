@@ -17,7 +17,7 @@
     z-index: 1;
     position: relative;
 
-    > h1 {
+    > #logo {
       position: relative;
       width: 250px;
       height: 35px;
@@ -27,12 +27,18 @@
       line-height: 35px;
       font-weight: normal;
       font-size: 1.2em;
-      cursor: default;
+      cursor: pointer;
+      text-decoration: none;
+      color: #000;
 
       &:before {
         @include icon($sprite-logo, $sprite-retina-logo);
         left: 0;
         margin-left: 0;
+      }
+
+      &:hover {
+        opacity: 0.75;
       }
     }
 

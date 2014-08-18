@@ -59,7 +59,7 @@
       "click #nav .toggle-settings"     : "toggleSettings"
       "click #nav .toggle-follow"       : "toggleFollow"
       "click #nav .logo"                : "backToTop"
-      "click h1"                        : "clickLogo"
+      "click #logo"                     : "clickLogo"
 
     ui:
       nav: "#nav"
@@ -84,8 +84,7 @@
 
     clickLogo: (event) ->
       do event.preventDefault
-      if document.documentElement.webkitRequestFullscreen
-        document.documentElement.webkitRequestFullscreen Element.ALLOW_KEYBOARD_INPUT
+      do App.switchFullScreen
 
     toggleSettings: (event) ->
       do event.preventDefault

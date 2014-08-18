@@ -57,6 +57,44 @@
   App.url = (endpoint) ->
     App.options.url + endpoint
 
+
+  # -------------------------------------------------------------------------------------
+  # Full screen stuff
+
+  App.supportsFullscreen = document.fullscreenEnabled or document.webkitFullscreenEnabled
+
+  App.isFullscreen = ->
+    if App.supportsFullscreen
+      return document.fullscreenElement or document.webkitFullscreenElement
+    false
+
+  App.switchFullScreen = ->
+    if App.supportsFullscreen
+      if App.isFullscreen() then App.exitFullscreen() else App.enterFullscreen()
+
+  App.exitFullscreen = ->
+    if App.supportsFullscreen
+      if document.exitFullscreen then do document.exitFullscreen
+      else if document.webkitExitFullscreen then do document.webkitExitFullscreen
+
+  App.replaceOriginalPushState = ->
+    if not App.isFullscreen() then Backbone.history._hasPushState = App.hasPushState
+
+  document.documentElement.onwebkitfullscreenchange = App.replaceOriginalPushState
+  document.documentElement.mozfullscreenchange = App.replaceOriginalPushState
+
+  App.enterFullscreen = (element = undefined) ->
+    return unless App.supportsFullscreen
+    Backbone.history._hasPushState = false
+
+    element ||= document.documentElement
+    if element.requestFullscreen
+      element.requestFullscreen()
+    else if element.webkitRequestFullscreen
+      element.webkitRequestFullscreen Element.ALLOW_KEYBOARD_INPUT
+
+  # -------------------------------------------------------------------------------------
+
   App.on "before:start", (options) ->
     App.$body = $('body')
 
