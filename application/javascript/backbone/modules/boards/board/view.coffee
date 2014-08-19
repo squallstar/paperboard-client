@@ -83,13 +83,13 @@
         @settings.render()
         @$el.append @settings.$el
 
-      window.setTimeout =>
-        @$el.addClass 'with-settings'
-        @ui.articles.masonry 'layout'
-      , 20
+      @$el.addClass 'with-settings'
+      App.$window.resize()
+      @ui.articles.masonry 'layout'
 
     hideBoardSettings: ->
       @$el.removeClass 'with-settings'
+      App.$window.resize()
       @ui.articles.masonry 'layout'
 
     pageScroll: (event) ->
@@ -105,6 +105,11 @@
     onBeforeDestroy: ->
       if @timeout then clearTimeout @timeout
       if @settings then @settings.destroy()
+
+      if @$el.hasClass 'with-settings'
+        @$el.removeClass 'with-settings'
+        App.$window.resize()
+
       App.$window.off "scroll", @pageScroll
 
     onRenderTemplate: ->

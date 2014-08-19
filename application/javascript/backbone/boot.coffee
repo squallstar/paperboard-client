@@ -16,7 +16,15 @@
 
   App.$window.resize ->
     App.$window._height = App.$window.height()
-    grid = Math.round App.$window.width()/290
+
+    width = 0
+    $content = $ '#main-content'
+    if $content.length > 0
+      width = $content.width()
+    else
+      width = App.$window.width()
+
+    grid = Math.round width/290
     if grid > 6 or grid < 1 then grid = 1
     return if not grid or @__gridSize is grid
     App.$html.removeClass("grid-#{@__gridSize}").addClass "grid-#{grid}"

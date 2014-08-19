@@ -129,7 +129,7 @@
     > .logo {
       @include transition(width, 0.3s);
       @include icon($sprite-logo, $sprite-retina-logo);
-      left: $side-padding + 3px;
+      left: $side-padding + 1px;
       margin-left: 0;
       overflow: hidden;
       width: 0;
@@ -140,7 +140,7 @@
       > .logo {
         @include transition(opacity, 0.2s);
         @include icon($sprite-logo-white, $sprite-retina-logo-white);
-        left: $side-padding + 3px;
+        left: $side-padding + 1px;
         margin-left: 0;
         opacity: 0.55;
         width: 0;
