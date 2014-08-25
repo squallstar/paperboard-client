@@ -151,6 +151,8 @@ section.board {
 
             &.author {
               @extend %clear;
+              @include transition(background-color, 0.3s);
+
               text-decoration: none;
 
               img {
@@ -171,12 +173,24 @@ section.board {
                 }
 
                 strong {
+                  @extend %antialias;
                   color: #7D7D7D;
                   margin: 1px 0 3px;
+                  font-weight: 600;
                 }
 
                 span {
                   color: #BBB;
+                }
+              }
+
+              &:hover {
+                background-color: #F3F3F3;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+
+                div strong {
+                  color: #666;
                 }
               }
             }
