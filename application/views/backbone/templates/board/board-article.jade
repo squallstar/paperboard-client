@@ -13,8 +13,14 @@
       p #{description}
 
     if source.type == 'TwitterUser'
-      .posted-date #{published_ago} by&nbsp;
-        a(href="/search/from/@#{source.screen_name}", data-navigate) #{source.full_name}
+      //- .posted-date #{published_ago} by&nbsp;
+      //-   a(href="/search/from/@#{source.screen_name}", data-navigate) #{source.full_name}
+      a.box.author(href='#')
+        img(src=source.profile_image_url)
+        div
+          strong #{source.full_name}
+          span #{published_ago}
+
     else
       .posted-date Posted #{published_ago}
       if url_host

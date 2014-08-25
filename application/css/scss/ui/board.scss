@@ -47,6 +47,7 @@ section.board {
 
     article {
       position: absolute;
+      padding: 10px;
 
       .grid-1 & {
         width: 100%;
@@ -72,10 +73,9 @@ section.board {
         width: 16.66%;
       }
 
-      padding: 10px;
-
       .w {
         position: relative;
+        border-radius: 5px;
         background-color: #FFF;
         border: 1px solid #D8D8D8;
         box-shadow: 1px 1px 4px rgba(0,0,0,0.05);
@@ -87,6 +87,14 @@ section.board {
           height: 0px;
           overflow: hidden;
           background: url(../img/logo.png) no-repeat center;
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
+          cursor: -webkit-zoom-in;
+          cursor: -moz-zoom-in;
+
+          &:hover {
+            opacity: 0.9;
+          }
 
           img {
             position: absolute;
@@ -130,6 +138,46 @@ section.board {
               &:hover {
                 color: #5DA9DD;
                 text-decoration: underline;
+              }
+            }
+          }
+
+          .box {
+
+            display: block;
+            margin: 15px -15px -15px;
+            border-top: 1px solid #E7E7E7;
+            padding: 10px 15px;
+
+            &.author {
+              @extend %clear;
+              text-decoration: none;
+
+              img {
+                float: left;
+                width: 30px;
+                height: 30px;
+                border-radius: 30px;
+                margin-right: 10px;
+              }
+
+              div {
+                font-size: 0.75em;
+                overflow: hidden;
+
+                strong, span {
+                  @extend %ellipsis;
+                  display: block;
+                }
+
+                strong {
+                  color: #7D7D7D;
+                  margin: 1px 0 3px;
+                }
+
+                span {
+                  color: #BBB;
+                }
               }
             }
           }
