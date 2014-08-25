@@ -14,7 +14,10 @@
       @articles = new Entities.Articles [], board: @
 
     isTwitterType: ->
-      @get('type') is 'twitter' or @get('name').indexOf('@') is 0
+      @get('type') is 'twitter'
+
+    isInstagramType: ->
+      @get('type') is 'instagram'
 
     isFollowed: ->
       @get('owned_collection') is false and @collection and @collection is App.boards

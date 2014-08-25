@@ -135,7 +135,7 @@
       width: 0;
     }
 
-    &.type-twitter, &.type-followed, &.type-can-be-followed {
+    &.type-twitter, &.type-instagram, &.type-followed, &.type-can-be-followed {
 
       > .logo {
         @include transition(opacity, 0.2s);
@@ -401,6 +401,10 @@
       background-color: #5DA9DD;
     }
 
+    &.type-instagram {
+      background-color: #4C799F;
+    }
+
     &.type-can-be-followed {
       background-color: #E74C3C;
 
@@ -420,7 +424,7 @@
       }
     }
 
-    &.type-twitter, &.type-followed, &.type-can-be-followed {
+    &.type-twitter, &.type-instagram, &.type-followed, &.type-can-be-followed {
 
       .context li {
 
@@ -466,7 +470,7 @@
     #nav {
       box-shadow: 0 0 15px rgba(0,0,0,0.35);
 
-      &:not(.type-twitter):not(.type-followed):not(.type-can-be-followed) {
+      &:not(.type-twitter):not(.type-instagram):not(.type-followed):not(.type-can-be-followed) {
         background-color: #FFF;
 
         > .toggle-sidebar {

@@ -104,6 +104,12 @@
             margin-left: 0;
           }
 
+          &.icon-instagram:before {
+            @include icon($sprite-instagram, $sprite-retina-instagram);
+            left: 30px;
+            margin-left: 0;
+          }
+
           &.icon-owned:before {
             @include icon($sprite-user, $sprite-retina-user);
             left: 30px;

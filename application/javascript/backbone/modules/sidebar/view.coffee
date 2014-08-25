@@ -24,6 +24,8 @@
         @ui.item.append "<img src='#{@model.get('user').image_url}' />"
       else if @model.isTwitterType()
         @ui.item.addClass 'icon-twitter'
+      else if @model.isInstagramType()
+        @ui.item.addClass 'icon-instagram'
       else
         @ui.item.addClass 'icon-owned'
 

@@ -130,6 +130,7 @@
       if object._class is 'Board'
         @ui.toggleSidebar.text object.get('name')
         @ui.nav.toggleClass 'type-twitter', object.isTwitterType()
+        @ui.nav.toggleClass 'type-instagram', object.isInstagramType()
         @ui.nav.toggleClass 'type-owned', object.isOwned()
         @ui.nav.toggleClass 'type-can-be-followed', object.canBeFollowed()
 
