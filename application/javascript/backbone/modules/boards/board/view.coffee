@@ -22,6 +22,10 @@
         url: model.url
       }
 
+      if model.type == 'instagram'
+        data.title = data.description
+        data.description = model.name
+
       if data.title.length > 160
         data.title = data.title.substring(0,159) + '&hellip;'
 
@@ -140,7 +144,7 @@
         threshold : 100
 
     attachHtml: (collectionView, itemView, index) ->
-      if itemView.model.get('description') isnt '' and itemView.model.get('lead_image')
+      if (itemView.model.get('description') isnt '' and itemView.model.get('lead_image')) or itemView.model.get('type') is 'instagram'
         @ui.articles.append itemView.el
         @ui.articles.masonry 'addItems', itemView.el
 
