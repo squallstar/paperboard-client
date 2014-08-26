@@ -77,6 +77,10 @@
           @ui.content.css
             top: top - 12
             left: left + width + 30
+        else if step.position is 'bottom-right'
+          @ui.content.css
+            top: top - @ui.content.height() + 23
+            left: left + width + 30
 
       @ui.cover.css {
         top: top
@@ -126,7 +130,8 @@
         {
           el: "#rg-sidebar"
           onBefore: ->
-            $('#nav .toggle-sidebar').click()
+            App.request "create:sidebar"
+            App.$html.addClass 'with-sidebar'
           onAfter: ->
             App.execute "hide:sidebar"
           title: "Your boards"
@@ -139,6 +144,12 @@
           content: "They are the main pillars of your boards. Click on it to read more about it. Try it now!"
           position: "right"
           coverPadding: 11
+        },
+        {
+          el: "#main-content article .box.author"
+          title: "View more about the author"
+          content: "Each article displays information about the owner on the bottom. Click it to search for more content by the same author!"
+          position: "bottom-right"
         }
       ]
     }
