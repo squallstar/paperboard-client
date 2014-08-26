@@ -4,5 +4,5 @@
     defaults:
       full_name: "User"
 
-    token: ->
-      1
+    needsWalkthrough: ->
+      return true

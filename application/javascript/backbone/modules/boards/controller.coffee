@@ -25,6 +25,10 @@
         return App.navigate(App.rootRoute, true) unless board
         API._loadBoard board
 
+  App.reqres.setHandler "load:board", (board) ->
+    App.navigate "board/#{board.get('private_id')}", {trigger: false}
+    API._loadBoard board
+
   App.addInitializer ->
     new Boards.Router
       controller: API

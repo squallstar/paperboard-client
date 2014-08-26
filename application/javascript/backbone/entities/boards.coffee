@@ -77,11 +77,14 @@
         board = b
         break
 
-    return callback(board) if board
+    if board
+      if callback then callback(board)
+      return board
 
     board = new App.Entities.Board private_id: private_id
     board.fetch
       success: ->
-        callback(board)
+        if callback then callback(board)
       error: ->
-        callback null
+        if callback then callback null
+    board

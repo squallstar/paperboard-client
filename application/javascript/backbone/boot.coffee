@@ -4,8 +4,8 @@
 
   App.rootRoute = "everything"
 
-  App.$window = $(window)
-  App.$html = $('html')
+  App.$window = $ window
+  App.$html = $ 'html'
   App.fixedHeader = false
 
   App.addRegions
@@ -121,6 +121,8 @@
       App.boards = new App.Entities.Boards
 
   App.on "start", ->
+    App.$htmlbody = $ 'html, body'
+    App.$wrapper = $ '#wrapper'
     App.$window.resize()
 
     route = @options.route or App.rootRoute
@@ -132,6 +134,10 @@
           valid = true
           break
       route = 'login' unless valid
+
+    if App.user and App.user.needsWalkthrough()
+      route = App.rootRoute
+      App.request "show:intro:walkthrough"
 
     Backbone.history.start {pushState: true, silent: route isnt @options.route}
     @navigate route, {trigger: true, replace: true}
