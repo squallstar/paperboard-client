@@ -34,7 +34,8 @@ module.exports = function(grunt) {
             'application/javascript/backbone/prototypes/*.coffee',
             'application/javascript/backbone/boot.coffee',
             'application/javascript/backbone/entities/*.coffee',
-            'application/javascript/backbone/modules/**/*.coffee'
+            'application/javascript/backbone/modules/**/*.coffee',
+            'application/javascript/backbone/helpers/**/*.coffee'
           ]
         }
       },

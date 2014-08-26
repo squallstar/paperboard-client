@@ -1,0 +1,12 @@
+if title
+  h2 #{title}
+if content
+  .content #{content}
+
+.buttons
+  if back
+    a.prev(href='#', title='Show previous tip') Back
+  if next
+    a.next(href='#', title='Show next tip') Next
+  if dismiss
+    a.dismiss(href='#', title='Dismiss tutorial') Ok, got it!
