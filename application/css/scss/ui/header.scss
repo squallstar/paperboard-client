@@ -138,7 +138,6 @@
     &.type-twitter, &.type-instagram, &.type-followed, &.type-can-be-followed {
 
       > .logo {
-        @include transition(opacity, 0.2s);
         @include icon($sprite-logo-white, $sprite-retina-logo-white);
         left: $side-padding + 1px;
         margin-left: 0;

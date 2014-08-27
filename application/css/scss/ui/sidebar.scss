@@ -1,24 +1,25 @@
 #rg-sidebar {
   $width: 230px;
 
-  @include transition(opacity, 0.25s);
+  @include transition(opacity, 0.24s);
   width: $width;
   position: fixed;
   top: $header-top-height;
-  left: 0;
   bottom: 0;
-  opacity: 0;
-  visibility: hidden;
-  background-color: #FFF;
+  background-color: rgba(255,255,255,0.97);
   z-index: 2;
+  opacity: 0;
+  border-top: 1px solid #E5E5E5;
+  pointer-events: none;
 
   html.with-sidebar & {
     opacity: 1;
-    visibility: visible;
+    pointer-events: all;
   }
 
   html.fixed-header & {
     top: 0;
+    border-top: 0;
   }
 
   &:after {
@@ -59,13 +60,13 @@
 
     > ul {
 
+      &:first-child li {
+        background-color: #FFF;
+      }
+
       li {
         position: relative;
         height: 47px;
-
-        &:hover, &.current {
-          background-color: #F5F5F5;
-        }
 
         .item {
           @extend %ellipsis;
@@ -123,7 +124,16 @@
           }
         }
 
+        &:hover, &.current {
+          background-color: #F5F5F5;
+
+          .item {
+            color: #555;
+          }
+        }
+
         .move-handle {
+          @include transition(opacity, 0.5s);
           width: 26px;
           height: 26px;
           position: absolute;

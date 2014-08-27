@@ -190,6 +190,8 @@
               window.setTimeout =>
                 App.$wrapper.animate {opacity: 1}, 2000
               , 1000
+            onAfter: ->
+              App.user.pot.save 'seen_walkthrough', true
           },
           {
             el: "#nav .toggle-sidebar"
@@ -208,7 +210,9 @@
             onBefore: ($el, step, callback) ->
               App.request "create:sidebar"
               App.$html.addClass 'with-sidebar'
-              do callback
+              window.setTimeout =>
+                do callback
+              , 100
             onAfter: ->
               App.execute "hide:sidebar"
             title: "Your boards"
