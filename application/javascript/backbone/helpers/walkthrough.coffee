@@ -1,5 +1,7 @@
 @Paperboard.module "Walkthrough", (Walkthrough, App, Backbone, Marionette, $, _) ->
 
+  board_to_show = 'p294953fb8dd382cf8'
+
   Walkthrough.View = Marionette.ItemView.extend
     id: "walkthrough"
     template: "walkthrough"
@@ -178,7 +180,7 @@
     App.$wrapper.css 'opacity', 0
 
     window.setTimeout =>
-      sampleBoard = App.request "find:board", "p212353f5b532ade33"
+      sampleBoard = App.request "find:board", board_to_show
 
       App.request "walkthrough", {
         steps: [

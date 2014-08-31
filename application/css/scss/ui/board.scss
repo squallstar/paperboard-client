@@ -3,6 +3,17 @@ section.board {
   width:100%;
   padding:20px 18px 30px 17px;
 
+  .end {
+    font-size: 0.9em;
+    opacity: 0.55;
+    display: block;
+    margin: 50px auto 25px;
+    text-align: center;
+    color: #666;
+    text-shadow: 0 1px 0 rgba(255,255,255,1);
+    cursor: default;
+  }
+
   > .settings {
     @include transition(right, 0.25s);
     width: $board-settings-width;

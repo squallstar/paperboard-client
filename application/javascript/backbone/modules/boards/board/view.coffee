@@ -77,8 +77,12 @@
     fetchMore: ->
       return if @fetching
       @fetching = true
+      pre = @collection.length
       @collection.fetchMore =>
         @fetching = false
+        if pre is @collection.length
+          @fetching = true
+          @$el.find('.paperspinner').replaceWith('<span class="end">– Sadly, you just reached the end of this board –</span>')
 
     showBoardSettings: ->
       unless @settings
@@ -141,7 +145,7 @@
       @$el.find('.lazy').removeClass('lazy').lazyload
         effect: "fadeIn"
         container: @ui.articles
-        threshold : 100
+        threshold : 120
 
     attachHtml: (collectionView, itemView, index) ->
       if (itemView.model.get('description') isnt '' and itemView.model.get('lead_image')) or itemView.model.get('type') is 'instagram'

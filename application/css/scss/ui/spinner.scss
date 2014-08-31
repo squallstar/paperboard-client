@@ -1,0 +1,60 @@
+.paperspinner {
+  margin: 30px auto 70px;
+  width: 80px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
+  opacity: 0.9;
+}
+
+.paperspinner > div {
+  height: 100%;
+  width: 5px;
+  margin: 0 1px;
+  display: inline-block;
+
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.paperspinner .red {
+  background-color: #F59393;
+}
+
+.paperspinner .blue {
+  background-color: #5BCBF5;
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.paperspinner .green {
+  background-color: #BAD96A;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.paperspinner .yellow {
+  background-color: #FFD75C;
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.paperspinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
