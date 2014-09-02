@@ -31,3 +31,7 @@
 
     needsWalkthrough: ->
       @pot.get('seen_walkthrough') isnt true
+
+    destroy: ->
+      $.removeCookie '_probe_tkn'
+      delete App.user

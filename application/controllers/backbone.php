@@ -18,10 +18,11 @@ class Backbone extends CI_Controller
       try {
         $data = @file_get_contents($url);
       } catch (Exception $e) {
-
+        return show_error('We are having some technical issues right now. Please try later');
       }
-
     }
+
+    if (!$data) $data = 'false';
 
     $this->load->view('backbone/index', array(
       'data' => $data,
