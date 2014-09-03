@@ -11,8 +11,8 @@
       confirm_password: "input.confirm_password"
 
     events:
-      "keyup input"    : "keyUp"
-      "click .sign-up" : "doSignup"
+      "keyup input" : "keyUp"
+      "click .btn-signup" : "doSignup"
 
     keyUp: (event) ->
       $el = $ event.currentTarget
@@ -28,6 +28,12 @@
       if event then do event.preventDefault
 
       @$el.find('.with-error').removeClass 'with-error'
+
+      full_name = @ui.full_name.val()
+
+      if full_name < 3
+        @ui.full_name.parent().addClass 'with-error'
+        return @ui.full_name.select()
 
       email = @ui.email.val()
 
