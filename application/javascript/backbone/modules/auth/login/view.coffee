@@ -36,7 +36,7 @@
 
       Backbone.OAuth.post
         method: 'POST'
-        url: App.url '/v3/sign_in'
+        url: '/v3/sign_in'
         data:
           user:
             email: @email

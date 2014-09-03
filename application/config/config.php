@@ -21,6 +21,8 @@ $config['base_url']	= '';
 | API Domain
 |--------------------------------------------------------------------------
 |
+| Fixtures address for local development: http://localhost/fixtures/
+|
 */
 $config['api_domain'] = 'http://hhvm.squallstar.com/';
 
