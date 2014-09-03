@@ -1,10 +1,14 @@
 .box.signup
   h2 Sign up
   form(autocomplete='off')
-    input(type='text', class='full_name', placeholder='John Doe')
-    input(type='email', class='email', placeholder='john@example.org')
-    input(type='password', class='password', placeholder='Password')
-    input(type='password', class='confirm_password', placeholder='Password')
+    div
+      input(type='text', class='full_name', placeholder='John Doe')
+    div
+      input(type='email', class='email', placeholder='john@example.org')
+    div
+      input(type='password', class='password', placeholder='Password')
+    div
+      input(type='password', class='confirm_password', placeholder='Password')
 
   a(class='btn-signup', href='#', title='Sign up for a new account') Sign up
 

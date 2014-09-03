@@ -36,11 +36,11 @@ body {
   min-width: $viewport-min-width;
 }
 
-input[type="text"], textarea {
+input[type="text"], input[type="email"], input[type="password"], textarea {
   font-family:"Proxima Nova", sans-serif;
 }
 
-input[type="text"], button {
+input[type="text"], input[type="email"], input[type="password"], button {
   -webkit-appearance: none;
   -moz-appearance:    none;
   appearance:         none;

@@ -110,7 +110,7 @@
       url: options.entrypoint.replace(/^\/|\/$/g, '')
       route: options.route.replace(/^\/|\/$/g, '')
 
-      open_routes: [/board\/([A-z0-9]+)/]
+      open_routes: [/board\/([A-z0-9]+)/, /signup/]
 
     App.__token = $.cookie '_probe_tkn'
 
