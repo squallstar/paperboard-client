@@ -4,11 +4,17 @@
     routes:
       "login" : "showLogin"
       "logout" : "doLogout"
+      "signup" : "showSignup"
 
     showLogin: ->
       return App.navigate(App.rootRoute, true) if App.user
       App.execute "hide:header"
       App.content.show new Auth.Login.View
+
+    showSignup: ->
+      return App.navigate(App.rootRoute, true) if App.user
+      App.execute "hide:header"
+      App.content.show new Auth.Signup.View
 
     doLogout: ->
       App.user.destroy() if App.user

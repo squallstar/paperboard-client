@@ -57,6 +57,7 @@
 
     ui:
       articles: ".articles"
+      spinner: ".paperspinner"
 
     initialize: ->
       _.bindAll @, 'pageScroll'
@@ -70,19 +71,21 @@
       @collection.fetch
         success: =>
           @fetched = true
-          @fetching = false
           if @collection.length is 0
-            @render()
+            @fetching = true
+            @ui.spinner.replaceWith('<span class="end">– Sadly, this board doesn\'t include any article  –</span>')
+          else
+            @fetching = false
 
     fetchMore: ->
       return if @fetching
       @fetching = true
-      pre = @collection.length
+      preFetchCount = @collection.length
       @collection.fetchMore =>
-        @fetching = false
-        if pre is @collection.length
-          @fetching = true
-          @$el.find('.paperspinner').replaceWith('<span class="end">– Sadly, you just reached the end of this board –</span>')
+        if preFetchCount is @collection.length
+          @ui.spinner.replaceWith('<span class="end">– Sadly, you just reached the end of this board –</span>')
+        else
+          @fetching = false
 
     showBoardSettings: ->
       unless @settings
