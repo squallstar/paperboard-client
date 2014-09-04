@@ -3,8 +3,12 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-html, body {
+
+html {
   background:#E5E5E5;
+}
+
+html, body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -21,6 +25,7 @@ body {
   font-family:"Proxima Nova", sans-serif;
   font-size: 1em;
   overflow-y:scroll;
+  background: transparent;
 
   html.with-header.fixed-header & {
     padding-top: $header-height;

@@ -105,3 +105,7 @@
 
     onDomRefresh: ->
       @ui.full_name.focus()
+      App.$html.addClass 'frms-signup'
+
+    onDestroy: ->
+      App.$html.removeClass 'frms-signup'
