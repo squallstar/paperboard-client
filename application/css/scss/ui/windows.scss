@@ -8,20 +8,50 @@
 
   form {
 
-    input[type="text"], input[type="password"], input[type="email"] {
-      border: 2px solid #EEE;
-      background-color: #FFF;
-      font-size: 1em;
-      padding: 13px 10px;
+    .field {
       margin: 0 0 20px;
-      font-weight: 300;
-      color: #000;
-      width: 100%;
-      border-radius: 4px;
 
-      &:focus {
-        border-color: #5DA9DD;
-        box-shadow: 0 0 3px rgba(0, 150, 238, 0.2);
+      input[type="text"], input[type="password"], input[type="email"] {
+        border: 2px solid #EEE;
+        background-color: #FFF;
+        font-size: 1em;
+        padding: 13px 10px;
+        font-weight: 300;
+        color: #000;
+        width: 100%;
+        border-radius: 4px;
+
+        &:focus {
+          border-color: #5DA9DD;
+          box-shadow: 0 0 3px rgba(0, 150, 238, 0.2);
+        }
+      }
+
+      span {
+        display: none;
+        font-size: 0.85em;
+        margin: 4px 0 0 13px;
+      }
+
+      &.with-success {
+
+        input, input:focus {
+          border-color: #5FBF60;
+          background-color: rgba(0, 255, 0, 0.1);
+        }
+      }
+
+      &.with-error {
+
+        input, input:focus {
+          border-color: #EA594E;
+          background-color: rgba(255,0,0,0.1);
+        }
+
+        span {
+          display: block;
+          color: #EA594E;
+        }
       }
     }
   }

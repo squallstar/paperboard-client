@@ -13,9 +13,11 @@
     events:
       "keyup input" : "keyUp"
       "click .btn-signup" : "doSignup"
+      "blur input.email" : "checkEmail"
 
     keyUp: (event) ->
       $el = $ event.currentTarget
+
       if event.which is 13
         do event.preventDefault
         if $el.is @ui.full_name
@@ -23,6 +25,33 @@
         else
           @doSignup event
 
+      else if $el.is @ui.email
+        if @ts then clearTimeout @ts
+        @ts = setTimeout =>
+          do @checkEmail
+        , 350
+
+    checkEmail: (event) ->
+      return if event and @ui.email.parent().hasClass 'with-success'
+
+      email = @ui.email.val()
+      return unless email
+      if event
+        return if email.indexOf('@') isnt -1 and email.indexOf('.') isnt -1
+
+      unless App.Helpers.RegExps.isValidEmail email
+        return @ui.email.parent().removeClass('with-success').addClass 'with-error'
+      else
+        @ui.email.parent().removeClass 'with-error with-success'
+
+      Backbone.OAuth.post
+        url: '/v3/user/check_email'
+        data:
+          email: email
+        success: (data) =>
+          @ui.email.parent().addClass 'with-success'
+        error: (response) =>
+          @ui.email.parent().addClass('with-error').find('span').text response.responseJSON.errors[0]
 
     doSignup: (event) ->
       if event then do event.preventDefault
@@ -62,7 +91,7 @@
 
       Backbone.OAuth.post
         method: 'POST'
-        url: App.url '/v3/sign_up'
+        url: '/v3/sign_up'
         data:
           user:
             email: @email
