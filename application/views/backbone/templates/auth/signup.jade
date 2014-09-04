@@ -1,19 +1,24 @@
-.box.signup
-  h2 Sign up
+.window.white
+  .signup-logo
+
+  h1 Sign up for a new Paperboard account
+
   form(autocomplete='off')
     .field
+      h4 Your name
       input(type='text', class='full_name', placeholder='John Doe')
     .field
+      h4 Email address
       input(type='email', class='email', placeholder='john@example.org')
       span
     .field
+      h4 Choose a password
       input(type='password', class='password', placeholder='Password')
     .field
+      h4 Confirm your new password
       input(type='password', class='confirm_password', placeholder='Password')
 
-  a(class='btn-signup', href='#', title='Sign up for a new account') Sign up
+    a(class='btn btn-signup confirm', href='#', title='Sign up for a new account') Sign up
+    a(class='cnt', href='#') Terms and conditions
 
-.box.login
-  h2 Log in
-
-  a(class='btn-login', href='/login', data-navigate, title='Login with your account') Login
+a(class='cnt btn-login', href='/login', data-navigate, title='Login with your account') I've got an account, let me log in!

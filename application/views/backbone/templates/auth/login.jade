@@ -1,15 +1,18 @@
-.box.login
-  h2 Login with your Paperboard Account
-  form(autocomplete='off')
-    .field
-      input(type='email', class='email', placeholder='Email address')
-    .field
-      input(type='password', class='password', placeholder='Password')
-  a(class='btn-login', href='#', title='Login with your account') Login
-  a(class='forgot-password', href='#', title='Request a new password') Forgot password?
+.window
+  .box.login
+    h2 Login with your Paperboard Account
+    form(autocomplete='off')
+      .field
+        h4 Email address
+        input(type='email', class='email', placeholder='john@example.org')
+      .field
+        h4 Password
+        input(type='password', class='password', placeholder='')
+    a(class='btn-login', href='#', title='Login with your account') Login
+    a(class='forgot-password', href='#', title='Request a new password') Forgot password?
 
-.box.signup
-  h2 No account?
-  p Future claim
+  .box.signup
+    h2 No account?
+    p Future claim
 
-  a(class='btn-signup', href='/signup', data-navigate, title='Sign up for a new account') Sign up
+    a(class='btn-signup', href='/signup', data-navigate, title='Sign up for a new account') Sign up

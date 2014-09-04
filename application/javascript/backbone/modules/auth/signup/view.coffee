@@ -2,7 +2,7 @@
 
   Signup.View = Marionette.ItemView.extend
     template: "signup"
-    className: "window"
+    className: "frms"
 
     ui:
       full_name: "input.full_name"

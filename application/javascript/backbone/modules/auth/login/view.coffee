@@ -2,7 +2,6 @@
 
   Login.View = Marionette.ItemView.extend
     template: "login"
-    className: "window"
 
     events:
       "click .btn-login": "doLogin"
