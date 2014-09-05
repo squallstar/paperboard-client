@@ -3,7 +3,9 @@
 
   h1 Connect your accounts
 
-  p.centered You can truly enjoy the magic of Paperboard by connecting one or more services to your account.
+  p.centered
+    strong #{user_name}
+    | , you can truly enjoy the magic of Paperboard by connecting one or more services to your account.
 
   .connect-services
 
@@ -12,6 +14,7 @@
         h3 Connect Twitter account
         p We'll create a board with all the articles posted by people you follow on Twitter. Pure magic!
 
+
     if accounts.instagram.length == 0
       a(href='#', class='instagram')
         h3 Connect Instagram account
@@ -19,4 +22,9 @@
 
   hr
 
-  a(class='cnt btn-skip', href='#', title='Continue') Skip
+  if accounts.twitter.length && accounts.instagram.length
+    a(class='cnt btn btn-skip', href='#', title='Continue') Continue
+  else if accounts.twitter.length || accounts.instagram.length
+    a(class='cnt btn-skip', href='#', title='Continue') Continue
+  else
+    a(class='cnt btn-skip', href='#', title='Continue') Skip

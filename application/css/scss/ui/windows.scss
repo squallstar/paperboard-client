@@ -37,6 +37,14 @@
       margin: 0 auto 20px auto;
     }
 
+    .connect-logo {
+      width: 100px;
+      height: 100px;
+      background: url(../img/connect-logo.png) no-repeat center center;
+      background-size: cover;
+      margin: 0 auto 20px auto;
+    }
+
     h1 {
       font-family: "Proxima Nova Condensed", sans-serif;
       font-size: 1.5em;
@@ -49,6 +57,10 @@
       line-height: 1.5;
       margin: 25px 0;
       color: #AAA;
+
+      strong {
+        color: #777;
+      }
 
       &.centered {
         text-align: center;

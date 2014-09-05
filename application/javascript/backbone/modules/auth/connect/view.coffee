@@ -11,6 +11,7 @@
 
     templateHelpers: ->
       accounts: App.user.getAccounts()
+      user_name: App.user.get('full_name').split(' ')[0]
 
     initialize: ->
       App.vent.on "connected:account", (type) =>
@@ -34,6 +35,8 @@
     didClickSkip: (event) ->
       do event.preventDefault
       App.user.pot.save 'connected_services', true
+      App.navigate App.rootRoute, true
+      App.request "show:intro:walkthrough"
 
     onBeforeDestroy: ->
       App.vent.off "connected:account"
