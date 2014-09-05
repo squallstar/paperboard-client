@@ -21,15 +21,18 @@
       if event.which is 13
         do event.preventDefault
         if $el.is @ui.full_name
-          @ui.email.focus()
+          return @ui.email.focus()
         else
-          @doSignup event
+          return @doSignup event
 
       else if $el.is @ui.email
         if @ts then clearTimeout @ts
         @ts = setTimeout =>
           do @checkEmail
         , 350
+
+      @$el.find('.with-error').removeClass 'with-error'
+
 
     checkEmail: (event) ->
       return if event and @ui.email.parent().hasClass 'with-success'
@@ -54,14 +57,16 @@
           @ui.email.parent().addClass('with-error').find('span').text response.responseJSON.errors[0]
 
     doSignup: (event) ->
+      return if @requesting
+
       if event then do event.preventDefault
 
       @$el.find('.with-error').removeClass 'with-error'
 
       full_name = @ui.full_name.val()
 
-      if full_name < 3
-        @ui.full_name.parent().addClass 'with-error'
+      if full_name.length < 3
+        @ui.full_name.parent().addClass('with-error').find('span').text 'Are you sure this is your real name?'
         return @ui.full_name.select()
 
       email = @ui.email.val()
@@ -73,34 +78,43 @@
       pwd = @ui.password.val()
 
       if pwd.length < 5
-        @ui.password.parent().addClass 'with-error'
+        @ui.password.parent().addClass('with-error').find('span').text 'The password needs to be at least 6 characters'
         return @ui.password.select()
 
       if pwd.length > 32
-        @ui.password.parent().addClass 'with-error'
+        @ui.password.parent().addClass('with-error').find('span').text 'The password is too long'
         return @ui.password.select()
 
       pwd2 = @ui.confirm_password.val()
 
       unless pwd is pwd2
-        @ui.password.parent().addClass 'with-error'
+        @ui.confirm_password.parent().addClass('with-error').find('span').text 'The confirmation password doesn\'t match'
         return @ui.confirm_password.select()
 
       $fields = @$el.find 'input'
       $fields.attr 'readonly', true
+
+      @requesting = true
 
       Backbone.OAuth.post
         method: 'POST'
         url: '/v3/sign_up'
         data:
           user:
-            email: @email
-            password: @password
-        success: (data) ->
-          console.log data
-          $fields.removeAttr 'readonly'
-        error: (response) ->
-          console.log response
+            full_name: full_name
+            email: email
+            password: pwd
+            password_confirmation: pwd2
+
+        success: (data) =>
+          @requesting = false
+          App.setToken data.auth_token
+          App.request "set:user", data.user
+          App.navigate App.rootRoute, true
+
+        error: (response) =>
+          @requesting = false
+          alert response.responseJSON.errors[0]
           $fields.removeAttr 'readonly'
 
     onDomRefresh: ->

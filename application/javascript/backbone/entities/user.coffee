@@ -3,9 +3,10 @@
   Entities.UserPot = Backbone.Model.extend
     defaults:
       seen_walkthrough: false
+      connected_services: false
 
     url: ->
-      "v3/user/bucket"
+      'v3/user/bucket'
 
     save: (key, value, callback) ->
       @attributes[key] = value
@@ -26,11 +27,27 @@
     defaults:
       full_name: "User"
 
+    url: 'v3/user'
+
     initialize: (data) ->
       @pot = new Entities.UserPot (if data.bucket then data.bucket else {})
 
     needsWalkthrough: ->
       @pot.get('seen_walkthrough') isnt true
+
+    needsToConnectServices: ->
+      @pot.get('connected_services') isnt true
+
+    getAccounts: ->
+      accounts =
+        twitter: []
+        instagram: []
+
+      for acc in @get 'connected_accounts'
+        if acc.type == 'twitter' then accounts.twitter.push acc
+        else if acc.type == 'instagram' then accounts.twitter.push acc
+
+      accounts
 
     destroy: ->
       $.removeCookie '_probe_tkn'

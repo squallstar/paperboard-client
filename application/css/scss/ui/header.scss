@@ -397,11 +397,11 @@
     }
 
     &.type-twitter {
-      background-color: #5DA9DD;
+      background-color: $color-twitter;
     }
 
     &.type-instagram {
-      background-color: #4C799F;
+      background-color: $color-instagram;
     }
 
     &.type-can-be-followed {

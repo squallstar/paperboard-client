@@ -44,7 +44,7 @@
         success: (data) ->
           App.setToken data.auth_token
           App.request "set:user", data.user
-          App.navigate App.rootRoute, true
+          App.navigate 'connect-services', {trigger: true, replace: true}
         error: ->
           alert 'The e-mail address or password you entered is not valid.'
       false

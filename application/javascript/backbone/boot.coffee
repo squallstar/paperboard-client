@@ -135,9 +135,12 @@
           break
       route = 'login' unless valid
 
-    if App.user and App.user.needsWalkthrough()
-      route = App.rootRoute
-      App.request "show:intro:walkthrough"
+    if App.user
+      if App.user.needsToConnectServices()
+        route = 'connect-services'
+      else if App.user.needsWalkthrough()
+        route = App.rootRoute
+        App.request "show:intro:walkthrough"
 
     Backbone.history.start {pushState: true, silent: route isnt @options.route}
     @navigate route, {trigger: true, replace: true}

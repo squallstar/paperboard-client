@@ -5,6 +5,7 @@
       "login" : "showLogin"
       "logout" : "doLogout"
       "signup" : "showSignup"
+      "connect-services" : "showConnect"
 
     showLogin: ->
       return App.navigate(App.rootRoute, true) if App.user
@@ -15,6 +16,10 @@
       return App.navigate(App.rootRoute, true) if App.user
       App.execute "hide:header"
       App.content.show new Auth.Signup.View
+
+    showConnect: ->
+      App.execute "hide:header"
+      App.content.show new Auth.Connect.View
 
     doLogout: ->
       App.user.destroy() if App.user

@@ -1,0 +1,22 @@
+.window.white
+  .connect-logo
+
+  h1 Connect your accounts
+
+  p.centered You can truly enjoy the magic of Paperboard by connecting one or more services to your account.
+
+  .connect-services
+
+    if accounts.twitter.length == 0
+      a(href='#', class='twitter')
+        h3 Connect Twitter account
+        p We'll create a board with all the articles posted by people you follow on Twitter. Pure magic!
+
+    if accounts.instagram.length == 0
+      a(href='#', class='instagram')
+        h3 Connect Instagram account
+        p You'll get a board with all the pics posted by people you follow on Instagram. You'll love that!
+
+  hr
+
+  a(class='cnt btn-skip', href='#', title='Continue') Skip
