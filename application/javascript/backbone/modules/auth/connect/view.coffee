@@ -18,6 +18,7 @@
         do @didConnectAccount
 
     didConnectAccount: ->
+      App.boards.fetch()
       App.user.fetch
         success: =>
           do @render
