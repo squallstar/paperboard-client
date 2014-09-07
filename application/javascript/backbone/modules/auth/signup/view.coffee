@@ -18,32 +18,17 @@
     keyUp: (event) ->
       $el = $ event.currentTarget
 
+      $(event.currentTarget).parent().removeClass 'with-error'
+
       if event.which is 13
         do event.preventDefault
-        if $el.is @ui.full_name
-          return @ui.email.focus()
-        else
-          return @doSignup event
-
-      else if $el.is @ui.email
-        if @ts then clearTimeout @ts
-        @ts = setTimeout =>
-          do @checkEmail
-        , 350
-
-      @$el.find('.with-error').removeClass 'with-error'
-
+        return @doSignup event
 
     checkEmail: (event) ->
-      return if event and @ui.email.parent().hasClass 'with-success'
-
       email = @ui.email.val()
-      return unless email
-      if event
-        return if email.indexOf('@') isnt -1 and email.indexOf('.') isnt -1
 
-      unless App.Helpers.RegExps.isValidEmail email
-        return @ui.email.parent().removeClass('with-success').addClass 'with-error'
+      if not App.Helpers.RegExps.isValidEmail email
+        return @ui.email.parent().removeClass('with-success').addClass('with-error').find('span').text 'The email address is not valid'
       else
         @ui.email.parent().removeClass 'with-error with-success'
 
@@ -72,7 +57,7 @@
       email = @ui.email.val()
 
       unless App.Helpers.RegExps.isValidEmail email
-        @ui.email.parent().addClass 'with-error'
+        @ui.email.parent().addClass('with-error').find('span').text 'The email address is not valid'
         return @ui.email.select()
 
       pwd = @ui.password.val()

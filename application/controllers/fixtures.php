@@ -8,7 +8,15 @@ class Fixtures extends CI_Controller
     switch ($method)
     {
       case 'sign_in':
+      case 'sign_up':
         echo file_get_contents(APPPATH . 'fixtures/sign_in.json');
+        break;
+
+      case 'user':
+        if ($param1 == 'check_email')
+        {
+          echo "{}";
+        }
         break;
 
       case 'collections':
