@@ -40,3 +40,6 @@
 
     onBeforeDestroy: ->
       App.vent.off "connected:account"
+
+    onDomRefresh: ->
+      App.$window.resize()

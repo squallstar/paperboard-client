@@ -1,5 +1,19 @@
 .window.white
-  .connect-logo
+  ul.steps
+    li
+      h5 1
+      span Get started
+    li.current
+      h5 2
+      span Connect
+    li
+      h5 3
+      span Discover
+    li
+      h5 4
+      span Enjoy
+
+  //.connect-logo
 
   h1 Connect your accounts
 
@@ -7,22 +21,31 @@
 
   .connect-services
 
-    if accounts.twitter.length == 0
-      a(href='#', class='twitter')
+    if accounts.twitter.length > 0
+      .account.type-twitter
+        img
+        h3
+          | Nicholas Valbusa
+          span @squallstar
+          i Following #{accounts.twitter[0].following.count} people
+
+    a(href='#', class='twitter')
+      if accounts.twitter.length > 0
+        h3 Add another Twitter account
+      else
         h3 Connect Twitter account
         p We'll create a board with all the articles posted by people you follow on Twitter. Pure magic!
 
+    hr
 
     if accounts.instagram.length == 0
       a(href='#', class='instagram')
         h3 Connect Instagram account
-        p You'll get a board with all the pics posted by people you follow on Instagram. You'll love that!
+      p You'll get a board with all the pics posted by people you follow on Instagram. You'll love that!
 
   hr
 
-  if accounts.twitter.length && accounts.instagram.length
-    a(class='cnt btn btn-skip', href='#', title='Continue') Continue
-  else if accounts.twitter.length || accounts.instagram.length
-    a(class='cnt btn-skip', href='#', title='Continue') Continue
+  if accounts.twitter.length || accounts.instagram.length
+    a(class='btn btn-skip confirm-alt', href='#', title='Continue') Continue to Discover &rarr;
   else
     a(class='cnt btn-skip', href='#', title='Continue') Skip

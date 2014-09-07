@@ -13,3 +13,6 @@
     didClickContinue: (event) ->
       do event.preventDefault
       App.navigate 'connect-services', true
+
+    onDomRefresh: ->
+      App.$window.resize()
