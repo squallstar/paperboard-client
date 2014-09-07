@@ -5,6 +5,7 @@
       "login" : "showLogin"
       "logout" : "doLogout"
       "signup" : "showSignup"
+      "get-started": "showGetStarted"
       "connect-services" : "showConnect"
 
     showLogin: ->
@@ -20,6 +21,10 @@
     showConnect: ->
       App.execute "hide:header"
       App.content.show new Auth.Connect.View
+
+    showGetStarted: ->
+      App.execute "hide:header"
+      App.content.show new Auth.GetStarted.View
 
     doLogout: ->
       App.user.destroy() if App.user

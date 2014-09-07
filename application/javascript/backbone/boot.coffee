@@ -135,9 +135,9 @@
           break
       route = 'login' unless valid
 
-    if App.user
+    if App.user and route isnt 'logout'
       if App.user.needsToConnectServices()
-        route = 'connect-services'
+        route = 'get-started'
       else if App.user.needsWalkthrough()
         route = App.rootRoute
         App.request "show:intro:walkthrough"

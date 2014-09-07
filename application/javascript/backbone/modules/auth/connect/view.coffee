@@ -11,7 +11,6 @@
 
     templateHelpers: ->
       accounts: App.user.getAccounts()
-      user_name: App.user.get('full_name').split(' ')[0]
 
     initialize: ->
       App.vent.on "connected:account", (type) =>

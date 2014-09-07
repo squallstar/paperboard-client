@@ -49,6 +49,9 @@
 
       accounts
 
+    getFirstName: ->
+      @get('full_name').split(' ')[0]
+
     destroy: ->
       $.removeCookie '_probe_tkn'
       delete App.user

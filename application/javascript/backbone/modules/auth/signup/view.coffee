@@ -95,7 +95,7 @@
           @requesting = false
           App.setToken data.auth_token
           App.request "set:user", data.user
-          App.navigate 'connect-services', {trigger: true, replace: true}
+          App.navigate 'get-started', {trigger: true, replace: true}
 
         error: (response) =>
           @requesting = false
