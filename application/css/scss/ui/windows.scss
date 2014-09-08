@@ -60,7 +60,7 @@
       margin: 40px 0;
     }
 
-    > p {
+    p {
       font-size: 1em;
       line-height: 1.5;
       margin: 25px 0;
@@ -142,7 +142,7 @@
 
     .steps {
       @extend %clear;
-      margin: -40px -40px 65px;
+      margin: -40px -40px 55px;
       border-bottom: 1px solid #EEE;
 
       li {
@@ -271,7 +271,24 @@
     .connect-services {
       margin: 40px 0;
 
+      .head {
+        position: relative;
+        height: 30px;
+        margin: -10px 0 30px;
+        opacity: 0.1;
+
+        &.twitter:before {
+          @include icon($sprite-connect-twitter, $sprite-retina-connect-twitter);
+        }
+
+        &.instagram:before {
+          @include icon($sprite-connect-instagram, $sprite-retina-connect-instagram);
+        }
+      }
+
       a {
+        @include transition(border, 0.2s);
+        @extend %antialias;
         display: block;
         border-radius: 7px;
         border: 2px dashed #CCC;
@@ -280,12 +297,9 @@
         text-decoration: none;
         color: #999;
 
-        &.twitter {
-
-        }
-
-        &.instagram {
-
+        &:hover {
+          border-color: #888;
+          color: #666;
         }
 
         h3 {
@@ -295,8 +309,7 @@
       }
 
       a + p {
-        color: #AAA;
-        font-size: 1em;
+        color: #999;
         line-height: 1.3;
       }
 

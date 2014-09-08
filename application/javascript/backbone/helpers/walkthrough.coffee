@@ -1,6 +1,6 @@
 @Paperboard.module "Walkthrough", (Walkthrough, App, Backbone, Marionette, $, _) ->
 
-  board_to_show = 'p039154097aa3c85ab'
+  board_to_show = 'p649540849963ce90'
 
   Walkthrough.View = Marionette.ItemView.extend
     id: "walkthrough"

@@ -1,5 +1,7 @@
 @Paperboard.module "Auth.Signup", (Signup, App, Backbone, Marionette, $, _) ->
 
+  MIN_PASSWORD_LENGTH = 8
+
   Signup.View = Marionette.ItemView.extend
     template: "signup"
     className: "frms"
@@ -62,8 +64,8 @@
 
       pwd = @ui.password.val()
 
-      if pwd.length < 5
-        @ui.password.parent().addClass('with-error').find('span').text 'The password needs to be at least 6 characters'
+      if pwd.length < MIN_PASSWORD_LENGTH
+        @ui.password.parent().addClass('with-error').find('span').text "The password needs to be at least #{MIN_PASSWORD_LENGTH} characters"
         return @ui.password.select()
 
       if pwd.length > 32
@@ -103,9 +105,10 @@
           $fields.removeAttr 'readonly'
 
     onDomRefresh: ->
-      @ui.full_name.focus()
       App.$html.addClass 'frms-signup'
-      App.$window.resize()
+      App.goTop 150, =>
+        @ui.full_name.focus()
+
 
     onDestroy: ->
       App.$html.removeClass 'frms-signup'

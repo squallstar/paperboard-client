@@ -7,6 +7,9 @@
     events:
       "click .btn-continue" : "didClickContinue"
 
+    ui:
+      content: '.content'
+
     templateHelpers: ->
       firstName: App.user.getFirstName()
 
@@ -14,5 +17,10 @@
       do event.preventDefault
       App.navigate 'connect-services', true
 
+    onRender: ->
+      @ui.content.css 'opacity', 0
+
     onDomRefresh: ->
-      App.$window.resize()
+      App.goTop 1
+      @$el.find('.get-started-logo').addClass('bounceIn animated').one App.$anim, =>
+        @ui.content.delay(300).animate {opacity: 1}, 300

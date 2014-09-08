@@ -14,6 +14,13 @@
     content: "#rg-content"
     overlay: "#overlay"
 
+  App.$anim = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+
+  App.goTop = (speed = 0, callback) ->
+    $('html, body').animate
+      scrollTop: 0
+    , speed, callback
+
   App.$window.resize ->
     App.$window._height = App.$window.height()
 

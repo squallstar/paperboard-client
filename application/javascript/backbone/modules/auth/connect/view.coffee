@@ -9,6 +9,12 @@
       "click .connect-services .instagram" : "connectInstagram"
       "click .btn-skip" : "didClickSkip"
 
+    ui:
+      services: ".connect-services"
+
+    firstRender: true
+    connectedType: ''
+
     templateHelpers: ->
       accounts: App.user.getAccounts()
 
@@ -18,17 +24,21 @@
 
     didConnectAccount: ->
       App.boards.fetch()
-      App.user.fetch
-        success: =>
-          do @render
+      @ui.services.animate {opacity: 0.55}, 300, =>
+        App.user.fetch
+          success: =>
+            @ui.services.animate {opacity: 1}, 300
+            do @render
 
     connectTwitter: (event) ->
       do event.preventDefault
+      @connectedType = 'twitter'
       path = encodeURIComponent window.location.origin + '/callbacks/connected_account/twitter'
       window.open Backbone.OAuth.url("/v1/source_management/add_twitter_account?d=#{path}"), "connectTwitter", "width=800,height=600"
 
     connectInstagram: (event) ->
       do event.preventDefault
+      @connectedType = 'instagram'
       path = encodeURIComponent window.location.origin + '/callbacks/connected_account/instagram'
       window.open Backbone.OAuth.url("/v1/source_management/add_instagram_account?d=#{path}"), "connectInstagram", "width=800,height=600"
 
@@ -41,5 +51,10 @@
     onBeforeDestroy: ->
       App.vent.off "connected:account"
 
+    onRender: ->
+      @$el.find(".account.type-#{@connectedType}").addClass 'flipInX animated'
+
     onDomRefresh: ->
-      App.$window.resize()
+      if @firstRender
+        @firstRender = false
+        App.goTop 150

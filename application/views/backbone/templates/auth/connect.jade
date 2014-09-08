@@ -13,13 +13,15 @@
       h5 4
       span Enjoy
 
-  //.connect-logo
+  //h1 Connect your accounts
 
-  h1 Connect your accounts
-
-  p.centered You can truly enjoy the magic of Paperboard by connecting one or more services to your account.
+  p You can truly enjoy the magic of Paperboard by connecting one or more services to your account. Don't worry, we won't post anything without your explicit permission!
 
   .connect-services
+
+    hr
+
+    .head.twitter
 
     if accounts.twitter.length > 0
       for account in accounts.twitter
@@ -30,16 +32,19 @@
             span #{account.screen_name}
             i Following #{account.following.count} people
 
-    a(href='#', class='twitter')
-      if accounts.twitter.length > 0
-        h3 Add one more Twitter account
-      else
-        h3 Connect Twitter account
+    if accounts.twitter.length <= 3
+      a(href='#', class='twitter')
+        if accounts.twitter.length > 0
+          h3 Add one more Twitter account
+        else
+          h3 Connect Twitter account
 
     if accounts.twitter.length == 0
       p We'll create a board with all the articles posted by people you follow on Twitter. Pure magic!
 
     hr
+
+    .head.instagram
 
     if accounts.instagram.length > 0
       for account in accounts.instagram
@@ -62,6 +67,6 @@
   hr
 
   if accounts.twitter.length || accounts.instagram.length
-    a(class='btn btn-skip confirm-alt', href='#', title='Continue') Continue to Discover &rarr;
+    a(class='btn btn-skip confirm-alt', href='#', title='Continue') Continue &rarr;
   else
     a(class='cnt btn-skip', href='#', title='Continue') Skip

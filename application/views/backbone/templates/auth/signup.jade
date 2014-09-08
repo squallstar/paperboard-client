@@ -4,13 +4,15 @@
   h1 Sign up for a new Paperboard account
 
   form(autocomplete='off')
+    input(type='password', style='display:none')
+
     .field
       h4 Your name
-      input(type='text', class='full_name', placeholder='John Doe')
+      input(type='text', class='full_name', placeholder='John Doe', name="name")
       span
     .field
       h4 Email address
-      input(type='email', class='email', placeholder='john@example.org')
+      input(type='email', class='email', placeholder='john@example.org', name="email")
       span
     .field
       h4 Choose a password
