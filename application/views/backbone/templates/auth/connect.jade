@@ -22,12 +22,13 @@
   .connect-services
 
     if accounts.twitter.length > 0
-      .account.type-twitter
-        img
-        h3
-          | Nicholas Valbusa
-          span @squallstar
-          i Following #{accounts.twitter[0].following.count} people
+      for account in accounts.twitter
+        .account.type-twitter
+          img
+          h3
+            | #{account.access_token.full_name}
+            span #{account.access_token.screen_name}
+            i Following #{account.following.count} people
 
     a(href='#', class='twitter')
       if accounts.twitter.length > 0
@@ -38,10 +39,21 @@
 
     hr
 
-    if accounts.instagram.length == 0
-      a(href='#', class='instagram')
+    if accounts.instagram.length > 0
+      for account in accounts.instagram
+        .account.type-instagram
+          img
+          h3
+            | #{account.access_token.full_name}
+            span #{account.access_token.screen_name}
+            i Following #{account.following.count} people
+
+    a(href='#', class='instagram')
+      if accounts.instagram.length > 0
+        h3 Add another Instagram account
+      else
         h3 Connect Instagram account
-      p You'll get a board with all the pics posted by people you follow on Instagram. You'll love that!
+        p You'll get a board with all the pics posted by people you follow on Instagram. You'll love that!
 
   hr
 
