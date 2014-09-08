@@ -317,7 +317,7 @@
           width: 33px;
           height: 33px;
           border-radius: 33px;
-          border: 2px solid #CCC;
+          border: 2px solid #FFF;
           background-color: #C0C0C0;
           margin-right: 15px;
         }
@@ -348,19 +348,11 @@
         &.type-twitter {
           background-color: $color-twitter;
           border-color: #4792C5;
-
-          img {
-            border-color: #4792C5;
-          }
         }
 
         &.type-instagram {
           background-color: $color-instagram;
           border-color: #416b8f;
-
-          img {
-            border-color: #416b8f;
-          }
         }
       }
     }
