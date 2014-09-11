@@ -1,6 +1,6 @@
 @Paperboard.module "Walkthrough", (Walkthrough, App, Backbone, Marionette, $, _) ->
 
-  board_to_show = 'p649540849963ce90'
+  board_to_show = ''
 
   Walkthrough.View = Marionette.ItemView.extend
     id: "walkthrough"
@@ -124,7 +124,10 @@
           , 500
 
       unless step.el
-        cb = =>
+        cb = (shouldProceed) =>
+          if shouldProceed is false
+            return do @showNextStep
+
           @ui.content.fadeOut 250, =>
             @ui.content.css 'opacity', 1
             @ui.content.html $content
@@ -180,7 +183,13 @@
     App.$wrapper.css 'opacity', 0
 
     window.setTimeout =>
-      sampleBoard = App.request "find:board", board_to_show
+
+      sampleBoard = undefined
+
+      Backbone.OAuth.get
+        url: 'v4/collections/one_for_walkthrough'
+        success: (data) ->
+          sampleBoard = App.request "find:board", data.collection.private_id
 
       App.request "walkthrough", {
         steps: [
@@ -251,9 +260,10 @@
             el: "header .toggle-follow"
             elClick: true
             title: "Follow boards you like"
-            content: "Following boards you like is dead simple. Just press that red button to instantly save them to your Paperboard!"
+            content: "Following boards you like is dead simple. Just press this shiny yellow button to instantly save them to your Paperboard!"
             position: "left"
             onBefore: ($el, step, callback) ->
+              if not sampleBoard then return callback(false)
               App.$htmlbody.animate
                 scrollTop: 0
               , 500, ->
