@@ -23,7 +23,15 @@
       input(type='password', class='confirm_password', placeholder='Password')
       span
 
-    a(class='btn btn-signup confirm', href='#', title='Sign up for a new account') Sign up
-    a(class='cnt', href='#') Terms and conditions
+    a(class='btn btn-signup confirm', href='#') Create my account
 
-a(class='cnt btn-login', href='/login', data-navigate, title='Login with your account') I've got an account, let me log in!
+    p.terms
+      | By signing up, you confirm that you have read and agree to our&nbsp;
+      a(href='#') terms of service
+      | &nbsp;and&nbsp;
+      a(href='#') privacy policy
+      | .
+
+.cnt
+  | Already have an account?&nbsp;
+  a(class='cnt btn-login', href='/login', data-navigate, title='Login with your account') Login here
