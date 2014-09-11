@@ -64,9 +64,30 @@
     if accounts.instagram.length == 0
       p You'll get a board with all the pics posted by people you follow on Instagram. You'll love that!
 
+    hr
+
+    .head.feedly
+
+    if accounts.feedly.length > 0
+      for account in accounts.feedly
+        .account.type-feedly
+          img(src=account.avatar)
+          h3 #{account.full_name}
+            i Successfully connected
+
+    a(href='#', class='feedly')
+      if accounts.feedly.length > 0
+        h3 Add one more Feedly account
+      else
+        h3 Connect Feedly account
+
+    if accounts.feedly.length == 0
+      p We'll import your categories and feeds into beautiful, organised boards.
+
   hr
 
-  if accounts.twitter.length || accounts.instagram.length
+  if accounts.twitter.length || accounts.instagram.length || accounts.feedly.length
     a(class='btn btn-skip confirm-alt', href='#', title='Continue') Continue &rarr;
   else
-    a(class='cnt btn-skip', href='#', title='Continue') Skip
+    p.cnt
+      a(class='btn-skip', href='#', title='Continue') Skip

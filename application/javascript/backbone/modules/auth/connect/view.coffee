@@ -7,6 +7,7 @@
     events:
       "click .connect-services .twitter" : "connectTwitter"
       "click .connect-services .instagram" : "connectInstagram"
+      "click .connect-services .feedly" : "connectFeedly"
       "click .btn-skip" : "didClickSkip"
 
     ui:
@@ -41,6 +42,12 @@
       @connectedType = 'instagram'
       path = encodeURIComponent window.location.origin + '/callbacks/connected_account/instagram'
       window.open Backbone.OAuth.url("/v1/source_management/add_instagram_account?d=#{path}"), "connectInstagram", "width=800,height=600"
+
+    connectFeedly: (event) ->
+      do event.preventDefault
+      @connectedType = 'feedly'
+      path = encodeURIComponent window.location.origin + '/callbacks/connected_account/feedly'
+      window.open Backbone.OAuth.url("/v1/source_management/add_feedly_account?d=#{path}"), "connectFeedly", "width=800,height=600"
 
     didClickSkip: (event) ->
       do event.preventDefault

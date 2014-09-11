@@ -303,6 +303,10 @@
         &.instagram:before {
           @include icon($sprite-connect-instagram, $sprite-retina-connect-instagram);
         }
+
+        &.feedly:before {
+          @include icon($sprite-connect-feedly, $sprite-retina-connect-feedly);
+        }
       }
 
       a {
@@ -385,6 +389,11 @@
         &.type-instagram {
           background-color: $color-instagram;
           border-color: #416b8f;
+        }
+
+        &.type-feedly {
+          background-color: $color-feedly;
+          border-color: #13A843;
         }
       }
     }

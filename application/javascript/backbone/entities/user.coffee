@@ -42,10 +42,12 @@
       accounts =
         twitter: []
         instagram: []
+        feedly: []
 
       for acc in @get 'connected_accounts'
         if acc.type == 'twitter' then accounts.twitter.push acc
         else if acc.type == 'instagram' then accounts.instagram.push acc
+        else if acc.type == 'feedly' then accounts.feedly.push acc
 
       accounts
 

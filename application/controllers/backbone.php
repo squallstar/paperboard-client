@@ -9,6 +9,16 @@ class Backbone extends CI_Controller
     $entrypoint = rtrim($this->config->item('api_domain'), '/') . '/';
     $auth_token = $this->input->cookie('_probe_tkn');
 
+    if ($this->input->get('access_token'))
+    {
+      $auth_token = $this->input->get('access_token');
+      $this->input->set_cookie([
+        'name' => '_probe_tkn',
+        'value' => $auth_token,
+        'expire' => 604800
+      ]);
+    }
+
     $data = 'false';
 
     if ($auth_token)
