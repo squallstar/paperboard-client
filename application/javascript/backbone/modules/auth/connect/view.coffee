@@ -59,9 +59,15 @@
       App.vent.off "connected:account"
 
     onRender: ->
-      @$el.find(".account.type-#{@connectedType}").addClass 'flipInX animated'
+      if @firstRender
+        @ui.services.css 'opacity', 0
+      else
+        @$el.find(".account.type-#{@connectedType}").addClass 'flipInX animated'
 
     onDomRefresh: ->
       if @firstRender
         @firstRender = false
         App.goTop 150
+        window.setTimeout =>
+          @ui.services.animate {opacity: 1}, 700
+        , 300

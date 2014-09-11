@@ -144,7 +144,7 @@
 
     if App.user and route isnt 'logout'
       if App.user.needsToConnectServices()
-        route = 'get-started'
+        route = 'connect-services'
       else if App.user.needsWalkthrough()
         route = App.rootRoute
         App.request "show:intro:walkthrough"

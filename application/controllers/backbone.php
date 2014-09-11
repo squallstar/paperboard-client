@@ -32,7 +32,7 @@ class Backbone extends CI_Controller
       }
     }
 
-    if (!$data) $data = 'false';
+    if (strpos($data, '{') !== 0) $data = 'false';
 
     $this->load->view('backbone/index', array(
       'data' => $data,

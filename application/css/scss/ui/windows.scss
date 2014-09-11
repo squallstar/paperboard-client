@@ -67,6 +67,10 @@
       margin: 25px 0;
       color: #AAA;
 
+      &.darker {
+        color: #999;
+      }
+
       strong {
         color: #777;
       }
@@ -333,7 +337,7 @@
 
       a + p {
         color: #999;
-        line-height: 1.3;
+        line-height: 1.5;
       }
 
       .account {

@@ -13,9 +13,7 @@
       h5 4
       span Enjoy
 
-  //h1 Connect your accounts
-
-  p You can truly enjoy the magic of Paperboard by connecting one or more services to your account. Don't worry, we won't post anything without your explicit permission!
+  p.darker You can truly enjoy the magic of Paperboard by connecting one or more services to your account. Don't worry, we won't post anything without your explicit permission!
 
   .connect-services
 
@@ -73,7 +71,7 @@
         .account.type-feedly
           img(src=account.avatar)
           h3 #{account.full_name}
-            i Successfully connected
+            i ✔︎ Successfully connected
 
     a(href='#', class='feedly')
       if accounts.feedly.length > 0
