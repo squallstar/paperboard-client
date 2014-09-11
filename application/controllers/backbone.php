@@ -6,7 +6,7 @@ class Backbone extends CI_Controller
   {
     header("Cache-Control: no-cache");
 
-    $entrypoint = $this->config->item('api_domain');
+    $entrypoint = rtrim($this->config->item('api_domain'), '/') . '/';
     $auth_token = $this->input->cookie('_probe_tkn');
 
     $data = 'false';
