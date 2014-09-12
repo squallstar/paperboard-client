@@ -111,6 +111,12 @@
             margin-left: 0;
           }
 
+          &.icon-feedly:before {
+            @include icon($sprite-feedly, $sprite-retina-feedly);
+            left: 30px;
+            margin-left: 0;
+          }
+
           &.icon-owned:before {
             @include icon($sprite-user, $sprite-retina-user);
             left: 30px;

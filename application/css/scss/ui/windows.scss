@@ -387,17 +387,17 @@
 
         &.type-twitter {
           background-color: $color-twitter;
-          border-color: #4792C5;
+          border-color: darken($color-twitter, 9%);
         }
 
         &.type-instagram {
           background-color: $color-instagram;
-          border-color: #416b8f;
+          border-color: darken($color-instagram, 9%);
         }
 
         &.type-feedly {
           background-color: $color-feedly;
-          border-color: #13A843;
+          border-color: darken($color-feedly, 9%);
         }
       }
     }

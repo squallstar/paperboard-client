@@ -19,6 +19,9 @@
     isInstagramType: ->
       @get('type') is 'instagram'
 
+    isFeedlyType: ->
+      @get('type') is 'feedly'
+
     isFollowed: ->
       @get('owned_collection') is false and @collection and @collection is App.boards
 

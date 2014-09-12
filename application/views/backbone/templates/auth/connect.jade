@@ -71,7 +71,7 @@
         .account.type-feedly
           img(src=account.avatar)
           h3 #{account.full_name}
-            i ✔︎ Successfully connected
+            i #{account.opml.categories_count} boards with #{account.opml.feeds_count} feeds imported
 
     a(href='#', class='feedly')
       if accounts.feedly.length > 0

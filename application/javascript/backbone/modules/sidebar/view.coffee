@@ -26,6 +26,8 @@
         @ui.item.addClass 'icon-twitter'
       else if @model.isInstagramType()
         @ui.item.addClass 'icon-instagram'
+      else if @model.isFeedlyType()
+        @ui.item.addClass 'icon-feedly'
       else
         @ui.item.addClass 'icon-owned'
 
