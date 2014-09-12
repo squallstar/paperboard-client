@@ -20,11 +20,11 @@ html, body {
 }
 
 body {
-  height:100%;
-  min-height:100%;
-  font-family:"Proxima Nova", sans-serif;
+  height: 100%;
+  min-height: 100%;
+  font-family: $base-font, sans-serif;
   font-size: 1em;
-  overflow-y:scroll;
+  overflow-y: scroll;
   background: transparent;
 
   html.with-header.fixed-header & {
@@ -42,7 +42,7 @@ body {
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea {
-  font-family:"Proxima Nova", sans-serif;
+  font-family: $base-font, sans-serif;
 }
 
 input[type="text"], input[type="email"], input[type="password"], button {
