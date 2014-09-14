@@ -401,6 +401,31 @@
         }
       }
     }
+
+    .discover {
+
+      ul.tags {
+
+        li {
+          display: inline-block;
+          margin: 0 10px 10px 0;
+
+          a {
+            display: inline-block;
+            text-decoration: none;
+            color: #444;
+            background-color: #EEE;
+            padding: 7px 11px;
+            border-radius: 4px;
+
+            &:hover {
+              background-color: #97DEFF;
+              color: #0D0258;
+            }
+          }
+        }
+      }
+    }
   }
 }
 

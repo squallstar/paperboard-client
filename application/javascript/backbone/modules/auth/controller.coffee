@@ -7,6 +7,7 @@
       "signup" : "showSignup"
       "get-started": "showGetStarted"
       "connect-services" : "showConnect"
+      "discover" : "showDiscover"
 
     showLogin: ->
       return App.navigate(App.rootRoute, true) if App.user
@@ -21,6 +22,11 @@
     showConnect: ->
       App.execute "hide:header"
       App.content.show new Auth.Connect.View
+
+    showDiscover: ->
+      App.execute "hide:header"
+      App.content.show new Auth.Discover.View
+        collection: new App.Entities.Tags
 
     showGetStarted: ->
       App.execute "hide:header"

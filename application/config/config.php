@@ -24,7 +24,7 @@ $config['base_url']	= '';
 | Fixtures address for local development: http://localhost/fixtures/
 |
 */
-$config['api_domain'] = 'http://rails.paperboard.me/hhvm/';
+$config['api_domain'] = 'http://localhost/fixtures/';
 
 /*
 |--------------------------------------------------------------------------

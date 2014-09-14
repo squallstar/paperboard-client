@@ -4,6 +4,7 @@
     defaults:
       seen_walkthrough: false
       connected_services: false
+      content_discovered: false
 
     url: ->
       'v3/user/bucket'
@@ -37,6 +38,9 @@
 
     needsToConnectServices: ->
       @pot.get('connected_services') isnt true
+
+    needsToDiscoverContent: ->
+      @pot.get('content_discovered') isnt true
 
     getAccounts: ->
       accounts =

@@ -52,8 +52,7 @@
     didClickSkip: (event) ->
       do event.preventDefault
       App.user.pot.save 'connected_services', true
-      App.navigate App.rootRoute, true
-      App.request "show:intro:walkthrough"
+      App.navigate 'discover', true
 
     onBeforeDestroy: ->
       App.vent.off "connected:account"
