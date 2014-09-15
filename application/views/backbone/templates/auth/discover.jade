@@ -15,14 +15,29 @@
 
 
   h1 What do you like?
-  p.darker Just select tags you fancy and we'll try to match and tailor the best boards for you. Rocket science!
+  p.darker.centered
+    | Just select the&nbsp;
+    strong.enlight #tags
+    | &nbsp;you fancy and we'll try to match and suggest the best boards for you. Rocket science!
+
+  hr
 
   .discover
-    ul.tags
+    .primary
+      ul.tags
+
+    .suggested.hide
+      hr
+      h4 Recommended for you
+      ul.tags
+
+    .others.hide
+      hr
+      h4 Also popular on paperboard
+      ul.tags
 
   .proceed.hide
 
     hr
 
-    p.cnt
-      a(class='btn-skip', href='#', title='Continue') Skip
+    a(class='btn btn-skip confirm-alt', href='#', title='Continue') Continue &rarr;

@@ -17,7 +17,7 @@
   }
 
   .window {
-    max-width: 480px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 0 40px;
     border-radius: 4px;
@@ -58,7 +58,7 @@
       font-family: "Proxima Nova Condensed", sans-serif;
       font-size: 1.5em;
       text-align: center;
-      margin: 40px 0;
+      margin: 40px 0 30px;
     }
 
     p {
@@ -73,6 +73,14 @@
 
       strong {
         color: #777;
+
+        &.enlight {
+          background-color: #97DEFF;
+          color: #0D0258;
+          padding: 1px 5px;
+          display: inline-block;
+          border-radius: 4px;
+        }
       }
 
       &.centered {
@@ -404,12 +412,21 @@
 
     .discover {
 
+      h4 {
+        text-transform: uppercase;
+        font-size: 0.9em;
+        text-align: center;
+        font-weight: 500;
+        color: #777;
+      }
+
       ul.tags {
-        overflow: hidden;
+        @extend %clear;
+        margin-top: 20px;
+        text-align: center;
 
         li {
           display: inline-block;
-          float: left;
           margin: 0 10px 10px 0;
 
           small {

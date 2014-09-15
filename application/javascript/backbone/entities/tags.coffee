@@ -35,5 +35,4 @@
         add: true
         remove: false
         success: ->
-          console.log arguments
           if callback then callback arguments

@@ -11,18 +11,22 @@
       do event.preventDefault
       selected = not @model.get 'selected'
       @model.set 'selected', selected
-      @$el.toggleClass 'selected', selected
+      @$el.removeClass 'new'
+      @$el.toggleClass 'selected bounceIn animated', selected
+
+      @model.set 'suggested', false
+
       do @onRender
 
     onRender: ->
       @$el.toggleClass 'selected', @model.get('selected')
       @$el.toggleClass 'new suggested', @model.get('suggested')
 
-    destroy: ->
-      return if @isDestroyed
-      _args = arguments
-      @$el.hide 350, =>
-        Marionette.View.prototype.destroy.apply @, _args
+    # destroy: ->
+    #   return if @isDestroyed
+    #   _args = arguments
+    #   @$el.hide 350, =>
+    #     Marionette.View.prototype.destroy.apply @, _args
 
   # -------------------------------------------------------------------------
 
@@ -30,7 +34,7 @@
     template: "discover"
     className: "frms"
     childView: Discover.TagView
-    childViewContainer: "ul.tags"
+    childViewContainer: "ul.tags.all"
 
     events:
       "click .btn-skip" : "didClickSkip"
@@ -38,7 +42,9 @@
     firstRender: true
 
     ui:
-      tags: "ul.tags"
+      tags: ".primary ul.tags"
+      suggestedTags: ".suggested ul.tags"
+      otherTags: ".others ul.tags"
 
     collectionEvents:
       "change:selected" : "didSelectItem"
@@ -57,24 +63,39 @@
       App.navigate App.rootRoute, true
       App.request "show:intro:walkthrough"
 
-    didSelectItem: (event) ->
+    didSelectItem: (model) ->
       return if @collection.selectedTags().length < 4
 
       @$el.find('.proceed').removeClass 'hide'
 
-      @loadMore = true
       @$el.find('li.new').removeClass 'new'
+
+      @loadMore = true
       @collection.fetchMore()
 
-    onAddChild: (childView) ->
-      if @loadMore
-        childView.$el.addClass 'bounce animated'
-        unusedItem = @collection.firstNotSelected()
-        if unusedItem
-          unusedItem.destroy()
+    # onAddChild: (childView) ->
+      # if @loadMore
+        # unusedItem = @collection.firstNotSelected()
+        # if unusedItem
+        #   unusedItem.destroy()
 
     onCollectionRendered: ->
       App.$window.resize()
+
+    attachHtml: (collectionView, childView, index) ->
+      if @loadMore
+        if childView.model.get('suggested')
+          @ui.suggestedTags.append childView.$el
+          if @ui.suggestedTags.parent().hasClass 'hide'
+            @ui.suggestedTags.parent().removeClass 'hide'
+            window.setTimeout =>
+              App.scrollTo @ui.suggestedTags, 500
+            , 200
+        else
+          @ui.otherTags.parent().removeClass 'hide'
+          @ui.otherTags.append childView.$el
+      else
+        @ui.tags.append childView.$el
 
     onDomRefresh: ->
       if @firstRender

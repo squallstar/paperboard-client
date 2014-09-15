@@ -21,6 +21,11 @@
       scrollTop: 0
     , speed, callback
 
+  App.scrollTo = ($element, speed = 150, callback) ->
+    $('html, body').animate
+      scrollTop: $element.offset().top
+    , speed, callback
+
   App.$window.resize ->
     App.$window._height = App.$window.height()
 
