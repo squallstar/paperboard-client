@@ -1,5 +1,30 @@
 @Paperboard.module "Auth.Discover", (Discover, App, Backbone, Marionette, $, _) ->
 
+  Discover.Collection = Marionette.ItemView.extend
+    template: "discover-collection"
+    tagName: 'section'
+
+    templateHelpers: ->
+      cover: if cover = @model.get('cover_asset') then cover.url_archived_small else false
+
+  # -------------------------------------------------------------------------
+
+  Discover.Collections = Marionette.CompositeView.extend
+    template: "discover-collections"
+    childView: Discover.Collection
+    childViewContainer: ".suggestions"
+
+    events:
+      "click .confirm-alt" : "didClickContinue"
+
+    didClickContinue: (event) ->
+      do event.preventDefault
+      App.user.pot.save 'discover_seen', true
+      App.navigate App.rootRoute, true
+      App.request "show:intro:walkthrough"
+
+  # -------------------------------------------------------------------------
+
   Discover.TagView = Marionette.ItemView.extend
     template: "discover-tag"
     tagName: "li"
@@ -21,12 +46,6 @@
     onRender: ->
       @$el.toggleClass 'selected', @model.get('selected')
       @$el.toggleClass 'new suggested', @model.get('suggested')
-
-    # destroy: ->
-    #   return if @isDestroyed
-    #   _args = arguments
-    #   @$el.hide 350, =>
-    #     Marionette.View.prototype.destroy.apply @, _args
 
   # -------------------------------------------------------------------------
 
@@ -59,9 +78,22 @@
 
     didClickSkip: (event) ->
       if event then do event.preventDefault
-      App.user.pot.save 'discover_seen', true
-      App.navigate App.rootRoute, true
-      App.request "show:intro:walkthrough"
+
+      tags = @collection.selectedTags()
+      App.user.pot.save 'suggestions', tags
+
+      @$el.find('.btn-skip').addClass('loading').text 'Please wait'
+      @$el.find('ul.tags').animate {opacity: 0.5}, 1000
+
+      suggested = new App.Entities.SuggestedBoards [], tags: tags
+
+      suggested.fetch
+        success: =>
+          @suggestions = new Discover.Collections
+            collection: suggested
+          @$el.find('.the-content').html @suggestions.$el
+          @suggestions.render()
+          App.scrollTo 0, 200
 
     didSelectItem: (model) ->
       return if @collection.selectedTags().length < 4
@@ -73,12 +105,6 @@
       @loadMore = true
       @collection.fetchMore()
 
-    # onAddChild: (childView) ->
-      # if @loadMore
-        # unusedItem = @collection.firstNotSelected()
-        # if unusedItem
-        #   unusedItem.destroy()
-
     onCollectionRendered: ->
       App.$window.resize()
 
@@ -89,13 +115,16 @@
           if @ui.suggestedTags.parent().hasClass 'hide'
             @ui.suggestedTags.parent().removeClass 'hide'
             window.setTimeout =>
-              App.scrollTo @ui.suggestedTags, 500
+              App.scrollTo @ui.suggestedTags.offset().top-100, 500
             , 200
         else
           @ui.otherTags.parent().removeClass 'hide'
           @ui.otherTags.append childView.$el
       else
         @ui.tags.append childView.$el
+
+    onBeforeClose: ->
+      if @suggestions then @suggestions.close()
 
     onDomRefresh: ->
       if @firstRender

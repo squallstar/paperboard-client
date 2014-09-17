@@ -1,0 +1,12 @@
+.wrapper
+  .cover(style="background-image:url(#{cover})")
+  .content
+    h3 #{name}
+    .tags #{tags.join(', ')}
+    .stats #{total_links_count} articles
+    .author
+      img(src=user.image_url)
+      span by #{user.full_name}
+
+    for link in links
+      h5 #{link.name}

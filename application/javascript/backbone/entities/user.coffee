@@ -5,6 +5,7 @@
       seen_walkthrough: false
       connected_services: false
       content_discovered: false
+      suggestions: []
 
     url: ->
       'v3/user/bucket'

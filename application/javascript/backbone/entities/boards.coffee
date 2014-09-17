@@ -73,6 +73,15 @@
 
   # --------------------------------------------------------------------------
 
+  Entities.SuggestedBoards = Entities.Boards.extend
+    url: ->
+      "v4/collections/suggested?tags=" + encodeURIComponent(@tags.join(','))
+
+    initialize: (models, options) ->
+      @tags = options.tags
+
+  # --------------------------------------------------------------------------
+
   App.reqres.setHandler "find:board", (private_id, callback) ->
     board = undefined
     for b in App.boards.models

@@ -22,8 +22,12 @@
     , speed, callback
 
   App.scrollTo = ($element, speed = 150, callback) ->
+    $element
+    if $element.length
+      $element = $element.offset().top
+
     $('html, body').animate
-      scrollTop: $element.offset().top
+      scrollTop: $element
     , speed, callback
 
   App.$window.resize ->
