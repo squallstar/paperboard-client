@@ -26,7 +26,7 @@
         data.title = data.description
         data.description = model.name
 
-      if data.title.length > 160
+      if data.title and data.title.length > 160
         data.title = data.title.substring(0,159) + '&hellip;'
 
       if data.description.length > 160
