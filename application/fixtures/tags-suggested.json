@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Bill Gates",
+    "suggested": false
+  },
+  {
+    "name": "Windows 95",
+    "suggested": true
+  },
+  {
+    "name": "Pasta",
+    "suggested": false
+  },
+  {
+    "name": "Verona",
+    "suggested": true
+  },
+  {
+    "name": "London",
+    "suggested": false
+  },
+  {
+    "name": "Spaghetti",
+    "suggested": true
+  }
+]

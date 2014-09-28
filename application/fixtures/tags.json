@@ -1,3 +1,26 @@
 [
-  "hello", "world", "lorem", "ipsum", "dolor", "sit", "amet", "et", "first", "japan", "tokyo", "kyoto", "garden", "flowers"
+  {
+    "name": "Microsoft",
+    "suggested": false
+  },
+  {
+    "name": "Apple",
+    "suggested": false
+  },
+  {
+    "name": "Pizza",
+    "suggested": false
+  },
+  {
+    "name": "Italy",
+    "suggested": false
+  },
+  {
+    "name": "UK",
+    "suggested": false
+  },
+  {
+    "name": "Nokia",
+    "suggested": false
+  }
 ]

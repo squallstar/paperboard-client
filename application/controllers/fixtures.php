@@ -39,7 +39,14 @@ class Fixtures extends CI_Controller
       case 'directory':
         if ($param1 == 'tags')
         {
-          $this->json(200, file_get_contents(APPPATH . 'fixtures/tags.json'));
+          if ($this->input->get('filter'))
+          {
+            $this->json(200, file_get_contents(APPPATH . 'fixtures/tags-suggested.json'));
+          }
+          else
+          {
+            $this->json(200, file_get_contents(APPPATH . 'fixtures/tags.json'));
+          }
         }
         break;
     }
