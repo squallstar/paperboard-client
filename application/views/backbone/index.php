@@ -24,6 +24,7 @@
 
     <div id="overlay"></div>
     <div id="wrapper">
+      <div id="rg-overlay"></div>
       <div id="rg-header"></div>
       <div id="rg-sidebar"></div>
       <div id="rg-content"></div>

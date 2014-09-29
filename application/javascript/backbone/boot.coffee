@@ -12,7 +12,6 @@
     header:  "#rg-header"
     sidebar: "#rg-sidebar"
     content: "#rg-content"
-    overlay: "#overlay"
 
   App.$anim = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
 
@@ -70,6 +69,12 @@
     App.user = new App.Entities.User user
     App.vent.trigger "user:login"
     do App.boards.fetch
+
+  App.reqres.setHandler 'set:intent', (intent) ->
+    App.__intent = intent
+
+  App.reqres.setHandler 'intent', ->
+    App.__intent
 
   App.setToken = (token) ->
     $.cookie '_probe_tkn', token

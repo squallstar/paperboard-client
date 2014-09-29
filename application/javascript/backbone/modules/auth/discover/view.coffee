@@ -20,6 +20,7 @@
     didClickContinue: (event) ->
       do event.preventDefault
       App.user.pot.save 'discover_seen', true
+      App.user.pot.save 'content_discovered', true
       App.navigate App.rootRoute, true
       App.request "show:intro:walkthrough"
 

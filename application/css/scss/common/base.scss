@@ -36,9 +36,28 @@ body {
   display: none !important;
 }
 
-#content-rg {
+#rg-content {
   @extend %hardwareacceleration;
   min-width: $viewport-min-width;
+}
+
+#rg-overlay {
+  @include transition(opacity, 0.24s);
+  @extend %hardwareacceleration;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(255,255,255,0.5);
+  opacity: 0;
+  visibility: hidden;
+
+  html.with-overlay & {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea {

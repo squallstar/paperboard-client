@@ -1,5 +1,19 @@
-# @Collector.module "Overlay", (Overlay, App, Backbone, Marionette, $, _) ->
+@Paperboard.module "Overlay", (Overlay, App, Backbone, Marionette, $, _) ->
 
-#   App.reqres.setHandler "show:login", ->
+  fn = (event) ->
+    do event.preventDefault
+    do event.stopPropagation
 
-#     App.overlay.show new Overlay.Login
+  Overlay.Region = Marionette.Region.extend
+    el: '#rg-overlay'
+
+    onShow: ->
+      App.$html.addClass 'with-overlay'
+      App.$html.on 'scroll touchmove mousewheel', fn
+
+    onBeforeEmpty: ->
+      App.$html.removeClass 'with-overlay'
+      App.$html.off 'scroll touchmove mousewheel', fn
+
+  App.addRegions
+    overlay: Overlay.Region

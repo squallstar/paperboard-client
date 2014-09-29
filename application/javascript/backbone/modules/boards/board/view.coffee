@@ -10,6 +10,14 @@
     tagName: "article"
     template: "board-article"
 
+    events:
+      "click .img" : "revealNovel"
+
+    revealNovel: (event) ->
+      do event.preventDefault
+      App.request 'set:intent', @model
+      App.navigate "article/#{@model.get('id')}", true
+
     serializeData: ->
       model = @model.toJSON()
       data = {
