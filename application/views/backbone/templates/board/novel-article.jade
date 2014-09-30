@@ -1,6 +1,13 @@
-h1 #{name}
+.nano
+  .nano-content
+    article
+      if img
+        img.lead(src=img.url_archived_medium)
 
-.content
-  !{htmlcontent}
+      .internal
+        h1 #{name}
 
-a(href='#', class='close-novel') Close
+        .content
+          !{htmlcontent}
+
+        a(href='#', class='close-novel') Close

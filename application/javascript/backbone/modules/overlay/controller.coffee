@@ -9,11 +9,11 @@
 
     onShow: ->
       App.$html.addClass 'with-overlay'
-      App.$html.on 'scroll touchmove mousewheel', fn
+      #App.$html.on 'scroll touchmove mousewheel', fn
 
     onBeforeEmpty: ->
       App.$html.removeClass 'with-overlay'
-      App.$html.off 'scroll touchmove mousewheel', fn
+      #App.$html.off 'scroll touchmove mousewheel', fn
 
   App.addRegions
     overlay: Overlay.Region

@@ -23,7 +23,7 @@
       data = {
         title: model.name
         description: model.description.replace /(<([^>]+)>)/ig,""
-        image: false
+        image: @model.topImage()
         source: model.sources[0]
         published_ago: @model.publishedAgo()
         url_host: if model.url_host then model.url_host.replace('www.', '') else false
@@ -39,12 +39,6 @@
 
       if data.description.length > 160
         data.description = data.description.substring(0,159) + '&hellip;'
-
-      if model.lead_image
-        data.image = model.lead_image
-        if data.image and data.image.width and data.image.height
-          data.image.ratio = (data.image.height * 100 / data.image.width).toFixed(2)
-          if data.image.ratio > 150 then data.image.ratio = 149
 
       data
 

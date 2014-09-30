@@ -13,6 +13,15 @@
       else
         return published.fromNow()
 
+    topImage: ->
+      img = @get 'lead_image'
+      if img
+        if img.width and img.height
+          img.ratio = (img.height * 100 / img.width).toFixed(2)
+          if img.ratio > 150 then img.ratio = 149
+        return img
+      false
+
   # --------------------------------------------------------------------------
 
   Entities.Articles = Backbone.AuthCollection.extend
