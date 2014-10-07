@@ -4,6 +4,15 @@
     template: "discover-collection"
     tagName: 'section'
 
+    events:
+      "click" : "didClick"
+
+    didClick: (event) ->
+      do event.preventDefault
+      val = not @model.get 'selected'
+      @model.set 'selected', val
+      @$el.toggleClass 'selected', val
+
     templateHelpers: ->
       cover: if cover = @model.get('cover_asset') then cover.url_archived_small else false
 
@@ -19,8 +28,28 @@
 
     didClickContinue: (event) ->
       do event.preventDefault
+
       App.user.pot.save 'discover_seen', true
       App.user.pot.save 'content_discovered', true
+
+      ids = []
+      for board in @collection.models
+        if board.get('selected') then ids.push board.get('private_id')
+
+      if ids.length is 0
+        return alert 'Please select at least one board to continue.'
+
+      Backbone.OAuth.post
+        method: 'POST'
+        url: '/v3/collections/follow'
+        data:
+          boards: ids
+        success: =>
+          do @proceed
+        error: =>
+          do @proceed
+
+    proceed: ->
       App.navigate App.rootRoute, true
       App.request "show:intro:walkthrough"
 

@@ -479,6 +479,15 @@
         border: 1px solid #CCC;
         border-radius: 4px;
 
+        &:hover {
+          cursor: pointer;
+          background-color: #EFEFEF;
+        }
+
+        &.selected {
+          background-color: #A6E22E;
+        }
+
         .wrapper {
           display: table-row;
         }

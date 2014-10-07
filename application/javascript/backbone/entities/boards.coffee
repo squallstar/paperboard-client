@@ -6,6 +6,7 @@
     defaults:
       private_id: 0
       name: ""
+      tags_orig: []
 
     url: ->
       "v3/collections/#{@get('private_id')}"
@@ -79,6 +80,11 @@
 
     initialize: (models, options) ->
       @tags = options.tags
+
+    parse: (response) ->
+      for board in response
+        board.selected = false
+      response
 
   # --------------------------------------------------------------------------
 
