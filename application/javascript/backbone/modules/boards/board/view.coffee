@@ -133,6 +133,8 @@
       do @attachLazyLoad
       @firstLayout = true
 
+      @ui.articles.brickLane('layout')
+
       if @timeout then clearTimeout @timeout
       @timeout = window.setTimeout =>
         if @ui.articles.height() < App.$window.height() then do @fetchMore

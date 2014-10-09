@@ -19,13 +19,13 @@
 
   article {
     position: relative;
-    padding: 0 0 0 160px;
+    padding: 0;
     height: 100%;
     background-color: #FFF;
     margin-right: 320px;
 
     .nano-content {
-      padding: 40px 160px 0 0;
+      padding: 40px 160px;
     }
 
     .nano-pane {
@@ -38,21 +38,70 @@
       }
     }
 
+    .left {
+      $img-size: 32px;
+
+      @extend %clear;
+      margin-bottom: 30px;
+
+      img, strong, span {
+        float: left;
+      }
+
+      img {
+        width: $img-size;
+        height: $img-size;
+        border-radius: $img-size;
+        margin-right: 10px;
+      }
+
+      strong, span {
+        @extend %antialias;
+        color: #555;
+        height: $img-size;
+        line-height: $img-size;
+        font-size: 0.9em;
+      }
+
+      strong {
+        font-weight: 600;
+        margin-right: 7px;
+      }
+
+      span {
+        font-weight: 300;
+      }
+    }
+
     img.lead {
       width: 100%;
-      margin: 20px 0;
+      margin: 15px 0 20px;
     }
 
     h1 {
-      font-size: 2.1em;
+      @extend %antialias;
+      color: #34373B;
+      font-weight: 500;
+      font-size: 2.5em;
       line-height: 1.4;
       margin-bottom: 15px;
+      font-family: $heading-font;
     }
 
     h2 {
       font-size: 1.7em;
       font-weight: 500;
       margin: 40px 0 20px;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      margin: 20px 0;
+    }
+
+    h4 {
+      font-size: 1.35em;
+      margin: 20px 0;
     }
 
     a {
@@ -69,16 +118,31 @@
     .html-content {
       font-size: 1em;
       line-height: 1.7;
-      margin: 20px 0;
+      margin-top: 20px;
 
       img {
-        max-width: 100%;
+        max-width: 100% !important;
         margin: 20px auto;
       }
 
       p {
         margin: 20px 0;
         color: #777;
+        text-align: justify;
+      }
+
+      blockquote {
+        @extend %antialias;
+        font-style: italic;
+        font-size: 1em;
+        margin: 30px 0;
+        padding: 10px 15px;
+        background: #fffab4;
+      }
+
+      iframe {
+        width: 100%;
+        min-height: 320px;
       }
 
       hr {

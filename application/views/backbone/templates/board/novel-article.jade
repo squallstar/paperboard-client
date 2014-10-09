@@ -1,15 +1,24 @@
 article
   .nano
     .nano-content
-      h1 #{name}
+
+      header
+        .left
+          if source && source.profile_image_url
+            img(src=source.profile_image_url)
+          strong #{source.full_name}
+          span #{published_ago}
+
+      if name
+        h1 #{name}
 
       if img
         img.lead(src=img.url_archived_medium ? img.url_archived_medium : img.url_original)
 
       .html-content
-        !{htmlcontent}
+        !{content}
 
-        a(href='#', class='close-novel') Close
+      a(href='#', class='close-novel') Close
 
 aside
   p Column
