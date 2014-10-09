@@ -1,7 +1,6 @@
 article
   .nano
     .nano-content
-
       header
         .left
           if source && source.profile_image_url
@@ -19,6 +18,8 @@ article
         !{content}
 
       a(href='#', class='close-novel') Close
+
+      a.view-original(href=url, target='_blank') View original article
 
 aside
   p Column

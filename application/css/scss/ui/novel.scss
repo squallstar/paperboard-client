@@ -7,7 +7,7 @@
   padding: 0 $visible-bg-area;
   height: 100%;
 
-  aside {
+  > aside {
     width: $sidebar-width;
     position: absolute;
     top: 0;
@@ -17,7 +17,7 @@
     padding: 30px;
   }
 
-  article {
+  > article {
     position: relative;
     padding: 0;
     height: 100%;
@@ -25,7 +25,7 @@
     margin-right: 320px;
 
     .nano-content {
-      padding: 40px 160px;
+      padding: 40px 145px;
     }
 
     .nano-pane {
@@ -73,11 +73,6 @@
       }
     }
 
-    img.lead {
-      width: 100%;
-      margin: 15px 0 20px;
-    }
-
     h1 {
       @extend %antialias;
       color: #34373B;
@@ -85,6 +80,11 @@
       font-size: 2.5em;
       line-height: 1.4;
       margin-bottom: 15px;
+    }
+
+    img.lead {
+      width: 100%;
+      margin: 15px 0 20px;
     }
 
     h2 {
@@ -103,25 +103,27 @@
       margin: 20px 0;
     }
 
-    a {
-      color: #1ABC9C;
-      text-decoration: none;
-      border-bottom: 1px dotted #1ABC9C;
-
-      &:hover {
-        color: #4C799F;
-        border-bottom-color: #4C799F;
-      }
-    }
-
     li {
-      margin-left: 30px;
+      list-style-type: disc;
+      margin-left: 15px;
     }
 
     .html-content {
       font-size: 1em;
       line-height: 1.7;
       margin-top: 20px;
+
+      a {
+        @include transition(all, 0.2s);
+        color: #1ABC9C;
+        text-decoration: none;
+        border-bottom: 1px dotted #1ABC9C;
+
+        &:hover {
+          color: #F65E4E;
+          border-bottom-color: #F65E4E;
+        }
+      }
 
       img {
         max-width: 100% !important;
@@ -132,6 +134,20 @@
         margin: 20px 0;
         color: #777;
         text-align: justify;
+      }
+
+      figcaption {
+        font-size: 0.85em;
+        color: #999;
+
+        p {
+          margin: 5px 0;
+        }
+      }
+
+      strong {
+        color: #333;
+        font-weight: bold;
       }
 
       blockquote {
@@ -154,6 +170,24 @@
         height: 1px;
         background-color: #DDD;
         margin: 20px 0;
+      }
+    }
+
+    .view-original {
+      @include transition(all, 0.2s);
+      display: block;
+      margin: 20px 0;
+      border: 2px solid #CCC;
+      border-radius: 4px;
+      padding: 16px 15px;
+      text-align: center;
+      color: #999;
+      font-size: 1em;
+      text-decoration: none;
+
+      &:hover {
+        color: #1ABC9C;
+        border-color: #1ABC9C;
       }
     }
   }

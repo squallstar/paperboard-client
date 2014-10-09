@@ -1,10 +1,13 @@
 @Paperboard.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
-  Entities.Article = Backbone.Model.extend
+  Entities.Article = Backbone.AuthModel.extend
     _class: "Article"
     defaults:
       name: ""
       published_at: 0
+
+    url: ->
+      "v3/articles/#{@get('id')}"
 
     publishedAgo: ->
       published = moment(@get("published_at")*1000)

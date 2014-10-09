@@ -1,3 +1,5 @@
+@import "common/placeholders";
+
 @import "../vendor/reset.css";
 @import "../vendor/nanoscroller";
 
@@ -8,7 +10,6 @@
 @import "generated/sprite-retina";
 
 @import "common/animations";
-@import "common/placeholders";
 @import "common/mixins";
 @import "common/base";
 

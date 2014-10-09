@@ -35,7 +35,20 @@
         App.overlay.show new Boards.Novel.View
           model: article
       else
-        App.navigate App.rootRoute, true
+        article = new App.Entities.Article
+          id: id
+        article.fetch
+          success: ->
+            App.overlay.show new Boards.Novel.View
+              model: article
+            window.setTimeout ->
+              if App.user
+                if not API._currentBoard then do API.showEverything
+              else
+                # TODO, load some default page for non-logged in users
+            , 500
+          error: ->
+            App.navigate App.rootRoute, true
 
   App.reqres.setHandler "load:board", (board) ->
     App.navigate "board/#{board.get('private_id')}", {trigger: false}
