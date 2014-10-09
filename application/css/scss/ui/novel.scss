@@ -1,40 +1,74 @@
-
 #novel {
+  $sidebar-width: 320px;
+  $visible-bg-area: 25px;
+
+  @extend %clear;
   margin: 0 auto;
-  width: 960px;
-  padding: 0 20px;
+  padding: 0 $visible-bg-area;
   height: 100%;
 
-  .nano {
-    padding: 40px 0;
+  aside {
+    width: $sidebar-width;
+    position: absolute;
+    top: 0;
+    right: $visible-bg-area;
+    background-color: #FFF;
+    height: 100%;
+    padding: 30px;
   }
 
   article {
     position: relative;
-    width: 640px;
+    padding: 0 0 0 160px;
+    height: 100%;
     background-color: #FFF;
-    border-radius: 5px;
-    background-color: #FFF;
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    margin-right: 320px;
 
-    .lead {
-      width: 100%;
+    .nano-content {
+      padding: 40px 160px 0 0;
     }
 
-    .internal {
-      padding: 30px;
+    .nano-pane {
+      opacity: 0.15;
+      border-radius: 0;
+
+      > .nano-slider {
+        border-radius: 0;
+        margin: 0;
+      }
+    }
+
+    img.lead {
+      width: 100%;
+      margin: 20px 0;
     }
 
     h1 {
-      font-family: $heading-font;
-      font-size: 1.7em;
-      line-height: 1.3;
-      margin-bottom: 20px;
+      font-size: 2.1em;
+      line-height: 1.4;
+      margin-bottom: 15px;
     }
 
-    .content {
-      font-size: 0.9em;
-      line-height: 1.5;
+    h2 {
+      font-size: 1.7em;
+      font-weight: 500;
+      margin: 40px 0 20px;
+    }
+
+    a {
+      color: #1ABC9C;
+      text-decoration: none;
+      border-bottom: 1px dotted #1ABC9C;
+
+      &:hover {
+        color: #4C799F;
+        border-bottom-color: #4C799F;
+      }
+    }
+
+    .html-content {
+      font-size: 1em;
+      line-height: 1.7;
       margin: 20px 0;
 
       img {
@@ -45,6 +79,14 @@
       p {
         margin: 20px 0;
         color: #777;
+      }
+
+      hr {
+        border: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #DDD;
+        margin: 20px 0;
       }
     }
   }

@@ -1,13 +1,15 @@
-.nano
-  .nano-content
-    article
+article
+  .nano
+    .nano-content
+      h1 #{name}
+
       if img
-        img.lead(src=img.url_archived_medium)
+        img.lead(src=img.url_archived_medium ? img.url_archived_medium : img.url_original)
 
-      .internal
-        h1 #{name}
-
-        .content
-          !{htmlcontent}
+      .html-content
+        !{htmlcontent}
 
         a(href='#', class='close-novel') Close
+
+aside
+  p Column

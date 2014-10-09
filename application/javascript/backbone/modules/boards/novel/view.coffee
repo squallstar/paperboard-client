@@ -10,7 +10,7 @@
     templateHelpers: ->
       content = @model.get('content') || @model.get('description')
 
-      htmlcontent: '<p>' + content.replace(/(?:\n)/g, '</p><p>') + '</p>'
+      htmlcontent: '<p>' + content.replace(/Â/g, '').replace(/(?:\n)/g, '</p><p>') + '</p>'
       img: if content.indexOf('<img') is -1 then @model.topImage() else false
 
     closeNovel: (event) ->
