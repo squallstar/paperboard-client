@@ -17,13 +17,15 @@
 
       if not data.content then data.content = data.description
 
+      data.name = data.name.replace(/[Ââ]/g, '')
+
       if data.type == 'instagram'
         data.content = data.name
         delete data.name
 
       data.published_ago = @model.publishedAgo()
       data.source = data.sources[0]
-      data.content = '<p>' + data.content.replace(/Â/g, '').replace(/(?:\n)/g, '</p><p>') + '</p>'
+      data.content = '<p>' + data.content.replace(/[Ââ]/g, '').replace(/(?:\n)/g, '</p><p>') + '</p>'
       data.img = if data.content.indexOf('<img') is -1 then @model.topImage() else false
       data
 
@@ -37,9 +39,18 @@
       #TODO: navigate to prev url (silent)
 
     onRender: ->
-      @ui.html.find('.html-content *').removeAttr('style').removeAttr('id').removeAttr('class')
+      @ui.html.find("a[href^='#'], input, form, button, script, style, [class^='hid'], #creative_commons, header, footer").remove()
       @ui.html.find('.html-content iframe').removeAttr('width').removeAttr('height')
-      @ui.html.find("a[href^='#']").remove()
+      @ui.html.find('.html-content *').removeAttr('style').removeAttr('id').removeAttr('class').removeAttr('onclick')
+
+      if not @model.get('content')?
+        @model.set 'content', ''
+        @ui.nano.css 'opacity', 0.75
+        @model.fetch
+          success: =>
+            return if @isDestroyed
+            do @render
+            @$el.find('.nano').animate {opacity: 1}, 500
 
     onDomRefresh: ->
       @ui.nano.nanoScroller
@@ -47,9 +58,10 @@
 
       # maybe needs to be improved to use imagesloaded
       @ui.nano.one =>
+        return if @isDestroyed
         window.setTimeout =>
           @ui.nano.nanoScroller()
         , 1000
 
-    onDestroy: ->
-      @$el.find('.nano').nanoScroller stop:true
+    onBeforeDestroy: ->
+      @ui.nano.nanoScroller {stop: true}

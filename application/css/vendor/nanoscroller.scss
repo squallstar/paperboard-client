@@ -23,7 +23,7 @@
   display: block;
 }
 .nano > .nano-pane {
-  background : rgba(0,0,0,.25);
+  background : rgba(0, 0, 0, 0.05);
   position   : absolute;
   width      : 10px;
   right      : 0;
@@ -31,22 +31,19 @@
   bottom     : 0;
   visibility : hidden\9; /* Target only IE7 and IE8 with this hack */
   opacity    : .01;
-  -webkit-transition    : .2s;
-  -moz-transition       : .2s;
-  -o-transition         : .2s;
-  transition            : .2s;
-  -moz-border-radius    : 5px;
-  -webkit-border-radius : 5px;
-  border-radius         : 5px;
+  -webkit-transition    : .4s;
+  -moz-transition       : .4s;
+  -o-transition         : .4s;
+  transition            : .4s;
 }
 .nano > .nano-pane > .nano-slider {
-  background: #444;
-  background: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, 0.1);
   position              : relative;
-  margin                : 0 1px;
-  -moz-border-radius    : 3px;
-  -webkit-border-radius : 3px;
-  border-radius         : 3px;
+  cursor                : move;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 }
 .nano:hover > .nano-pane, .nano-pane.active, .nano-pane.flashed {
   visibility : visible\9; /* Target only IE7 and IE8 with this hack */

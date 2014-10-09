@@ -28,13 +28,22 @@
       padding: 40px 145px;
     }
 
-    .nano-pane {
-      opacity: 0.15;
-      border-radius: 0;
+    .close-novel {
+      @include transition(opacity, 0.2s);
+      @extend %text-indent;
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      left: 11px;
+      bottom: 9px;
+      opacity: 0.45;
 
-      > .nano-slider {
-        border-radius: 0;
-        margin: 0;
+      &:before {
+        @include icon($sprite-collapse, $sprite-retina-collapse);
+      }
+
+      &:hover {
+        opacity: 1;
       }
     }
 
@@ -84,7 +93,7 @@
 
     img.lead {
       width: 100%;
-      margin: 15px 0 20px;
+      margin: 15px 0 10px;
     }
 
     .html-content {
@@ -116,12 +125,10 @@
       a {
         @include transition(all, 0.2s);
         color: #1ABC9C;
-        text-decoration: none;
-        border-bottom: 1px dotted #1ABC9C;
+        text-decoration: underline;
 
         &:hover {
           color: #F65E4E;
-          border-bottom-color: #F65E4E;
         }
       }
 
@@ -157,6 +164,15 @@
         margin: 30px 0;
         padding: 10px 15px;
         background: #fffab4;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+
+        p:first-child {
+          margin-top: 0;
+        }
+
+        p:last-child {
+          margin-bottom: 0;
+        }
       }
 
       iframe {
@@ -176,7 +192,7 @@
     .view-original {
       @include transition(all, 0.2s);
       display: block;
-      margin: 20px 0;
+      margin: 30px 0;
       border: 2px solid #CCC;
       border-radius: 4px;
       padding: 16px 15px;
@@ -188,6 +204,11 @@
       &:hover {
         color: #1ABC9C;
         border-color: #1ABC9C;
+      }
+
+      &.instagram:hover {
+        color: $color-instagram;
+        border-color: $color-instagram;
       }
     }
   }

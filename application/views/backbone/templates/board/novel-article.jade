@@ -17,9 +17,12 @@ article
       .html-content
         !{content}
 
-      a(href='#', class='close-novel') Close
+      if type == 'instagram'
+        a.view-original.instagram(href=url, target='_blank') View picture on Instagram
+      else
+        a.view-original(href=url, target='_blank') View original article
 
-      a.view-original(href=url, target='_blank') View original article
+  a(href='/close-article', class='close-novel', title='Close article') Close
 
 aside
   p Column
