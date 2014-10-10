@@ -3,7 +3,8 @@
   Entities.Article = Backbone.AuthModel.extend
     _class: "Article"
     defaults:
-      name: ""
+      name: ''
+      type: 'feed'
       published_at: 0
 
     url: ->

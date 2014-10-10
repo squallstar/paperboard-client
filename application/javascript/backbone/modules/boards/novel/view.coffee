@@ -41,7 +41,7 @@
       App.navigate route, {trigger: false, replace: false}
 
     onRender: ->
-      @ui.html.find("a[href^='#'], input, form, button, script, style, [class^='hid'], #creative_commons, header, footer, .pagination, .mtl, .author, [class^='publication'], .credit, [class^='social']").remove()
+      @ui.html.find("a[href^='#'], aside, input, form, button, script, style, [class^='hid'], #creative_commons, header, footer, .pagination, .mtl, .author, [class^='publication'], .credit, [class^='social'], [class^='hp-'], #toc_container, .sharedaddy, .ad, .po, .sot").remove()
       @ui.html.find('.html-content iframe').removeAttr('width').removeAttr('height')
       @ui.html.find('.html-content *').removeAttr('style').removeAttr('id').removeAttr('class').removeAttr('onclick')
 
@@ -53,6 +53,20 @@
             return if @isDestroyed
             do @render
             @$el.find('.nano').animate {opacity: 1}, 500
+      else
+        $imgs = @$el.find 'img'
+        $imgs.load(->
+          $img = $ @
+          width = $img.width()
+          if width < 200
+            $img.remove()
+          else if width > 450
+            $img.removeAttr('width').removeAttr('height')
+            $img.css 'min-width', '100%'
+        ).error ->
+          $img = $ @
+          $img.closest('figure').remove()
+          $img.remove()
 
     onDomRefresh: ->
       @ui.nano.nanoScroller
