@@ -25,6 +25,7 @@
         private_id: "everything"
 
     showBoard: (id) ->
+      App.request 'overlay:dismiss:animated'
       App.request "find:board", id, (board) ->
         return App.navigate(App.rootRoute, true) unless board
         API._loadBoard board

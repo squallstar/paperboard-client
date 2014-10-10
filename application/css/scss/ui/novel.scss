@@ -2,213 +2,247 @@
   $sidebar-width: 320px;
   $visible-bg-area: 25px;
 
-  @extend %clear;
-  margin: 0 auto;
-  padding: 0 $visible-bg-area;
+  position: relative;
   height: 100%;
+  overflow: hidden;
 
-  > aside {
-    width: $sidebar-width;
+  > .clicker {
+    @include transition(background-color, 0.2s);
+    @extend %text-indent;
     position: absolute;
     top: 0;
-    right: $visible-bg-area;
-    background-color: #FFF;
+    left: -100%;
+    width: 300%;
     height: 100%;
-    padding: 30px;
+
+    &:hover {
+      background-color: rgba(0,0,0,0.3);
+    }
   }
 
-  > article {
+  .wrapper {
+    @include transition(all, 0.35s);
+    @extend %clear;
+    top: 100%;
     position: relative;
-    padding: 0;
+    margin: 0 auto;
+    padding: 0 $visible-bg-area;
     height: 100%;
-    background-color: #FFF;
-    margin-right: 320px;
+    max-width: 1300px;
+    overflow: hidden;
+    transform: scale(0.7, 0.7);
 
-    .nano-content {
-      padding: 40px 145px;
+    html.with-overlay & {
+      top: 0;
+      transform: scale(1, 1);
     }
 
-    .close-novel {
-      @include transition(opacity, 0.2s);
-      @extend %text-indent;
+    > aside {
+      z-index: 3;
+      width: $sidebar-width;
       position: absolute;
-      width: 45px;
-      height: 45px;
-      left: 11px;
-      bottom: 9px;
-      opacity: 0.45;
-
-      &:before {
-        @include icon($sprite-collapse, $sprite-retina-collapse);
-      }
-
-      &:hover {
-        opacity: 1;
-      }
+      top: 0;
+      right: $visible-bg-area;
+      background-color: #FFF;
+      height: 100%;
+      padding: 30px;
     }
 
-    .left {
-      $img-size: 32px;
+    > article {
+      z-index: 2;
+      position: relative;
+      padding: 0;
+      height: 100%;
+      background-color: #FFF;
+      margin-right: 320px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
 
-      @extend %clear;
-      margin-bottom: 30px;
-
-      img, strong, span {
-        float: left;
+      .nano-content {
+        padding: 40px 145px;
       }
 
-      img {
-        width: $img-size;
-        height: $img-size;
-        border-radius: $img-size;
-        margin-right: 10px;
-      }
+      .close-novel {
+        @include transition(opacity, 0.2s);
+        @extend %text-indent;
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        left: 11px;
+        bottom: 9px;
+        opacity: 0.45;
 
-      strong, span {
-        @extend %antialias;
-        color: #555;
-        height: $img-size;
-        line-height: $img-size;
-        font-size: 0.9em;
-      }
-
-      strong {
-        font-weight: 600;
-        margin-right: 7px;
-      }
-
-      span {
-        font-weight: 300;
-      }
-    }
-
-    h1 {
-      @extend %antialias;
-      color: #34373B;
-      font-weight: bold;
-      font-size: 2.5em;
-      line-height: 1.4;
-      margin-bottom: 15px;
-    }
-
-    img.lead {
-      width: 100%;
-      margin: 15px 0 10px;
-    }
-
-    .html-content {
-      font-size: 1em;
-      line-height: 1.7;
-      margin-top: 20px;
-
-      h1, h2 {
-        font-size: 1.7em;
-        font-weight: 500;
-        margin: 40px 0 20px;
-      }
-
-      h3 {
-        font-size: 1.5em;
-        margin: 20px 0;
-      }
-
-      h4 {
-        font-size: 1.35em;
-        margin: 20px 0;
-      }
-
-      li {
-        list-style-type: disc;
-        margin-left: 15px;
-      }
-
-      a {
-        @include transition(all, 0.2s);
-        color: #1ABC9C;
-        text-decoration: underline;
+        &:before {
+          @include icon($sprite-collapse, $sprite-retina-collapse);
+        }
 
         &:hover {
-          color: #F65E4E;
+          opacity: 1;
         }
       }
 
-      img {
-        max-width: 100% !important;
-        margin: 20px auto;
+      .left {
+        $img-size: 32px;
+
+        @extend %clear;
+        margin-bottom: 30px;
+
+        img, strong, span {
+          float: left;
+        }
+
+        img {
+          width: $img-size;
+          height: $img-size;
+          border-radius: $img-size;
+          margin-right: 10px;
+        }
+
+        strong, span {
+          @extend %antialias;
+          color: #555;
+          height: $img-size;
+          line-height: $img-size;
+          font-size: 0.9em;
+        }
+
+        strong {
+          font-weight: 600;
+          margin-right: 7px;
+        }
+
+        span {
+          font-weight: 300;
+        }
       }
 
-      p {
-        margin: 20px 0;
-        color: #777;
-        text-align: justify;
+      h1 {
+        @extend %antialias;
+        color: #34373B;
+        font-weight: bold;
+        font-size: 2.5em;
+        line-height: 1.4;
+        margin-bottom: 15px;
       }
 
-      figcaption {
-        font-size: 0.85em;
-        color: #999;
+      img.lead {
+        width: 100%;
+        margin: 15px 0 10px;
+      }
+
+      .html-content {
+        font-size: 1em;
+        line-height: 1.7;
+        margin-top: 20px;
+
+        h1, h2 {
+          font-size: 1.7em;
+          font-weight: 500;
+          margin: 40px 0 20px;
+        }
+
+        h3 {
+          font-size: 1.5em;
+          margin: 20px 0;
+        }
+
+        h4 {
+          font-size: 1.35em;
+          margin: 20px 0;
+        }
+
+        li {
+          list-style-type: disc;
+          margin-left: 15px;
+        }
+
+        a {
+          @include transition(all, 0.2s);
+          color: #1ABC9C;
+          text-decoration: underline;
+
+          &:hover {
+            color: #F65E4E;
+          }
+        }
+
+        img {
+          max-width: 100% !important;
+          margin: 20px auto;
+        }
 
         p {
-          margin: 5px 0;
+          margin: 20px 0;
+          color: #777;
+          text-align: justify;
+        }
+
+        figcaption {
+          font-size: 0.85em;
+          color: #999;
+
+          p {
+            margin: 5px 0;
+          }
+        }
+
+        strong {
+          color: #333;
+          font-weight: bold;
+        }
+
+        blockquote {
+          @extend %antialias;
+          font-style: italic;
+          font-size: 1em;
+          margin: 30px 0;
+          padding: 10px 15px;
+          background: #fffab4;
+          text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+
+          p:first-child {
+            margin-top: 0;
+          }
+
+          p:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        iframe {
+          width: 100%;
+          min-height: 320px;
+        }
+
+        hr {
+          border: 0;
+          width: 100%;
+          height: 1px;
+          background-color: #DDD;
+          margin: 20px 0;
         }
       }
 
-      strong {
-        color: #333;
-        font-weight: bold;
-      }
-
-      blockquote {
-        @extend %antialias;
-        font-style: italic;
-        font-size: 1em;
+      .view-original {
+        @include transition(all, 0.2s);
+        display: block;
         margin: 30px 0;
-        padding: 10px 15px;
-        background: #fffab4;
-        text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+        border: 2px solid #CCC;
+        border-radius: 4px;
+        padding: 16px 15px;
+        text-align: center;
+        color: #999;
+        font-size: 1em;
+        text-decoration: none;
 
-        p:first-child {
-          margin-top: 0;
+        &:hover {
+          color: #1ABC9C;
+          border-color: #1ABC9C;
         }
 
-        p:last-child {
-          margin-bottom: 0;
+        &.instagram:hover {
+          color: $color-instagram;
+          border-color: $color-instagram;
         }
-      }
-
-      iframe {
-        width: 100%;
-        min-height: 320px;
-      }
-
-      hr {
-        border: 0;
-        width: 100%;
-        height: 1px;
-        background-color: #DDD;
-        margin: 20px 0;
-      }
-    }
-
-    .view-original {
-      @include transition(all, 0.2s);
-      display: block;
-      margin: 30px 0;
-      border: 2px solid #CCC;
-      border-radius: 4px;
-      padding: 16px 15px;
-      text-align: center;
-      color: #999;
-      font-size: 1em;
-      text-decoration: none;
-
-      &:hover {
-        color: #1ABC9C;
-        border-color: #1ABC9C;
-      }
-
-      &.instagram:hover {
-        color: $color-instagram;
-        border-color: $color-instagram;
       }
     }
   }

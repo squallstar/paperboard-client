@@ -40,7 +40,7 @@ body {
 }
 
 #rg-overlay {
-  @include transition(opacity, 0.15s);
+  @include transition(opacity, 0.2s);
   @extend %hardwareacceleration;
   position: fixed;
   top: 0;

@@ -5,7 +5,7 @@
     template: "novel-article"
 
     events:
-      "click .close-novel" : "closeNovel"
+      "click a.close-action"  : "closeNovel"
       "click .html-content a" : "didClickLink"
 
     ui:
@@ -35,11 +35,13 @@
 
     closeNovel: (event) ->
       do event.preventDefault
-      do @destroy
-      #TODO: navigate to prev url (silent)
+      App.request 'overlay:dismiss:animated'
+
+      route = if Backbone.history.canGoBack() then Backbone.history.previousFragment() else App.rootRoute
+      App.navigate route, {trigger: false, replace: false}
 
     onRender: ->
-      @ui.html.find("a[href^='#'], input, form, button, script, style, [class^='hid'], #creative_commons, header, footer").remove()
+      @ui.html.find("a[href^='#'], input, form, button, script, style, [class^='hid'], #creative_commons, header, footer, .pagination, .mtl, .author, [class^='publication'], .credit, [class^='social']").remove()
       @ui.html.find('.html-content iframe').removeAttr('width').removeAttr('height')
       @ui.html.find('.html-content *').removeAttr('style').removeAttr('id').removeAttr('class').removeAttr('onclick')
 
