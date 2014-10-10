@@ -98,12 +98,10 @@
 
       @$el.addClass 'with-settings'
       App.$window.resize()
-      @ui.articles.brickLane 'layout'
 
     hideBoardSettings: ->
       @$el.removeClass 'with-settings'
       App.$window.resize()
-      @ui.articles.brickLane 'layout'
 
     pageScroll: (event) ->
       return if @fetching or not @firstLayout
@@ -113,7 +111,7 @@
         do @fetchMore
 
     onBeforeDestroyCollection: ->
-      @ui.articles.brickLane 'destroy'
+      @ui.articles.masonry 'destroy'
 
     onBeforeDestroy: ->
       if @timeout then clearTimeout @timeout
@@ -127,13 +125,18 @@
 
     onRenderTemplate: ->
       App.$window.on "scroll", @pageScroll
-      @ui.articles.brickLane()
+      @ui.articles.masonry
+        itemSelector: 'article'
+        columnWidth: 'article'
+        isAnimated: false
+        gutter: 0
+        transitionDuration: 200
 
     onRenderCollection: ->
       do @attachLazyLoad
-      @firstLayout = true
 
-      @ui.articles.brickLane('layout')
+      if not @firstLayout then @ui.articles.masonry()
+      @firstLayout = true
 
       if @timeout then clearTimeout @timeout
       @timeout = window.setTimeout =>
@@ -144,16 +147,15 @@
       @$el.find('.lazy').removeClass('lazy').lazyload
         effect: "fadeIn"
         container: @ui.articles
-        threshold : 120
+        threshold : 150
 
     attachHtml: (collectionView, itemView, index) ->
       if (itemView.model.get('description') isnt '' and itemView.model.get('lead_image')) or itemView.model.get('type') is 'instagram'
-        @ui.articles.brickLane 'append', itemView.el
+        @ui.articles.append itemView.$el
+        @ui.articles.masonry 'appended', itemView.$el
 
-      if index is 0
-        @ui.articles.brickLane 'layout'
-
-      if @collection.length > 0 and index is (@collection.length-1)
+      len = @collection.length
+      if len > 0 and index is (len-1)
         do @onRenderCollection
 
     onRender: ->
