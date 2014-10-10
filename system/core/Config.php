@@ -267,6 +267,26 @@ class CI_Config {
 		}
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * CDN URL
+	 * Returns cdn_url . index_page [. uri_string]
+	 *
+	 * @access	public
+	 * @param	string	the URI string
+	 * @return	string
+	 */
+	function cdn_url($uri = '')
+	{
+		$url = $this->slash_item('cdn_url');
+
+		if (!$url || $url == '') return $this->site_url($uri);
+
+		$suffix = ($this->item('url_suffix') == FALSE) ? '' : $this->item('url_suffix');
+		return $url.$this->slash_item('index_page').$this->_uri_string($uri).$suffix;
+	}
+
 	// -------------------------------------------------------------
 
 	/**

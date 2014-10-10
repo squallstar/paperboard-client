@@ -12,7 +12,7 @@
  * This can be set to anything, but default usage is:
  *
  *     development
- *     testing
+ *     staging
  *     production
  *
  * NOTE: If you change these, also change the error_reporting() code below
@@ -36,7 +36,7 @@ if (defined('ENVIRONMENT'))
 			error_reporting(E_ALL);
 		break;
 
-		case 'testing':
+		case 'staging':
 		case 'production':
 			error_reporting(0);
 		break;
@@ -44,6 +44,11 @@ if (defined('ENVIRONMENT'))
 		default:
 			exit('The application environment is not set correctly.');
 	}
+}
+
+if(!ini_get('date.timezone'))
+{
+  date_default_timezone_set('GMT');
 }
 
 /*

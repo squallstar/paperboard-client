@@ -12,8 +12,8 @@
     <meta name="msapplication-TileColor" content="#333"/>
     <!--<meta name="msapplication-TileImage" content="<?php echo site_url('assets/img/apple-icon.png'); ?>"/>
     <link rel="apple-touch-icon" href="<?php echo site_url('assets/img/apple-icon.png'); ?>">-->
-    <link rel="stylesheet" href="<?php echo site_url('assets/css/paperboard.css'); ?>" type="text/css" media="screen" />
-    <script src="<?php echo site_url('assets/js/paperboard.js'); ?>?v=2"></script>
+    <link rel="stylesheet" href="<?php echo cdn_url('assets/css/paperboard.css'); ?>?v=<?php echo date('Hdm'); ?>" type="text/css" media="screen" />
+    <script src="<?php echo cdn_url('assets/js/paperboard.js'); ?>?v=<?php echo date('Hdm'); ?>"></script>
     <?php if (ENVIRONMENT == 'development') { ?><script src="http://localhost:35729/livereload.js"></script><?php } ?>
   </head>
   <body>
