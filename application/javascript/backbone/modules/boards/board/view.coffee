@@ -21,6 +21,7 @@
     serializeData: ->
       model = @model.toJSON()
       data = {
+        id: model.id
         title: model.name
         description: model.description.replace /(<([^>]+)>)/ig,""
         image: @model.topImage()
@@ -130,7 +131,7 @@
         columnWidth: 'article'
         isAnimated: false
         gutter: 0
-        transitionDuration: 200
+        transitionDuration: 0
 
     onRenderCollection: ->
       do @attachLazyLoad
@@ -150,7 +151,7 @@
         threshold : 150
 
     attachHtml: (collectionView, itemView, index) ->
-      if (itemView.model.get('description') isnt '' and itemView.model.get('lead_image')) or itemView.model.get('type') is 'instagram'
+      if itemView.model.get('lead_image') or itemView.model.get('description').length > 60
         @ui.articles.append itemView.$el
         @ui.articles.masonry 'appended', itemView.$el
 

@@ -40,7 +40,7 @@
 
     fetchMore: (callback) ->
       url = @url()
-      if @length then url += '?max_timestamp=' + encodeURIComponent(@last().get('published_at'))
+      if @length then url += '?limit=50&max_timestamp=' + encodeURIComponent(@last().get('published_at'))
 
       @fetch
         url: url
@@ -52,9 +52,3 @@
         error: =>
           callback false
 
-    parse: (resp) ->
-      articles = []
-      for article in resp
-        if article.fetched is true then articles.push article
-      if articles.length is 0 then return resp
-      articles
