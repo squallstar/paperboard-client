@@ -7,7 +7,7 @@ a(href='/close-article', class='close-action clicker') Close
         header
           .left
             if source && source.profile_image_url
-              img(src=source.profile_image_url)
+              img(src=source.profile_image_url, alt=source.full_name)
             strong #{source.full_name}
             span #{published_ago}
 

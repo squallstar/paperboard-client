@@ -17,15 +17,13 @@
 
       if not data.content then data.content = data.description
 
-      data.name = data.name.replace(/[Ââ]/g, '')
-
       if data.type == 'instagram'
         data.content = data.name
         delete data.name
 
       data.published_ago = @model.publishedAgo()
       data.source = data.sources[0]
-      data.content = '<p>' + data.content.replace(/[Ââ]/g, '').replace(/(?:\n)/g, '</p><p>') + '</p>'
+      data.content = '<p>' + data.content.replace(/(?:\n)/g, '</p><p>') + '</p>'
       data.img = if data.content.indexOf('<img') is -1 then @model.topImage() else false
       data
 
@@ -41,9 +39,9 @@
       App.navigate route, {trigger: false, replace: false}
 
     onRender: ->
-      @ui.html.find("a[href^='#'], aside, input, form, button, script, style, [class^='hid'], #creative_commons, header, footer, .pagination, .mtl, .author, [class^='publication'], .credit, [class^='social'], [class^='hp-'], #toc_container, .sharedaddy, .ad, .po, .sot, [class^='recommended-']").remove()
-      @ui.html.find('.html-content iframe').removeAttr('width').removeAttr('height')
-      @ui.html.find('.html-content *').removeAttr('style').removeAttr('id').removeAttr('class').removeAttr('onclick')
+      @ui.html.find("a[href^='#'], aside, input, form, button, script, style, [class^='hid'], #creative_commons, header, footer, .pagination, .mtl, .author, [class^='publication'], .credit, [class^='social'], [class^='hp-'], #toc_container, .sharedaddy, .ad, .po, .sot, [class^='recommended-'], #also-related-links, .embedded-hyper").remove()
+      @ui.html.find('iframe').removeAttr('width').removeAttr('height')
+      @ui.html.find('*').removeAttr('style').removeAttr('id').removeAttr('class').removeAttr('onclick')
 
       if not @model.get('content')?
         @model.set 'content', ''
@@ -54,7 +52,7 @@
             do @render
             @$el.find('.nano').animate {opacity: 1}, 500
       else
-        $imgs = @$el.find 'img'
+        $imgs = @ui.html.find 'img'
         $imgs.load(->
           $img = $ @
           width = $img.width()
