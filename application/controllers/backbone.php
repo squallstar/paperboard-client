@@ -20,6 +20,12 @@ class Backbone extends CI_Controller
       ]);
     }
 
+    $meta = [
+      'title' => '',
+      'description' => '',
+      'image' => ''
+    ];
+
     $data = 'false';
     $intent = ['type' => null, 'data' => null];
 
@@ -30,12 +36,24 @@ class Backbone extends CI_Controller
       $article_id = str_replace('article/', '', $matches[0]);
 
       try {
-        $data = @file_get_contents($entrypoint . 'v3/articles/' . $article_id);
-        $data = json_decode($data);
-        $intent = [
-          'type' => 'article',
-          'data' => $data
-        ];
+        $d = @file_get_contents($entrypoint . 'v3/articles/' . $article_id);
+        $d = json_decode($d, true);
+
+        if (isset($d['name']))
+        {
+          $intent = [
+            'type' => 'article',
+            'data' => $d
+          ];
+
+          $meta['title'] = substr($d['name'], 0, 100);
+          $meta['description'] = substr($d['description'], 0, 200);
+
+          if (isset($d['lead_image']['url_archived_medium']))
+          {
+            $meta['image'] = $d['lead_image']['url_archived_medium'];
+          }
+        }
       } catch (Exception $e) {
 
       }
@@ -55,6 +73,7 @@ class Backbone extends CI_Controller
     if (strpos($data, '{') !== 0) $data = 'false';
 
     $this->load->view('backbone/index', array(
+      'meta' => $meta,
       'intent' => json_encode($intent),
       'data' => $data,
       'entrypoint' => $entrypoint
