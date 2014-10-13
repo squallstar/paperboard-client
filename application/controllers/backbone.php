@@ -21,6 +21,25 @@ class Backbone extends CI_Controller
     }
 
     $data = 'false';
+    $intent = ['type' => null, 'data' => null];
+
+    $uri = $this->router->uri->uri_string;
+
+    if (preg_match("/^article\/([A-z0-9\-])+/", $uri, $matches))
+    {
+      $article_id = str_replace('article/', '', $matches[0]);
+
+      try {
+        $data = @file_get_contents($entrypoint . 'v3/articles/' . $article_id);
+        $data = json_decode($data);
+        $intent = [
+          'type' => 'article',
+          'data' => $data
+        ];
+      } catch (Exception $e) {
+
+      }
+    }
 
     if ($auth_token)
     {
@@ -36,6 +55,7 @@ class Backbone extends CI_Controller
     if (strpos($data, '{') !== 0) $data = 'false';
 
     $this->load->view('backbone/index', array(
+      'intent' => json_encode($intent),
       'data' => $data,
       'entrypoint' => $entrypoint
     ));

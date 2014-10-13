@@ -145,6 +145,11 @@
     else
       App.boards = new App.Entities.Boards
 
+    if options.intent
+      if options.type is 'article'
+        article = new App.Entities.Article options.intent.data
+        App.request 'set:intent', article
+
   App.on "start", ->
     App.$htmlbody = $ 'html, body'
     App.$wrapper = $ '#wrapper'

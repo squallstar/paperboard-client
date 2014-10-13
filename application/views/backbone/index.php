@@ -18,8 +18,8 @@
   </head>
   <body>
     <div id="font-loader">
-      <span class="font-proxima-nova">x</span>
-      <span class="font-proxima-nova-condensed">x</span>
+      <span class="font-proxima-nova">Please wait while we load the environment.</span>
+      <span class="font-proxima-nova-condensed"><a href="/">Refresh</a>.</span>
     </div>
 
     <div id="overlay"></div>
@@ -35,7 +35,8 @@
       Paperboard.start({
         entrypoint:'<?php echo $entrypoint; ?>',
         route:'<?php echo $_SERVER["REQUEST_URI"]; ?>',
-        data:<?php echo $data; ?>
+        data:<?php echo $data; ?>,
+        intent: <?php echo $intent; ?>
       });
     });
     </script>
