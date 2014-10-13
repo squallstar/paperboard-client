@@ -1,5 +1,7 @@
 <?php
 
+$ini = parse_ini_file('../.env');
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -18,7 +20,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', strtolower($ini['ENVIRONMENT']));
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -50,6 +53,8 @@ if(!ini_get('date.timezone'))
 {
   date_default_timezone_set('GMT');
 }
+
+define('BUILD_NUMBER', $ini['BUILD_NUMBER']);
 
 /*
  *---------------------------------------------------------------

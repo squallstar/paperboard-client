@@ -39,7 +39,7 @@
       App.navigate route, {trigger: false, replace: false}
 
     onRender: ->
-      @ui.html.find("a[href^='#'], aside, input, form, button, script, style, [class^='hid'], #creative_commons, header, footer, .pagination, .mtl, .author, [class^='publication'], .credit, [class^='social'], [class^='hp-'], #toc_container, .sharedaddy, .ad, .po, .sot, [class^='recommended-'], #also-related-links, .embedded-hyper").remove()
+      @ui.html.find("a[href^='#'], aside, input, form, button, script, style, [class^='hid'], #creative_commons, header, footer, .pagination, .mtl, .author, [class^='publication'], .credit, [class^='social'], [class^='hp-'], #toc_container, .sharedaddy, .ad, .po, .sot, [class^='recommended-'], #also-related-links, .embedded-hyper, .source").remove()
       @ui.html.find('iframe').removeAttr('width').removeAttr('height')
       @ui.html.find('*').removeAttr('style').removeAttr('id').removeAttr('class').removeAttr('onclick')
 

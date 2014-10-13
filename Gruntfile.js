@@ -4,7 +4,7 @@ var mount = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
 
-var timestamp = new Date().getTime()
+var ts = new Date().getTime()
 
 module.exports = function(grunt) {
 
@@ -16,12 +16,26 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-spritesmith');
+  grunt.loadNpmTasks('grunt-ini-file');
+
+  var uglify_js = {};
+  uglify_js['public/assets/js/paperboard.' + ts + '.js'] = ['public/assets/js/paperboard.js'];
 
   grunt.initConfig({
 
     clean: {
-      all: ['application/assets/js', 'application/assets/css', 'public/assest/img/generated'],
-      post_build: ['.sass-cache', 'npm-debug.log', '__templates.js']
+      all: [
+        'public/assets/js',
+        'public/assets/css',
+        'public/assets/img/generated'
+      ],
+      post_build: [
+        '.sass-cache',
+        'npm-debug.log',
+        '__templates.js',
+        'public/assets/js/paperboard.js',
+        'public/assets/css/paperboard.css'
+      ]
     },
 
     coffee: {
@@ -52,7 +66,7 @@ module.exports = function(grunt) {
           '__templates.js',
           'public/assets/js/paperboard.js'
         ],
-        dest: 'public/assets/js/paperboard.js'
+        dest: 'public/assets/js/paperboard.' + ts + '.js'
       },
       css: {
         src: [
@@ -60,7 +74,16 @@ module.exports = function(grunt) {
           'application/css/vendor/grid.css',
           'public/assets/css/paperboard.css'
         ],
-        dest: 'public/assets/css/paperboard.css'
+        dest: 'public/assets/css/paperboard.' + ts + '.css'
+      }
+    },
+
+    "ini-file": {
+      build: {
+        file: '.env',
+        values: {
+          'BUILD_NUMBER': ts
+        }
       }
     },
 
@@ -99,9 +122,9 @@ module.exports = function(grunt) {
     sprite: {
       normal: {
         src: ['application/images/sprites/normal/*.png'],
-        destImg: 'public/assets/img/generated/sprite.png',
+        destImg: 'public/assets/img/generated/sprite.' + ts + '.png',
         destCSS: 'application/css/scss/generated/sprite.scss',
-        imgPath: '../img/generated/sprite.png',
+        imgPath: '../img/generated/sprite.' + ts + '.png',
         algorithm: 'binary-tree',
         engine: 'gm',
         'engineOpts': {
@@ -120,9 +143,9 @@ module.exports = function(grunt) {
       },
       retina: {
         src: ['application/images/sprites/retina/*.png'],
-        destImg: 'public/assets/img/generated/sprite-retina.png',
+        destImg: 'public/assets/img/generated/sprite-retina.' + ts + '.png',
         destCSS: 'application/css/scss/generated/sprite-retina.scss',
-        imgPath: '../img/generated/sprite-retina.png',
+        imgPath: '../img/generated/sprite-retina.' + ts + '.png',
         algorithm: 'binary-tree',
         engine: 'gm',
         'engineOpts': {
@@ -144,9 +167,7 @@ module.exports = function(grunt) {
     uglify: {
       release: {
         preserveComments : false,
-        files: {
-          'public/assets/js/paperboard.js': ['public/assets/js/paperboard.js']
-        }
+        files: uglify_js
       }
     },
 
@@ -185,6 +206,7 @@ module.exports = function(grunt) {
     'coffee',
     'jade2js',
     'concat:js',
+    'ini-file:build',
     'clean:post_build'
   ]);
 
@@ -197,6 +219,7 @@ module.exports = function(grunt) {
     'coffee',
     'jade2js',
     'concat:js',
+    'ini-file:build',
     'uglify',
     'clean:post_build'
   ]);
