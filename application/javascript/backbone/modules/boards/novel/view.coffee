@@ -37,6 +37,7 @@
 
       route = if Backbone.history.canGoBack() then Backbone.history.previousFragment() else App.rootRoute
       App.navigate route, {trigger: false, replace: false}
+      App.execute 'set:title', ''
 
     onRender: ->
       @ui.html.find("a[href^='#'], aside, input, form, button, script, style, [class^='hid'], #creative_commons, header, footer, .pagination, .mtl, .author, [class^='publication'], .credit, [class^='social'], [class^='hp-'], #toc_container, .sharedaddy, .ad, .po, .sot, [class^='recommended-'], #also-related-links, .embedded-hyper, .source").remove()

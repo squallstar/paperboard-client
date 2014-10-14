@@ -16,6 +16,7 @@
       App.content.show new Boards.Board.View
         model: board
         collection: board.articles
+      App.execute 'set:title', board.get('name')
 
     showEverything: ->
       App.navigate(App.rootRoute, true) unless App.user
@@ -35,6 +36,7 @@
       if article and article.id is id
         App.overlay.show new Boards.Novel.View
           model: article
+        App.execute 'set:title', article.get('name')
       else
         article = new App.Entities.Article
           id: id
@@ -42,6 +44,7 @@
           success: ->
             App.overlay.show new Boards.Novel.View
               model: article
+            App.execute 'set:title', article.get('name')
             window.setTimeout ->
               if App.user
                 if not API._currentBoard then do API.showEverything

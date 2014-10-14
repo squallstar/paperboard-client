@@ -29,6 +29,10 @@
       scrollTop: $element
     , speed, callback
 
+  App.commands.setHandler "set:title", (title) ->
+    if title then title = title += ' - '
+    document.title = "#{title}Paperboard"
+
   App.$window.resize ->
     App.$window._height = App.$window.height()
 
