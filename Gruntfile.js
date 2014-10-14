@@ -18,9 +18,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-spritesmith');
   grunt.loadNpmTasks('grunt-ini-file');
 
-  var uglify_js = {};
-  uglify_js['public/assets/js/paperboard.' + ts + '.js'] = ['public/assets/js/paperboard.' + ts + '.js'];
-
   grunt.initConfig({
 
     clean: {
@@ -32,9 +29,7 @@ module.exports = function(grunt) {
       post_build: [
         '.sass-cache',
         'npm-debug.log',
-        '__templates.js',
-        'public/assets/js/paperboard.js',
-        'public/assets/css/paperboard.css'
+        '__templates.js'
       ]
     },
 
@@ -66,7 +61,7 @@ module.exports = function(grunt) {
           '__templates.js',
           'public/assets/js/paperboard.js'
         ],
-        dest: 'public/assets/js/paperboard.' + ts + '.js'
+        dest: 'public/assets/js/paperboard.js'
       },
       css: {
         src: [
@@ -74,7 +69,7 @@ module.exports = function(grunt) {
           'application/css/vendor/grid.css',
           'public/assets/css/paperboard.css'
         ],
-        dest: 'public/assets/css/paperboard.' + ts + '.css'
+        dest: 'public/assets/css/paperboard.css'
       }
     },
 
@@ -122,9 +117,9 @@ module.exports = function(grunt) {
     sprite: {
       normal: {
         src: ['application/images/sprites/normal/*.png'],
-        destImg: 'public/assets/img/generated/sprite.' + ts + '.png',
+        destImg: 'public/assets/img/generated/sprite.png',
         destCSS: 'application/css/scss/generated/sprite.scss',
-        imgPath: '../img/generated/sprite.' + ts + '.png',
+        imgPath: '../img/generated/sprite.png?v=' + ts,
         algorithm: 'binary-tree',
         engine: 'gm',
         'engineOpts': {
@@ -141,11 +136,12 @@ module.exports = function(grunt) {
         },
         padding: 1
       },
+
       retina: {
         src: ['application/images/sprites/retina/*.png'],
-        destImg: 'public/assets/img/generated/sprite-retina.' + ts + '.png',
+        destImg: 'public/assets/img/generated/sprite-retina.png',
         destCSS: 'application/css/scss/generated/sprite-retina.scss',
-        imgPath: '../img/generated/sprite-retina.' + ts + '.png',
+        imgPath: '../img/generated/sprite-retina.png?v=' + ts,
         algorithm: 'binary-tree',
         engine: 'gm',
         'engineOpts': {
@@ -167,7 +163,9 @@ module.exports = function(grunt) {
     uglify: {
       release: {
         preserveComments : false,
-        files: uglify_js
+        files: {
+          'public/assets/js/paperboard.js': ['public/assets/js/paperboard.js']
+        }
       }
     },
 
@@ -198,6 +196,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', [
+    'clean:all',
     'sprite:normal',
     'sprite:retina',
     'sass:development',
@@ -205,7 +204,8 @@ module.exports = function(grunt) {
     'coffee',
     'jade2js',
     'concat:js',
-    'ini-file:build'
+    'ini-file:build',
+    'clean:post_build'
   ]);
 
   grunt.registerTask('build:production', [

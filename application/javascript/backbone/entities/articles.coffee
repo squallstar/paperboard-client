@@ -26,6 +26,21 @@
         return img
       false
 
+    suggested: ->
+      if not @_suggested
+        @_suggested = new Entities.SuggestedArticles [], article: @
+      @_suggested
+
+    siblings: ->
+      if @collection and @collection._class is 'SiblingArticles'
+        return @collection
+      if not @_siblings
+        @_siblings = new Entities.SiblingArticles [], article: @
+      @_siblings
+
+    setSiblings: (collection) ->
+      @_siblings = collection
+
   # --------------------------------------------------------------------------
 
   Entities.Articles = Backbone.AuthCollection.extend
@@ -52,3 +67,26 @@
         error: =>
           callback false
 
+  # --------------------------------------------------------------------------
+
+  Entities.SuggestedArticles = Backbone.AuthCollection.extend
+    _class: "SuggestedArticles"
+    model: Entities.Article
+
+    initialize: (models, options) ->
+      @article = options.article
+
+    url: ->
+      "v3/articles/#{@article.get('id')}/suggested?limit=15"
+
+  # --------------------------------------------------------------------------
+
+  Entities.SiblingArticles = Backbone.AuthCollection.extend
+    _class: "SiblingArticles"
+    model: Entities.Article
+
+    initialize: (models, options) ->
+      @article = options.article
+
+    url: ->
+      "v3/articles/#{@article.get('id')}/siblings?limit=15"

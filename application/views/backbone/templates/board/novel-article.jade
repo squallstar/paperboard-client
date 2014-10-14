@@ -1,31 +1,20 @@
-a(href='/close-article', class='close-action clicker') Close
+header
+  .left
+    if source && source.profile_image_url
+      img(src=source.profile_image_url, alt=source.full_name)
+    strong #{source.full_name}
+    span #{published_ago}
 
-.wrapper
-  article
-    .nano
-      .nano-content
-        header
-          .left
-            if source && source.profile_image_url
-              img(src=source.profile_image_url, alt=source.full_name)
-            strong #{source.full_name}
-            span #{published_ago}
+if name
+  h1 #{name}
 
-        if name
-          h1 #{name}
+if img
+  img.lead(src=img.url_archived_medium ? img.url_archived_medium : img.url_original)
 
-        if img
-          img.lead(src=img.url_archived_medium ? img.url_archived_medium : img.url_original)
+.html-content
+  !{content}
 
-        .html-content
-          !{content}
-
-        if type == 'instagram'
-          a.view-original.instagram(href=url, target='_blank') View picture on Instagram
-        else
-          a.view-original(href=url, target='_blank') View original article
-
-    a(href='/close-article', class='close-action close-novel', title='Close article') Close
-
-  aside
-    p Column
+if type == 'instagram'
+  a.view-original.instagram(href=url, target='_blank') View picture on Instagram
+else
+  a.view-original(href=url, target='_blank') View original article

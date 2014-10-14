@@ -34,8 +34,11 @@
     showArticle: (id) ->
       article = App.request 'intent'
       if article and article.id is id
-        App.overlay.show new Boards.Novel.View
-          model: article
+        if App.overlay.hasView()
+          App.overlay.currentView.replaceArticleWith article
+        else
+          App.overlay.show new Boards.Novel.View
+            model: article
         App.execute 'set:title', article.get('name')
       else
         article = new App.Entities.Article

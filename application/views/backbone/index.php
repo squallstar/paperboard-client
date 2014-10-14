@@ -20,8 +20,8 @@
     <meta name="author" content="<?php echo $meta['author'] ? $meta['author'] . ' on Paperboard' : 'Nicholas Valbusa, @squallstar on Twitter'; ?>">
     <meta name="msapplication-TileImage" content="<?php echo cdn_url('assets/img/touch-logo.png'); ?>"/>
     <link rel="apple-touch-icon" href="<?php echo cdn_url('assets/img/touch-logo.png'); ?>">
-    <link rel="stylesheet" href="<?php echo cdn_url('assets/css/paperboard.' . BUILD_NUMBER . '.css'); ?>" type="text/css" media="screen" />
-    <script src="<?php echo cdn_url('assets/js/paperboard.' . BUILD_NUMBER . '.js'); ?>"></script>
+    <link rel="stylesheet" href="<?php echo cdn_url('assets/css/paperboard.css?v=' . BUILD_NUMBER); ?>" type="text/css" media="screen" />
+    <script src="<?php echo cdn_url('assets/js/paperboard.js?v=' . BUILD_NUMBER); ?>"></script>
     <?php if (ENVIRONMENT == 'development') { ?><script src="http://localhost:35729/livereload.js"></script><?php } ?>
   </head>
   <body>
