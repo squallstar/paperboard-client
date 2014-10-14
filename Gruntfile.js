@@ -176,7 +176,7 @@ module.exports = function(grunt) {
         files: [
           'application/css/**',
         ],
-        tasks: ['clean:all', 'sass:development', 'concat:css', 'clean:post_build'],
+        tasks: ['sass:development', 'concat:css', 'clean:post_build'],
         options: {
           livereload: true,
           debounceDelay: 1000
@@ -187,7 +187,7 @@ module.exports = function(grunt) {
           'application/javascript/**',
           'application/views/backbone/templates/**'
         ],
-        tasks: ['clean:all', 'coffee', 'jade2js', 'concat:js', 'clean:post_build'],
+        tasks: ['coffee', 'jade2js', 'concat:js', 'clean:post_build'],
         options: {
           livereload: true,
           debounceDelay: 1000
@@ -198,7 +198,6 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', [
-    'clean:all',
     'sprite:normal',
     'sprite:retina',
     'sass:development',
@@ -206,8 +205,7 @@ module.exports = function(grunt) {
     'coffee',
     'jade2js',
     'concat:js',
-    'ini-file:build',
-    'clean:post_build'
+    'ini-file:build'
   ]);
 
   grunt.registerTask('build:production', [

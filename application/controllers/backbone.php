@@ -23,7 +23,9 @@ class Backbone extends CI_Controller
     $meta = [
       'title' => '',
       'description' => '',
-      'image' => ''
+      'image' => '',
+      'author' => '',
+      'pubdate' => ''
     ];
 
     $data = 'false';
@@ -48,6 +50,12 @@ class Backbone extends CI_Controller
 
           $meta['title'] = substr($d['name'], 0, 100);
           $meta['description'] = substr($d['description'], 0, 200);
+          $meta['pubdate'] = $d['published_at'];
+
+          if (isset($d['sources'][0]['full_name']))
+          {
+            $meta['author'] = $d['sources'][0]['full_name'];
+          }
 
           if (isset($d['lead_image']['url_archived_medium']))
           {
