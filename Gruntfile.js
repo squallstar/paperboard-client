@@ -19,7 +19,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ini-file');
 
   var uglify_js = {};
-  uglify_js['public/assets/js/paperboard.' + ts + '.js'] = ['public/assets/js/paperboard.js'];
+  uglify_js['public/assets/js/paperboard.' + ts + '.js'] = ['public/assets/js/paperboard.' + ts + '.js'];
 
   grunt.initConfig({
 
