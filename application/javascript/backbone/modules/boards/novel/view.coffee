@@ -17,8 +17,8 @@
       if data.published_ago.indexOf('-') > 0
         data.published_ago = false
 
-      max_length = 100
-      if data.name.length > max_length then data.name = data.name.substr(0, max_length-1, '&hellip;')
+      max_length = 50
+      if data.name.length > max_length then data.name = data.name.substr(0, max_length-1) + '&hellip;'
       data
 
     didClick: (event) ->
@@ -26,19 +26,20 @@
       do event.stopPropagation
       App.request 'set:intent', @model
       App.navigate @$el.attr('href'), true
-      @$el.css opacity: 0.3
-      window.setTimeout =>
-        @$el.css opacity: 0
-      , 1500
+      @$el.css {opacity: 0, left: "-100%"}
       window.setTimeout =>
         @$el.parent().masonry('remove', @$el).masonry('layout')
-      , 2000
+        @model.destroy()
+      , 1000
 
   # --------------------------------------------------------------------------
 
   Novel.SuggestedView = Marionette.CollectionView.extend
     childView: Novel.SuggestedArticle
     className: 'suggested-container'
+
+    collectionEvents:
+      "remove" : "didRemoveSuggestion"
 
     initialize: ->
       if @collection.length is 0
@@ -48,14 +49,29 @@
             @$el.animate opacity: 1, 250
             @$el.closest('.nano').nanoScroller()
             do @bindMasonry
+
+            if @collection.length is 0 and @collection._class is 'SiblingArticles'
+              window.setTimeout =>
+                @$el.closest('aside').find('a[data-model="suggested"]').click()
+              , 200
       else
         do @render
-        do @bindMasonry
+
+    didRemoveSuggestion: ->
+      if @collection.length is 0
+        @collection.fetch
+          success: =>
+            @$el.masonry()
 
     onBeforeDestroy: ->
       @$el.masonry 'destroy'
 
+    onAddChild: (itemView) ->
+      if @hasMasonry
+        @$el.masonry 'appended', itemView.$el
+
     bindMasonry: ->
+      @hasMasonry = true
       @$el.masonry
         itemSelector: 'a'
         columnWidth: 'a'
@@ -90,7 +106,12 @@
         data.source.full_name = data.source.full_name.substr(0, max_length-1) + '&hellip;'
 
       data.published_ago = @model.publishedAgo()
-      data.content = '<p>' + data.content.replace(/(?:\n)/g, '</p><p>') + '</p>'
+
+      if data.content
+        data.content = '<p>' + data.content.replace(/(?:\n)/g, '</p><p>') + '</p>'
+      else
+        data.content = '' + data.description
+
       data.img = if data.content.indexOf('<img') is -1 then @model.topImage() else false
       data
 
@@ -173,6 +194,8 @@
       @section = new Novel['SuggestedView']
         collection: @model[$el.data('model')]()
       @ui.suggested.html @section.$el
+      if @section.collection.length > 0
+        do @section.bindMasonry
 
       $el.parent().contents().not($el).removeClass 'current'
       $el.addClass 'current'
@@ -180,6 +203,7 @@
     replaceArticleWith: (article) ->
       @model = article
       @articleView.model = article
+      @$el.find('.more .menu a[data-model="siblings"]').html @serializeData().source_name
       @articleView.$el.animate opacity:0.2, 300, =>
         @articleView.render()
         @articleView.$el.animate opacity:1, 300
@@ -192,7 +216,7 @@
 
       @ts = window.setTimeout =>
         @$el.find('.more .menu a:eq(0)').click()
-      , if @model.collection and @model.collection._class is 'SiblingArticles' then 0 else 1000
+      , 500
 
     onDomRefresh: ->
       @ui.nano.nanoScroller
