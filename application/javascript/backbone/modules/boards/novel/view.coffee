@@ -10,9 +10,16 @@
     events:
       "click" : "didClick"
 
-    templateHelpers: ->
-      published_ago = @model.publishedAgo()
-      published_ago : if published_ago.indexOf('-') is -1 then published_ago else false
+    serializeData: ->
+      data = @model.toJSON()
+
+      data.published_ago = @model.publishedAgo()
+      if data.published_ago.indexOf('-') > 0
+        data.published_ago = false
+
+      max_length = 100
+      if data.name.length > max_length then data.name = data.name.substr(0, max_length-1, '&hellip;')
+      data
 
     didClick: (event) ->
       do event.preventDefault
@@ -49,7 +56,6 @@
       @$el.masonry 'destroy'
 
     bindMasonry: ->
-      console.log @$el
       @$el.masonry
         itemSelector: 'a'
         columnWidth: 'a'
