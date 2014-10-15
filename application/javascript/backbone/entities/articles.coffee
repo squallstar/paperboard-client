@@ -89,4 +89,4 @@
       @article = options.article
 
     url: ->
-      "v3/articles/#{@article.get('id')}/siblings?limit=15"
+      "v3/articles/#{@article.get('id')}/siblings?limit=30"

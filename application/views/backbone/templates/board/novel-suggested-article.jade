@@ -1,3 +1,7 @@
-h4 #{name}
-if lead_image
-  img(width="100%", src=lead_image.url_archived_medium)
+.wrapper
+  if lead_image && lead_image.url_archived_small
+    .cover(style="background-image:url('" + lead_image.url_archived_small + "')")
+  .content
+    h4 #{name}
+    if published_ago
+      p #{published_ago}

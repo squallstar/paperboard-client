@@ -34,7 +34,7 @@
     showArticle: (id) ->
       article = App.request 'intent'
       if article and article.id is id
-        if App.overlay.hasView()
+        if App.overlay.hasView() and not App.overlay.currentView.isClosing
           App.overlay.currentView.replaceArticleWith article
         else
           App.overlay.show new Boards.Novel.View

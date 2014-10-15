@@ -20,7 +20,7 @@
     }
   }
 
-  .wrapper {
+  > .wrapper {
     @include transition(all, 0.35s);
     @extend %clear;
     top: 100%;
@@ -85,23 +85,76 @@
       }
 
       .suggested {
-        margin: 20px 0;
+        @extend %clear;
+        margin: 20px -5px;
+
+        > .suggested-container {
+          position: relative;
+        }
 
         a {
+          @include transition(all, 0.4s);
+          position: absolute;
           display: block;
-          margin-bottom: 10px;
           text-decoration: none;
-          margin: 10px 0;
+          margin: 0 0 10px;
+          padding: 0 5px;
+          width: 50%;
+          color: #000;
 
-          h4 {
-            color: #000;
-            font-size: 0.8em;
+          .wrapper {
+            $border-radius: 2px;
+
+            .cover {
+              @include transition(opacity, 0.2s);
+              border-top-left-radius: $border-radius;
+              border-top-right-radius: $border-radius;
+              overflow: hidden;
+              background-color: #E2E0E0;
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center center;
+              line-height: 1.5;
+              height: 100px;
+              margin-bottom: -2px;
+              position: relative;
+              z-index: 2;
+            }
+
+            .content {
+              @include transition(border-color, 0.2s);
+              padding: 8px;
+              line-height: 1.5;
+
+              border-radius: $border-radius;
+              background-color: #EFEFEF;
+              text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+
+              h4 {
+                @extend %break-words;
+                font-size: 0.8em;
+                font-weight: 300;
+              }
+
+              p {
+                margin-top: 5px;
+                font-size: 0.6em;
+                color: #999;
+              }
+            }
           }
 
-          &:visited {
+          &:hover {
 
-            h4 {
-              color: #999;
+            .wrapper {
+
+              .cover {
+                opacity: 0.8;
+              }
+
+              .content {
+                border-color: #DADADA;
+              }
             }
           }
         }
@@ -177,6 +230,7 @@
 
       h1 {
         @extend %antialias;
+        @extend %break-words;
         color: #34373B;
         font-weight: bold;
         font-size: 2.5em;

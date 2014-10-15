@@ -10,16 +10,28 @@
     events:
       "click" : "didClick"
 
+    templateHelpers: ->
+      published_ago = @model.publishedAgo()
+      published_ago : if published_ago.indexOf('-') is -1 then published_ago else false
+
     didClick: (event) ->
       do event.preventDefault
       do event.stopPropagation
       App.request 'set:intent', @model
       App.navigate @$el.attr('href'), true
+      @$el.css opacity: 0.3
+      window.setTimeout =>
+        @$el.css opacity: 0
+      , 1500
+      window.setTimeout =>
+        @$el.parent().masonry('remove', @$el).masonry('layout')
+      , 2000
 
   # --------------------------------------------------------------------------
 
   Novel.SuggestedView = Marionette.CollectionView.extend
     childView: Novel.SuggestedArticle
+    className: 'suggested-container'
 
     initialize: ->
       if @collection.length is 0
@@ -28,8 +40,22 @@
           success: =>
             @$el.animate opacity: 1, 250
             @$el.closest('.nano').nanoScroller()
+            do @bindMasonry
       else
         do @render
+        do @bindMasonry
+
+    onBeforeDestroy: ->
+      @$el.masonry 'destroy'
+
+    bindMasonry: ->
+      console.log @$el
+      @$el.masonry
+        itemSelector: 'a'
+        columnWidth: 'a'
+        isAnimated: false
+        gutter: 0
+        transitionDuration: 0
 
   # --------------------------------------------------------------------------
 
@@ -125,6 +151,8 @@
     closeNovel: (event) ->
       do event.preventDefault
       App.request 'overlay:dismiss:animated'
+
+      @isClosing = true
 
       route = if Backbone.history.canGoBack() then Backbone.history.previousFragment() else App.rootRoute
       App.navigate route, {trigger: false, replace: false}
