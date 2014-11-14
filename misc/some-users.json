@@ -1,0 +1,82 @@
+{
+  "created_at": NumberLong(1408543013),
+  "logged_at": "",
+  "email": "nayeem@cronycle.com",
+  "password": "482c811da5d5b4bc6d497ffa98491e38",
+  "full_name": "nayeem",
+  "nickname": "nayeems",
+  "auth_token": "7469e526dd1770d6c4e91875d9a74e46",
+  "avatar": {
+    "high": "https://pbs.twimg.com/profile_images/184994242/silhouette2_normal.jpg",
+    "medium": "https://pbs.twimg.com/profile_images/184994242/silhouette2_normal.jpg",
+    "small": "https://pbs.twimg.com/profile_images/184994242/silhouette2_normal.jpg"
+  },
+  "bucket": {
+    "collection_walkthrough_seen": true,
+    "hide_welcome_sidebar": true,
+    "howtouse_seen": true,
+    "tutorials__create_collection": true,
+    "tutorials__first_source_item_check": true
+  },
+  "connected_accounts": [
+    {
+      "id": "twitter_account:t146553f4a934d6a30",
+      "processed_at": NumberLong(1410258614),
+      "connected_at": NumberLong(1408543028),
+      "type": "twitter",
+      "access_token": {
+        "oauth_token": "37204051-gIlg8OBGm7N1Z9wCaNelqcvS9mLgDPSSv3vwPQUGx",
+        "oauth_token_secret": "n9A7ekInFWbBHmcmv8NZ5Ue8dUObIBmhFdEhcq0G6vXcY",
+        "user_id": "37204051",
+        "screen_name": "dancingbudha"
+      },
+      "following": {
+        "count": NumberLong(31683),
+        "updated_at": NumberLong(1410258366)
+      }
+    },
+    {
+      "id": "twitter_account:t962053f4a9c74da1d",
+      "processed_at": NumberLong(1410258615),
+      "connected_at": NumberLong(1408543175),
+      "type": "twitter",
+      "access_token": {
+        "oauth_token": "471865547-1DwJ2Z7UzTgtW1V7BuboBNCKRIY5f48TqBsoAZuS",
+        "oauth_token_secret": "TvwmEen3Uf18HTKnF2sM3vU8ZaE3hk6oHDF3MWwYBnYHO",
+        "user_id": "471865547",
+        "screen_name": "brianlittlewood"
+      },
+      "following": {
+        "count": NumberLong(425),
+        "updated_at": NumberLong(1410258369)
+      }
+    },
+    {
+      "id": "twitter_account:t968953f4ab952be87",
+      "processed_at": NumberLong(1410258626),
+      "connected_at": NumberLong(1408543637),
+      "type": "twitter",
+      "access_token": {
+        "oauth_token": "23437049-AVgDFWtQ4H8JsByDf84bqwDfeu9VNPuzysZh2gjod",
+        "oauth_token_secret": "vAo8lvlg3NWIfXOnoRNaYNCaKSY2rfmDF1K9Lek8nOOzA",
+        "user_id": "23437049",
+        "screen_name": "nayeems"
+      },
+      "following": {
+        "count": NumberLong(56918),
+        "updated_at": NumberLong(1410258379)
+      }
+    }
+  ],
+  "favourite_collection_position": NumberLong(2),
+  "favourites": [
+
+  ],
+  "has_password": true,
+  "has_to_wait": false,
+  "is_pro": true,
+  "marketing_opt_in": true,
+  "needs_to_subscribe": false,
+  "total_collections_count": NumberLong(3),
+  "total_links_count": NumberLong(0)
+}
