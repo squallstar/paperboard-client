@@ -1,0 +1,78 @@
+{
+	"id": "01c41941-991f-a4c9-59da-af8c7119fa6b",
+	"name": "Paperboard",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "fe05c83c-c98f-4003-4e56-9a6f62e66e35",
+			"name": "users",
+			"description": "",
+			"order": [
+				"3e60847c-a860-9150-6e42-3d869884772b",
+				"95023433-15df-310d-3706-90f3606a1694",
+				"02679390-da3b-367f-1bf8-702a2db6eb3c"
+			],
+			"collection_name": "Paperboard",
+			"collection_id": "01c41941-991f-a4c9-59da-af8c7119fa6b"
+		}
+	],
+	"timestamp": 1410783031553,
+	"synced": false,
+	"requests": [
+		{
+			"id": "02679390-da3b-367f-1bf8-702a2db6eb3c",
+			"headers": "",
+			"url": "http://hhvm.squallstar.it/v3/user/check_email?email=asdasd@asdad.com",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\ntests[\"Status code\"] = responseCode.code === 200;",
+			"time": 1410787788670,
+			"name": "Check email with no conflict",
+			"description": "",
+			"collectionId": "01c41941-991f-a4c9-59da-af8c7119fa6b",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "3e60847c-a860-9150-6e42-3d869884772b",
+			"headers": "",
+			"url": "http://hhvm.squallstar.it/v3/user/check_email",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\ntests[\"Status code\"] = responseCode.code === 422;\ntests[\"Has an error\"] = data.errors.length === 1;",
+			"time": 1410787642640,
+			"name": "Check email with no params",
+			"description": "",
+			"collectionId": "01c41941-991f-a4c9-59da-af8c7119fa6b",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "95023433-15df-310d-3706-90f3606a1694",
+			"headers": "",
+			"url": "http://hhvm.squallstar.it/v3/user/check_email?email=nicholas@cronycle.com",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\ntests[\"Status code\"] = responseCode.code === 409;\ntests[\"Has an error\"] = data.errors.length === 1;",
+			"time": 1410787716794,
+			"name": "Check email with conflict",
+			"description": "",
+			"collectionId": "01c41941-991f-a4c9-59da-af8c7119fa6b",
+			"responses": [],
+			"synced": false
+		}
+	]
+}
